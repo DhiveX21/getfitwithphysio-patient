@@ -1,0 +1,79 @@
+.footer {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  padding: 0px 40px 0px 40px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 14px;
+  /* identical to box height, or 70% */
+
+  text-align: center;
+
+  color: #22a8ba;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 14px;
+  /* or 88% */
+
+  text-align: center;
+
+  color: #5e5e5e;
+}
+
+.socmed {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+}
+
+.socmed__list {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.socmed__item {
+  width: 40px;
+}
+
+.playstore__list {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.playstore {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
