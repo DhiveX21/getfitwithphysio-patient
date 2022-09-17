@@ -77,7 +77,7 @@ export default function login({ providers, csrfToken }) {
               <picture>
                 <img
                   className="h-[30px]"
-                  src="/images/google.png"
+                  src="/images/icon/google.png"
                   alt="google"
                 />
               </picture>
@@ -86,7 +86,7 @@ export default function login({ providers, csrfToken }) {
               <picture>
                 <img
                   className="h-[30px]"
-                  src="/images/facebook.png"
+                  src="/images/icon/facebook.png"
                   alt="facebook"
                 />
               </picture>
@@ -95,7 +95,7 @@ export default function login({ providers, csrfToken }) {
               <picture>
                 <img
                   className="h-[30px]"
-                  src="/images/twitter.png"
+                  src="/images/icon/twitter.png"
                   alt="twitter"
                 />
               </picture>

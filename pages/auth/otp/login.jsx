@@ -80,7 +80,10 @@ export default function loginOtp({ providers, csrfToken }) {
         </div>
         <div className={style.illustration}>
           <picture>
-            <img src="/images/verifikasi_otp.svg" alt="Login illustration" />
+            <img
+              src="/images/icon/verifikasi_otp.svg"
+              alt="Login illustration"
+            />
           </picture>
         </div>
         <div className="otp__timer flex justify-center items-center">

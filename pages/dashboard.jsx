@@ -28,7 +28,7 @@ export default function dashboard() {
                 <ButtonWithIcon
                   text="Buat Appointment"
                   classNameInject="text-[24px] leading-[18px] h-full bg-primary"
-                  icon="./images/appointment_icon.svg"
+                  icon="/images/icon/appointment_icon.svg"
                 />
               </div>
               <div className="dashboard__action__item w-1/2 h-auto">
@@ -36,7 +36,7 @@ export default function dashboard() {
                 <ButtonWithIcon
                   classNameInject="bg-lightDanger text-[24px] leading-[18px] h-full"
                   text="Rekam Medis"
-                  icon="./images/medical-result_icon.svg"
+                  icon="./images/icon/medical-result_icon.svg"
                 />
               </div>
             </div>

@@ -25,7 +25,7 @@ export default function Header() {
               <button>
                 <img
                   className="absolute top-[30%] right-[10px]"
-                  src="/images/loupe.svg"
+                  src="/images/icon/loupe.svg"
                   alt="loupe"
                 />
               </button>
@@ -34,7 +34,7 @@ export default function Header() {
         </div>
         <div className={style.help}>
           <picture className="">
-            <img src="/images/help.svg" alt="contact us" />
+            <img src="/images/icon/help.svg" alt="contact us" />
           </picture>
         </div>
       </div>

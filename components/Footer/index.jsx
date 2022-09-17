@@ -31,27 +31,27 @@ export default function Footer() {
           <div className={style.socmed__list}>
             <div className={"hover-float " + style.socmed__item}>
               <picture>
-                <img src="/images/instagram.png" alt="instagram" />
+                <img src="/images/icon/instagram.png" alt="instagram" />
               </picture>
             </div>
             <div className={"hover-float " + style.socmed__item}>
               <picture>
-                <img src="/images/linkedin.png" alt="linkedin" />
+                <img src="/images/icon/linkedin.png" alt="linkedin" />
               </picture>
             </div>
             <div className={"hover-float " + style.socmed__item}>
               <picture>
-                <img src="/images/telegram.png" alt="telegram" />
+                <img src="/images/icon/telegram.png" alt="telegram" />
               </picture>
             </div>
             <div className={"hover-float " + style.socmed__item}>
               <picture>
-                <img src="/images/twitter_square.png" alt="twitter" />
+                <img src="/images/icon/twitter_square.png" alt="twitter" />
               </picture>
             </div>
             <div className={"hover-float " + style.socmed__item}>
               <picture>
-                <img src="/images/youtube.png" alt="youtube" />
+                <img src="/images/icon/youtube.png" alt="youtube" />
               </picture>
             </div>
           </div>

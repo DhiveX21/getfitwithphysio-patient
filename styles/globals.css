@@ -38,7 +38,8 @@ a {
 } */
 /* end dark mode */
 
-input {
+input,
+textarea {
   background: #f0f1ff;
   box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -51,6 +52,13 @@ input {
   /* text-align: center; */
 
   color: #22a8ba;
+}
+.form-hint {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+
+  color: #bebebe;
 }
 
 .container-page {

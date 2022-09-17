@@ -91,3 +91,27 @@ export function CardFullImage({
     </div>
   );
 }
+
+export function CardIdentity({
+  title = "Telefisio",
+  item = [{ name: "MuhammadArdhiansyah" }],
+}) {
+  return (
+    <div className={style.card_identity}>
+      <div className={style.card_identity__wrapper}>
+        <div className={style.card_identity__title}>
+          <span>{title}</span>
+        </div>
+        {item.map((value, index) => {
+          return (
+            <div className={style.card_identity__item}>
+              <label>{Object.keys(item[index])[0].replace("_", " ")}</label>
+              <span>:</span>
+              <p>{Object.values(item[index])[0]}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

@@ -14,12 +14,14 @@ export function SectionTitle({ text = "I'm Title" }) {
 
 export function MenuTitle({
   text = "I'm Title",
-  icon = "/images/booking-online.svg",
+  icon = "/images/icon/booking-online.svg",
 }) {
   return (
     <>
       <div className={style.menuTitle}>
-        <div className={style.menuTitle__wrapper + " bg-danger rounded-[20px]"}>
+        <div
+          className={style.menuTitle__wrapper + " bg-primary rounded-[20px]"}
+        >
           <picture>
             <img className="h-[75px]" src={icon} alt="menu" />
           </picture>
