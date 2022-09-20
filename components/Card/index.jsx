@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Card.module.css";
+import { Button } from "../Button";
 
 export function CardWithThumbnail({
   image = "./images/physio1.png",
@@ -104,13 +105,54 @@ export function CardIdentity({
         </div>
         {item.map((value, index) => {
           return (
-            <div className={style.card_identity__item}>
+            <div key={index} className={style.card_identity__item}>
               <label>{Object.keys(item[index])[0].replace("_", " ")}</label>
               <span>:</span>
               <p>{Object.values(item[index])[0]}</p>
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+export function FeedBackCardInput({
+  physio_id = "1",
+  physioImage = "/images/physio1.png",
+  title = "tanggapan",
+}) {
+  return (
+    <div className="w-full">
+      <div className="w-full flex flex-row items-center justify-center bg-[#EAF7FD] rounded-lg p-[10px]">
+        <div className="w-[30%] p-[20px]">
+          <picture>
+            <img className="rounded-lg" src={physioImage} alt="fisio" />
+          </picture>
+        </div>
+        <div className="flex flex-col gap-[5px] w-[70%]">
+          <div className="w-full">
+            <h4 className="text-[#68B2BC]">{title}</h4>
+          </div>
+          <div className="w-full">
+            <form action="">
+              <textarea
+                className="w-full h-[75px] text-[20px] text-center leading-[22px] p-[10px]"
+                placeholder="Fisionya baik dan Mengedukasi..."
+                type="text"
+              />
+            </form>
+          </div>
+          <div className="w-full text-center">
+            <Button
+              text="Kirim"
+              classNameInject="w-full bg-primary px-[40px] py-[5px] rounded-lg text-white"
+              click={() => {
+                console.log("Tanggapan");
+              }}
+            ></Button>
+          </div>
+        </div>
       </div>
     </div>
   );

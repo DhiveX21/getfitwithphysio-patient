@@ -11,6 +11,8 @@ import {
   getCsrfToken,
 } from "next-auth/react";
 import { getLocalStorage } from "../../../helpers/localStorage";
+import { useDispatch } from "react-redux";
+import { setControlLoading } from "../../../store/actions/controlActions";
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
@@ -20,6 +22,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function loginOtp({ providers, csrfToken }) {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { status, data: session } = useSession();
   const [seconds, setSeconds] = useState(300);
@@ -50,10 +53,28 @@ export default function loginOtp({ providers, csrfToken }) {
 
   const onSubmit = (data) => {
     checkLoginAttempt();
+    dispatch(
+      setControlLoading(
+        true,
+        "Loading",
+        "Please Wait",
+        "/images/controlLoading.gif"
+      )
+    );
     signIn("credentials", {
       otp: data.otp,
       phoneNumber: loginAttempt.phoneNumber,
     });
+    setTimeout(() => {
+      dispatch(
+        setControlLoading(
+          false,
+          "Loading",
+          "Please Wait",
+          "/images/controlLoading.gif"
+        )
+      );
+    }, 3000);
   };
 
   useEffect(() => {

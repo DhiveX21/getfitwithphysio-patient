@@ -2,12 +2,15 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "nextjs-breadcrumbs";
-import { CardIdentity } from "../../components/Card";
+import { CardIdentity, FeedBackCardInput } from "../../components/Card";
 import { VerticalProgressWithIcon } from "../../components/Progress";
 import { Button } from "../../components/Button";
 import { Common1 } from "../../components/Common";
+import { setControlLoading } from "../../store/actions/controlActions";
+import { useDispatch } from "react-redux";
 
 export default function AppointmentInfo() {
+  const dispatch = useDispatch();
   const status = "finish";
   const progressSimulation = [
     {
@@ -51,6 +54,7 @@ export default function AppointmentInfo() {
   ];
   const router = useRouter();
   const { id } = router.query;
+
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
@@ -76,6 +80,12 @@ export default function AppointmentInfo() {
             { Nama_Fisio: "awdkwadk" },
           ]}
         ></CardIdentity>
+        <div>
+          <div>
+            <h3 className="text-danger text-[20px] ">Feedback</h3>
+          </div>
+          <FeedBackCardInput />
+        </div>
         {status === "progress" ? (
           <VerticalProgressWithIcon progress={progressSimulation} />
         ) : status === "cancel" ? (

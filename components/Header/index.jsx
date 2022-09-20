@@ -1,18 +1,40 @@
 import React from "react";
 import style from "./Header.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Header() {
+  const router = useRouter();
   return (
     <div className={style.header}>
       <div className={style.wrapper}>
-        <div className={"hover-float " + style.logo}>
-          <Link href="/dashboard">
+        {router.asPath === "/dashboard" ? (
+          <div className={"hover-float " + style.logo}>
             <picture>
-              <img src="/images/logo.png" alt="getfit logo" />
+              <img
+                className="opacity-[50%] cursor-pointer hover:opacity-[100] duration-500"
+                src="/images/logo.png"
+                alt="getfit logo"
+              />
             </picture>
-          </Link>
-        </div>
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              router.back();
+            }}
+            className={"hover-float " + style.logo}
+          >
+            <picture>
+              <img
+                className="opacity-[50%] cursor-pointer hover:opacity-[100] duration-500"
+                src="/images/icon/left-arrow.png"
+                alt="getfit logo"
+              />
+            </picture>
+          </div>
+        )}
+
         {/* <div className="header__back">a</div> */}
         <div className={style.search}>
           <div className={style.search__wrapper}>
