@@ -15,11 +15,57 @@ import axios from "axios";
 // };
 
 export async function getServerSideProps(context) {
-  const medicalRecords = await axios
-    .get(`${req.headers.host}/api/medical-record/getAllMedicalRecords`)
-    .then((response) => {
-      return response.data;
-    });
+  // const medicalRecords = await axios
+  //   .get(`${req.headers.host}/api/medical-record/getAllMedicalRecords`)
+  //   .then((response) => {
+  //     return response.data;
+  //   });
+  const medicalRecords = [
+    {
+      _id: "1",
+      physio_name: "Rifa Rahmalia. S. Kes",
+      physio_photo: "/images/physio1.png",
+      medical_complaint:
+        "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rps: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpd: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpk: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      appointment_date: "19 September 2022 15:22",
+    },
+    {
+      _id: "2",
+      physio_name: "Faizah Abdullah, S.St.Ft., S.Ft., M.Biomed.",
+      physio_photo: "/images/physio2.jpeg",
+      medical_complaint:
+        "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rps: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpd: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpk: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      appointment_date: "19 September 2022 15:22",
+    },
+    {
+      _id: "3",
+      physio_name: "Rossa Nurhanifah. Amd. Ft",
+      physio_photo: "/images/physio3.jpeg",
+      medical_complaint:
+        "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rps: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpd: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpk: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      appointment_date: "19 September 2022 15:22",
+    },
+    {
+      _id: "4",
+      physio_name: "Amalia Syah V. Amd. Ft",
+      physio_photo: "/images/physio4.jpg",
+      medical_complaint:
+        "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rps: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpd: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      rpk: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
+      appointment_date: "19 September 2022 15:22",
+    },
+  ];
   return {
     props: { medicalRecords },
   };

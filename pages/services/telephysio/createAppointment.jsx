@@ -20,9 +20,11 @@ export default function CreateAppointment() {
   } = useForm();
 
   const onSubmit = (data) => {
-    API.create.then((response) => {
-      router.push(`/appointment/${response.data.id_appointment}`);
-    });
+    // API.create.then((response) => {
+    //   router.push(`/appointment/${response.data.id_appointment}`);
+    // });
+
+    router.push(`/appointment/123`);
   };
 
   console.log(watch("example")); // watch input value by passing the name of it

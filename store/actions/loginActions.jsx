@@ -6,7 +6,13 @@ export const getUsers = () => async (dispatch) => {
   const router = useRouter();
   try {
     // const res = await axios.get(`http://jsonplaceholder.typicode.com/users`);
-    const res = await axios.get(`${router.basePath}/api/login`);
+    // const res = await axios.get(`${router.basePath}/api/login`);
+    const res = {
+      phoneNumber: "0895619258715",
+      isVerified: true,
+      isSuspend: false,
+      role: "patient",
+    };
     dispatch({
       type: LOGIN_USER,
       payload: res.data,
