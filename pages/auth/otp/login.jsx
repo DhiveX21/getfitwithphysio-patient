@@ -21,7 +21,7 @@ import axios from "axios";
 export async function getServerSideProps(context) {
   const providers = await getProviders();
   const getOTP = await axios
-    .get("http://localhost:3000/api/loginOtp")
+    .get(`${req.headers.host}/api/loginOtp`)
     .then((response) => {
       return response.data;
     });

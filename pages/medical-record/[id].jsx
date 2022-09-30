@@ -9,9 +9,7 @@ import axios from "axios";
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const medicalRecords = await axios
-    .get(
-      `http://localhost:3000/api/medical-record/getMedicalRecordById?id=${id}`
-    )
+    .get(`${req.headers.host}/api/medical-record/getMedicalRecordById?id=${id}`)
     .then((response) => {
       return response.data;
     });

@@ -7,12 +7,11 @@ import { Button } from "../../../components/Button";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const API = {
-  create: axios.get("/api/createAppointment"),
-};
-
 export default function CreateAppointment() {
   const router = useRouter();
+  const API = {
+    create: axios.get(`${router.basePath}/api/createAppointment`),
+  };
   const {
     register,
     handleSubmit,

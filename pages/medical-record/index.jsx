@@ -19,7 +19,7 @@ export async function getServerSideProps() {
   //   }
   // );
   const medicalRecords = await axios
-    .get("http://localhost:3000/api/medical-record/getAllMedicalRecords")
+    .get(`${req.headers.host}/api/medical-record/getAllMedicalRecords`)
     .then((response) => {
       return response.data;
     });
