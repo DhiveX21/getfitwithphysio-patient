@@ -6,6 +6,7 @@ import Breadcrumbs from "nextjs-breadcrumbs";
 import { CardWithThumbnail } from "../components/Card";
 import { SectionTitle } from "../components/Title";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 // dashboard.auth = {
 //   // role: "admin",
@@ -13,7 +14,18 @@ import { useRouter } from "next/router";
 //   unauthorized: "/auth/login", // redirect to this url
 // };
 
-export default function dashboard() {
+export async function getServerSideProps(context) {
+  const medicalRecords = await axios
+    .get("http://localhost:3000/api/medical-record/getAllMedicalRecords")
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    props: { medicalRecords },
+  };
+}
+
+export default function Dashboard(props) {
   const router = useRouter();
   return (
     <Layout>
@@ -51,22 +63,22 @@ export default function dashboard() {
             <div className="dashboard__carousel__wrapper w-full rounded-md">
               <Carousel
                 swiperItem={[
-                  <div className="w-full rounded-[10px] overflow-hidden">
+                  ` <div className="w-full rounded-[10px] overflow-hidden">
                     <picture>
                       <img
                         className="w-full object-cover"
                         src="./images/servicelist_1.png"
                       />
                     </picture>
-                  </div>,
-                  <div className="w-full rounded-[10px] overflow-hidden">
+                  </div>`,
+                  `<div className="w-full rounded-[10px] overflow-hidden">
                     <picture>
                       <img
                         className="w-full object-cover"
                         src="./images/servicelist_1.png"
                       />
                     </picture>
-                  </div>,
+                  </div>`,
                 ]}
               />
             </div>
@@ -89,7 +101,12 @@ export default function dashboard() {
           </div>
           <div className="dashboard__last-appointment mb-[20px]">
             <div className="dashboard__last-appointment__wrapper ">
-              <CardWithThumbnail></CardWithThumbnail>
+              <CardWithThumbnail
+                image={props.medicalRecords[0].physio_photo}
+                title={props.medicalRecords[0].physio_name}
+                description={props.medicalRecords[0].medical_complaint}
+                note={props.medicalRecords[0].appointment_date}
+              ></CardWithThumbnail>
             </div>
           </div>
           <div className="dashboard__menu mb-[20px]">
@@ -99,14 +116,25 @@ export default function dashboard() {
                   <ButtonWithIcon2
                     text="Buat Appointment"
                     type="button"
+                    icon="/images/icon/appointment_icon.svg"
                     click={() => router.push("/services")}
                   ></ButtonWithIcon2>
                 </div>
                 <div className="dashboard__menu__list__item w-1/4">
-                  <ButtonWithIcon2></ButtonWithIcon2>
+                  <ButtonWithIcon2
+                    text="Rekam Medis"
+                    type="button"
+                    icon="/images/icon/medical-result_icon.svg"
+                    click={() => router.push("/medical-record")}
+                  ></ButtonWithIcon2>
                 </div>
                 <div className="dashboard__menu__list__item w-1/4">
-                  <ButtonWithIcon2></ButtonWithIcon2>
+                  <ButtonWithIcon2
+                    text="Tele Physio"
+                    type="button"
+                    icon="/images/icon/online.png"
+                    click={() => router.push("/services/telephysio")}
+                  ></ButtonWithIcon2>
                 </div>
               </div>
             </div>

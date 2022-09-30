@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function login({ providers, csrfToken }) {
+export default function Login({ providers, csrfToken }) {
   const router = useRouter();
   const {
     register,
@@ -28,7 +28,7 @@ export default function login({ providers, csrfToken }) {
     handleSubmit,
   } = useForm();
   const onSubmit = (data) => {
-    setLocalStorage("login_attempt", { phoneNumber: data.phoneNumber }, 20);
+    setLocalStorage("login_attempt", { phoneNumber: data.phoneNumber }, 300);
     router.push("/auth/otp/login");
   };
 
@@ -40,10 +40,7 @@ export default function login({ providers, csrfToken }) {
         </div>
         <div className={style.illustration}>
           <picture>
-            <img
-              src="/images/login_illustration.svg"
-              alt="Login illustration"
-            />
+            <img src="/images/login.png" alt="Login illustration" />
           </picture>
         </div>
         <div className={style.form}>

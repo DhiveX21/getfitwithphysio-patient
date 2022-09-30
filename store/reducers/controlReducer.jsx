@@ -1,4 +1,4 @@
-import { CONTROL_LOADING } from "../types";
+import { CONTROL_LOADING, CONTROL_LOADING_WITH_TIMER } from "../types";
 
 const initialState = {
   controlLoading: {

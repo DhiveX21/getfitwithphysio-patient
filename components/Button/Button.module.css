@@ -54,6 +54,11 @@
   height: 30px;
 }
 
+.buttonWithIcon2__icon picture {
+  display: flex;
+  justify-content: center;
+}
+
 .buttonWithIcon2__title {
   line-height: 12px;
 }

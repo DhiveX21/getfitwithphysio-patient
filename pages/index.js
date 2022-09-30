@@ -1,29 +1,18 @@
-import { useEffect } from "react";
-import styles from "../styles/Home.module.css";
-import Router from 'next/router'
 import Layout from "../components/Layout";
 import WithMaster from "../hoc/withMaster";
-import {
-  useSession,
-  signIn,
-  signOut,
-  getProviders,
-  getCsrfToken,
-} from "next-auth/react";
-
-Home.auth = {
-  // role: "admin",
-  // loading: "<div>loading</div>",
-  unauthorized: "/auth/login", // redirect to this url
-};
-
+import Router, { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/dashboard");
+  });
 
   return (
     <WithMaster>
       <Layout>
-        <div>awdkoawkoawko</div>
+        <div></div>
       </Layout>
     </WithMaster>
   );

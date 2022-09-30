@@ -2,7 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  env: {
+    AUTH_SECRET: "Getfit2022",
+  },
+};
 
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -1,6 +1,16 @@
 /* /////////////////////// */
 /* Control Loading */
 /* /////////////////////// */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .control_loading {
   background-color: white;
   z-index: 1000;

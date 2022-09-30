@@ -4,8 +4,31 @@ import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "nextjs-breadcrumbs";
+import axios from "axios";
 
-export default function index() {
+export async function getServerSideProps() {
+  // const medicalRecords = await fetch(
+  //   "http://localhost:3000/api/medical-record/getAllMedicalRecords",
+  //   {
+  //     body: JSON.stringify({ a: 1, b: "Textual content" }),
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
+  const medicalRecords = await axios
+    .get("http://localhost:3000/api/medical-record/getAllMedicalRecords")
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    props: { medicalRecords },
+  };
+}
+
+export default function MedicalRecords(props) {
   const router = useRouter();
   return (
     <Layout>
@@ -26,38 +49,24 @@ export default function index() {
             />
           </div>
           <div className="medical-record__list flex flex-col gap-[10px] mb-[20px]">
-            <div
-              onClick={() => {
-                router.push("/medical-record/1");
-              }}
-              className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-            >
-              <CardWithThumbnail title="physio1" image="/images/physio1.png" />
-            </div>
-            <div
-              onClick={() => {
-                router.push("/medical-record/1");
-              }}
-              className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-            >
-              <CardWithThumbnail title="physio2" image="/images/physio2.jpeg" />
-            </div>
-            <div
-              onClick={() => {
-                router.push("/medical-record/1");
-              }}
-              className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-            >
-              <CardWithThumbnail title="physio3" image="/images/physio3.jpeg" />
-            </div>
-            <div
-              onClick={() => {
-                router.push("/medical-record/1");
-              }}
-              className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-            >
-              <CardWithThumbnail title="physio4" image="/images/physio4.jpg" />
-            </div>
+            {props.medicalRecords.map((item, index) => {
+              return (
+                <div
+                  key={item._id}
+                  onClick={() => {
+                    router.push(`/medical-record/${item._id}`);
+                  }}
+                  className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
+                >
+                  <CardWithThumbnail
+                    title={item.physio_name}
+                    description={item.medical_complaint}
+                    note={item.appointment_date}
+                    image={item.physio_photo}
+                  />
+                </div>
+              );
+            })}
           </div>
           <hr className="solid"></hr>
         </div>

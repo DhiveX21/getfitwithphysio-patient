@@ -8,10 +8,10 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 const API = {
-  create: axios.get("http://localhost:3000/api/createAppointment"),
+  create: axios.get("/api/createAppointment"),
 };
 
-export default function createAppointment() {
+export default function CreateAppointment() {
   const router = useRouter();
   const {
     register,

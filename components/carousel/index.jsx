@@ -6,14 +6,15 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import parse from "html-react-parser";
 export default function Carousel({
   swiperItem = [
-    <div className="bg-danger h-[240px] rounded-[20px] justify-center items-center">
+    ` <div className="bg-danger h-[240px] rounded-[20px] justify-center items-center">
       swiper1
-    </div>,
-    <div className="bg-primary h-[240px] rounded-[20px] justify-center items-center">
+    </div>`,
+    ` <div className="bg-primary h-[240px] rounded-[20px] justify-center items-center">
       swiper2
-    </div>,
+    </div>`,
   ],
   slidesPerView = 1,
 }) {
@@ -28,8 +29,12 @@ export default function Carousel({
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
-      {swiperItem.map((item) => {
-        return <SwiperSlide>{item}</SwiperSlide>;
+      {swiperItem.map((item, index) => {
+        return (
+          <div key={index}>
+            <SwiperSlide>{parse(item)}</SwiperSlide>;
+          </div>
+        );
       })}
     </Swiper>
   );

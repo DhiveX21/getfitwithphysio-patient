@@ -23,7 +23,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function register({ providers, csrfToken }) {
+export default function Register({ providers, csrfToken }) {
   const { status } = useSession();
   console.log(status);
   const {

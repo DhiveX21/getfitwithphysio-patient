@@ -12,16 +12,25 @@ import {
 } from "next-auth/react";
 import { getLocalStorage } from "../../../helpers/localStorage";
 import { useDispatch } from "react-redux";
-import { setControlLoading } from "../../../store/actions/controlActions";
+import {
+  setControlLoading,
+  setControlLoadingWithTimer,
+} from "../../../store/actions/controlActions";
+import axios from "axios";
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
+  const getOTP = await axios
+    .get("http://localhost:3000/api/loginOtp")
+    .then((response) => {
+      return response.data;
+    });
   return {
-    props: { providers, csrfToken: await getCsrfToken(context) },
+    props: { providers, csrfToken: await getCsrfToken(context), getOTP },
   };
 }
 
-export default function loginOtp({ providers, csrfToken }) {
+export default function LoginOtp({ providers, csrfToken, getOTP }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const { status, data: session } = useSession();
@@ -52,29 +61,24 @@ export default function loginOtp({ providers, csrfToken }) {
   };
 
   const onSubmit = (data) => {
-    checkLoginAttempt();
-    dispatch(
-      setControlLoading(
-        true,
-        "Loading",
-        "Please Wait",
-        "/images/controlLoading.gif"
-      )
-    );
-    signIn("credentials", {
-      otp: data.otp,
-      phoneNumber: loginAttempt.phoneNumber,
-    });
-    setTimeout(() => {
+    if (data.otp == getOTP.otp) {
+      checkLoginAttempt();
       dispatch(
-        setControlLoading(
-          false,
+        setControlLoadingWithTimer(
+          5000,
           "Loading",
           "Please Wait",
           "/images/controlLoading.gif"
         )
       );
-    }, 3000);
+      signIn("credentials", {
+        otp: data.otp,
+        phoneNumber: loginAttempt.phoneNumber,
+        callbackUrl: "/dashboard",
+      });
+    } else {
+      alert("OTP SALAH");
+    }
   };
 
   useEffect(() => {

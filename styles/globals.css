@@ -46,13 +46,21 @@ textarea {
   font-weight: 400;
   font-size: 24px;
   line-height: 48px;
-
+  outline: none;
   padding: 0px 20px;
 
   /* text-align: center; */
 
   color: #22a8ba;
 }
+
+input:focus {
+  outline: 1px solid #22a8ba;
+}
+textarea:focus {
+  outline: 1px solid #22a8ba;
+}
+
 .form-hint {
   font-weight: 400;
   font-size: 20px;
@@ -99,9 +107,9 @@ textarea {
 }
 .breadcrumbs-inactive {
   font-weight: 400;
-  font-size: 24px;
-  line-height: 24px;
-  color: #5e5e5e;
+  font-size: 18px;
+  line-height: 18px;
+  color: #bebebe;
 }
 
 .breadcrumbs-inactive:after {
@@ -111,8 +119,8 @@ textarea {
   margin-right: 4px;
 }
 .breadcrumbs-active {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 30px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
   color: #22a8ba;
 }

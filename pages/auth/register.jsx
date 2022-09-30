@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import style from "./_register.module.css";
 import { useRouter } from "next/router";
 
-export default function register() {
+export default function Register() {
   const router = useRouter();
   const {
     register,

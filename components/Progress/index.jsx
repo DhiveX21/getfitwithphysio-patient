@@ -31,9 +31,10 @@ export function VerticalProgressWithIcon({
         </div>
         <div className={style.vertical_progress_with_icon__item}>
           <div className={style.vertical_progress_with_icon__item__wrapper}>
-            {progress.map((item) => {
+            {progress.map((item, index) => {
               return (
                 <div
+                  key={index}
                   className={`${
                     style.vertical_progress_with_icon__item__card
                   } ${item.status === "1" ? "animate-pulse" : ""}`}

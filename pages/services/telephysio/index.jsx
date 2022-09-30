@@ -5,7 +5,7 @@ import { CardFullImage } from "../../../components/Card";
 import { ButtonWithIcon } from "../../../components/Button";
 import { useRouter } from "next/router";
 
-export default function index() {
+export default function Telephysio() {
   const router = useRouter();
   return (
     <Layout>
