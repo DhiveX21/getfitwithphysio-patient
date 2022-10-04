@@ -17,11 +17,12 @@ export default function Carousel({
     </div>`,
   ],
   slidesPerView = 1,
+  spaceBetween = 50,
 }) {
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
-      spaceBetween={50}
+      spaceBetween={spaceBetween}
       navigation
       loop={true}
       autoplay={true}
@@ -30,11 +31,7 @@ export default function Carousel({
       onSwiper={(swiper) => console.log(swiper)}
     >
       {swiperItem.map((item, index) => {
-        return (
-          <div key={index}>
-            <SwiperSlide>{parse(item)}</SwiperSlide>;
-          </div>
-        );
+        return <SwiperSlide key={index}>{parse(item)}</SwiperSlide>;
       })}
     </Swiper>
   );

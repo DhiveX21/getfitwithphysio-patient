@@ -17,13 +17,7 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // const user = await axios.get(`/api/login`);
-        const user = {
-          phoneNumber: "0895619258715",
-          isVerified: true,
-          isSuspend: false,
-          role: "patient",
-        };
+        const user = await axios.get(`http://localhost:3000/api/login`);
         if (user.data) {
           // Any object returned will be saved in `user` property of the JWT
           return user.data;

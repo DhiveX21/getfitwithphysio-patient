@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Card.module.css";
+import style from "./Card.module.scss";
 import { Button } from "../Button";
 
 export function CardWithThumbnail({
@@ -151,6 +151,30 @@ export function FeedBackCardInput({
                 console.log("Tanggapan");
               }}
             ></Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function HoverableCard({
+  image = "/images/article3.png",
+  title = "Video",
+  description = "Pelatihan dengan bentuk Video",
+}) {
+  return (
+    <div className={style.hoverable_card}>
+      <div
+        className={style.hoverable_card__wrapper}
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <div className={style.hoverable_card__content}>
+          <div className={style.hoverable_card__title}>
+            <h3>{title}</h3>
+          </div>
+          <div className={style.hoverable_card__description}>
+            <p>{description}</p>
           </div>
         </div>
       </div>

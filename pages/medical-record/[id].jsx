@@ -8,22 +8,13 @@ import axios from "axios";
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  // const medicalRecords = await axios
-  //   .get(`${req.headers.host}/api/medical-record/getMedicalRecordById?id=${id}`)
-  //   .then((response) => {
-  //     return response.data;
-  //   });
-  const medicalRecords = {
-    _id: "1",
-    physio_name: "Rifa Rahmalia. S. Kes",
-    physio_photo: "/images/physio1.png",
-    medical_complaint:
-      "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
-    rps: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
-    rpd: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
-    rpk: "Saya mengalami Neckpain yang cukup mengganggu, terutama pada saat malam hari.",
-    appointment_date: "19 September 2022 15:22",
-  };
+  const medicalRecords = await axios
+    .get(
+      `http://localhost:3000/api/medical-record/getMedicalRecordById?id=${id}`
+    )
+    .then((response) => {
+      return response.data;
+    });
   return {
     props: { medicalRecords },
   };

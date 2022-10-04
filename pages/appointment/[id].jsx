@@ -73,19 +73,24 @@ export default function AppointmentInfo() {
         </div>
         <CardIdentity
           item={[
-            { name: "awdkoawkdokadwo" },
-            { Tanggal_Appointment: "awdkwadk" },
-            { Jam_Appointment: "awdkwadk" },
-            { Tipe_Appointment: "awdkwadk" },
-            { Nama_Fisio: "awdkwadk" },
+            { name: "Muhammad Ardhiansyah" },
+            { Tanggal_Appointment: "12 Juni 2022" },
+            { Jam_Appointment: "14 : 00 WIB" },
+            { Tipe_Appointment: "Tele Fisio" },
+            { Nama_Fisio: "Rifa Rahmalia. S. Kes" },
           ]}
         ></CardIdentity>
-        <div>
+
+        {status === "finish" ? (
           <div>
-            <h3 className="text-danger text-[20px] ">Feedback</h3>
+            <div>
+              <h3 className="text-danger text-[20px] ">Feedback</h3>
+            </div>
+            <FeedBackCardInput />
           </div>
-          <FeedBackCardInput />
-        </div>
+        ) : (
+          ""
+        )}
         {status === "progress" ? (
           <VerticalProgressWithIcon progress={progressSimulation} />
         ) : status === "cancel" ? (
