@@ -20,14 +20,11 @@ import axios from "axios";
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
-  // const getOTP = await axios
-  //   .get(`${req.headers.host}/api/loginOtp`)
-  //   .then((response) => {
-  //     return response.data;
-  //   });
-  const getOTP = {
-    otp: "1234",
-  };
+  const getOTP = await axios
+    .get("http://localhost:3000/api/loginOtp")
+    .then((response) => {
+      return response.data;
+    });
   return {
     props: { providers, csrfToken: await getCsrfToken(context), getOTP },
   };

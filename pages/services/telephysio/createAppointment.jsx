@@ -7,11 +7,12 @@ import { Button } from "../../../components/Button";
 import { useRouter } from "next/router";
 import axios from "axios";
 
+const API = {
+  create: axios.get(`/api/createAppointment`),
+};
+
 export default function CreateAppointment() {
   const router = useRouter();
-  const API = {
-    create: axios.get(`${router.basePath}/api/createAppointment`),
-  };
   const {
     register,
     handleSubmit,
@@ -20,11 +21,11 @@ export default function CreateAppointment() {
   } = useForm();
 
   const onSubmit = (data) => {
-    // API.create.then((response) => {
-    //   router.push(`/appointment/${response.data.id_appointment}`);
-    // });
-
-    router.push(`/appointment/123`);
+    API.create.then((response) => {
+      router.push(
+        `http://localhost:3000/appointment/${response.data.id_appointment}`
+      );
+    });
   };
 
   console.log(watch("example")); // watch input value by passing the name of it

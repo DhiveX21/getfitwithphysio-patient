@@ -8,15 +8,15 @@ export default function index() {
       <div className={style.sticky_bottom_nav}>
         <div className={style.sticky_bottom_nav__wrapper}>
           <div className={style.sticky_bottom_nav__list}>
-            <Link href="/profile">
+            <Link href="/product">
               <div className={style.sticky_bottom_nav__list__item}>
                 <div className={style.sticky_bottom_nav__list__item__icon}>
                   <picture>
-                    <img src="/images/icon/user.png" alt="menu" />
+                    <img src="/images/icon/checkout.png" alt="menu" />
                   </picture>
                 </div>
                 <div className={style.sticky_bottom_nav__list__item__title}>
-                  <h3>Profile</h3>
+                  <h3>Product</h3>
                 </div>
               </div>
             </Link>
