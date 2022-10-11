@@ -61,26 +61,26 @@ export default function Dashboard(props) {
           </div>
           <div className="dashboard__carousel w-full">
             <div className="dashboard__carousel__wrapper w-full rounded-md">
-              <Carousel
-                swiperItem={[
-                  ` <div className="w-full rounded-[10px] overflow-hidden">
+              <Carousel>
+                {[
+                  <div className="w-full rounded-[10px] overflow-hidden">
                     <picture>
                       <img
                         className="w-full object-cover"
                         src="./images/servicelist_1.png"
                       />
                     </picture>
-                  </div>`,
-                  `<div className="w-full rounded-[10px] overflow-hidden">
+                  </div>,
+                  <div className="w-full rounded-[10px] overflow-hidden">
                     <picture>
                       <img
                         className="w-full object-cover"
                         src="./images/servicelist_1.png"
                       />
                     </picture>
-                  </div>`,
+                  </div>,
                 ]}
-              />
+              </Carousel>
             </div>
           </div>
           <div className="dashboard__breadcrumb my-[5px]">

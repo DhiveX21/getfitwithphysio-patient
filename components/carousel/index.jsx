@@ -18,7 +18,9 @@ export default function Carousel({
   ],
   slidesPerView = 1,
   spaceBetween = 50,
+  children,
 }) {
+  console.log(children);
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -30,8 +32,8 @@ export default function Carousel({
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
-      {swiperItem.map((item, index) => {
-        return <SwiperSlide key={index}>{parse(item)}</SwiperSlide>;
+      {children.map((item, index) => {
+        return <SwiperSlide key={index}>{item}</SwiperSlide>;
       })}
     </Swiper>
   );
