@@ -20,7 +20,7 @@ export default function Product(props) {
   return (
     <Layout>
       <div className="product">
-        <div className="product__wrapper flex flex-col p-[20px]">
+        <div className="product__wrapper flex flex-col px-[20px] mb-[20px]">
           <MenuTitle
             text="Rekam Medis"
             icon="/images/icon/medical-result_icon.svg"

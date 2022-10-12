@@ -15,7 +15,7 @@
 
 .logo {
   width: 15%;
-  padding: 10px;
+  padding: 5px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@
 
 .search {
   width: 70%;
-  padding: 10px;
+  padding: 5px;
 }
 .search__wrapper {
   width: 100%;
@@ -33,7 +33,7 @@
 
 .help {
   width: 15%;
-  padding: 10px;
+  padding: 5px;
   height: 100%;
   display: flex;
   justify-content: center;

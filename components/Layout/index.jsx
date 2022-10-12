@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { setControlLoadingWithTimer } from "../../store/actions/controlActions";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import StickyNotification from "./StickyNotification";
 
 export default function Layout(props) {
   const { children } = props;
@@ -55,6 +56,7 @@ export default function Layout(props) {
       <ControlLoading />
       <Header />
       <div className={style.layout}>{children}</div>
+      <StickyNotification />
       <StickyBottomNav />
       <Footer />
     </>
