@@ -1,4 +1,4 @@
-import { CONTROL_LOADING, CONTROL_LOADING_WITH_TIMER } from "../types";
+import { CONTROL_LOADING, CONTROL_NOTIFICATION } from "../types";
 
 const initialState = {
   controlLoading: {
@@ -6,6 +6,15 @@ const initialState = {
     title: "Loading...",
     description: "Please Wait",
     image: "/images/controlLoading.gif",
+  },
+  controlNotification: {
+    active: false,
+    notification: [
+      {
+        title: "Notification Title",
+        message: "Notification Message",
+      },
+    ],
   },
 };
 
@@ -19,6 +28,19 @@ export default function (state = initialState, action) {
           title: action.title,
           description: action.desc,
           image: action.image,
+        },
+      };
+    case CONTROL_NOTIFICATION:
+      return {
+        ...state,
+        controlNotification: {
+          active: false,
+          notification: [
+            {
+              title: "Notification Title",
+              message: "Notification Message",
+            },
+          ],
         },
       };
     default:

@@ -33,7 +33,7 @@ export default function MedicalRecords(props) {
   return (
     <Layout>
       <div className="medical-record">
-        <div className="medical-record__wrapper flex flex-col p-[20px]">
+        <div className="medical-record__wrapper flex flex-col px-[20px] mb-[20px]">
           <MenuTitle
             text="Rekam Medis"
             icon="/images/icon/medical-result_icon.svg"
