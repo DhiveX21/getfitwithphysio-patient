@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import WithMaster from "../hoc/withMaster";
 import { SessionProvider, useSession } from "next-auth/react";
 import { LoadingLogo } from "../components/Loading";
+import Head from "next/head";
 
 export default function MyApp({
   Component,
@@ -12,6 +13,13 @@ export default function MyApp({
 }) {
   return (
     <>
+      <Head>
+        <title>
+          GET Fisio | One Stop Solution Women’s Health Physiotherapy Services
+        </title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="shortcut icon" href="/logo.png" />
+      </Head>
       <SessionProvider session={session}>
         <Provider store={store}>
           {Component.auth ? (

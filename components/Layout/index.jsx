@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setControlLoadingWithTimer } from "../../store/actions/controlActions";
 import { useSession } from "next-auth/react";
-import Head from "next/head";
 import StickyNotification from "./StickyNotification";
 
 export default function Layout(props) {
@@ -46,13 +45,6 @@ export default function Layout(props) {
   }, []);
   return (
     <>
-      <Head>
-        <title>
-          GET Fisio | One Stop Solution Women’s Health Physiotherapy Services
-        </title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="shortcut icon" href="/logo.png" />
-      </Head>
       <ControlLoading />
       <Header />
       <div className={style.layout}>{children}</div>

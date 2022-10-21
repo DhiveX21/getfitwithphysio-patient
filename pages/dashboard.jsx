@@ -40,7 +40,7 @@ export default function Dashboard(props) {
                 <ButtonWithIcon
                   text="Buat Appointment"
                   classNameInject="text-[24px] leading-[18px] h-full bg-primary"
-                  icon="/images/icon/appointment_icon.svg"
+                  icon="/images/icon/calendar_danger.png"
                   click={() => {
                     router.push("/services");
                   }}
@@ -49,9 +49,9 @@ export default function Dashboard(props) {
               <div className="dashboard__action__item w-1/2 h-auto">
                 {/* <button className="bg-danger text-white">Rekam Medis</button> */}
                 <ButtonWithIcon
-                  classNameInject="bg-lightDanger text-[24px] leading-[18px] h-full"
+                  classNameInject="bg-danger text-[24px] leading-[18px] h-full"
                   text="Rekam Medis"
-                  icon="./images/icon/medical-result_icon.svg"
+                  icon="./images/icon/clipboard.png"
                   click={() => {
                     router.push("/medical-record");
                   }}
@@ -63,7 +63,10 @@ export default function Dashboard(props) {
             <div className="dashboard__carousel__wrapper w-full rounded-md">
               <Carousel>
                 {[
-                  <div className="w-full rounded-[10px] overflow-hidden">
+                  <div
+                    key={1}
+                    className="w-full rounded-[10px] overflow-hidden"
+                  >
                     <picture>
                       <img
                         className="w-full object-cover"
@@ -71,7 +74,10 @@ export default function Dashboard(props) {
                       />
                     </picture>
                   </div>,
-                  <div className="w-full rounded-[10px] overflow-hidden">
+                  <div
+                    key={2}
+                    className="w-full rounded-[10px] overflow-hidden"
+                  >
                     <picture>
                       <img
                         className="w-full object-cover"
@@ -116,7 +122,7 @@ export default function Dashboard(props) {
                   <ButtonWithIcon2
                     text="Buat Appointment"
                     type="button"
-                    icon="/images/icon/appointment_icon.svg"
+                    icon="/images/icon/calendar.png"
                     click={() => router.push("/services")}
                   ></ButtonWithIcon2>
                 </div>
@@ -124,7 +130,7 @@ export default function Dashboard(props) {
                   <ButtonWithIcon2
                     text="Rekam Medis"
                     type="button"
-                    icon="/images/icon/medical-result_icon.svg"
+                    icon="/images/icon/clipboard.png"
                     click={() => router.push("/medical-record")}
                   ></ButtonWithIcon2>
                 </div>
@@ -132,7 +138,7 @@ export default function Dashboard(props) {
                   <ButtonWithIcon2
                     text="Tele Physio"
                     type="button"
-                    icon="/images/icon/online.png"
+                    icon="/images/icon/video-call.png"
                     click={() => router.push("/services/telephysio")}
                   ></ButtonWithIcon2>
                 </div>
@@ -142,6 +148,14 @@ export default function Dashboard(props) {
                     type="button"
                     icon="/images/icon/excercise.png"
                     click={() => router.push("/exercise")}
+                  ></ButtonWithIcon2>
+                </div>
+                <div className="dashboard__menu__list__item w-1/4">
+                  <ButtonWithIcon2
+                    text="Riwayat Appointment"
+                    type="button"
+                    icon="/images/icon/schedule.png"
+                    click={() => router.push("/appointment")}
                   ></ButtonWithIcon2>
                 </div>
               </div>

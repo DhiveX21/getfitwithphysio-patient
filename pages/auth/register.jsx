@@ -2,8 +2,23 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import style from "./_register.module.css";
 import { useRouter } from "next/router";
+import {
+  useSession,
+  signIn,
+  signOut,
+  getProviders,
+  getCsrfToken,
+} from "next-auth/react";
+import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
 
-export default function Register() {
+export async function getServerSideProps(context) {
+  const providers = await getProviders();
+  return {
+    props: { providers, csrfToken: await getCsrfToken(context) },
+  };
+}
+
+export default function Register({ providers, csrfToken }) {
   const router = useRouter();
   const {
     register,
@@ -11,8 +26,8 @@ export default function Register() {
     handleSubmit,
   } = useForm();
   const onSubmit = (data) => {
-    console.log("sbmit");
-    router.push("/auth/register");
+    setLocalStorage("login_attempt", { phoneNumber: data.phoneNumber }, 300);
+    router.push("/auth/otp/register");
   };
   return (
     <div className={style["register-page"] + " container-page"}>
@@ -39,15 +54,16 @@ export default function Register() {
         </div>
         <div className={style.form}>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div className={style.form__wrapper}>
               <input
-                placeholder="Masukan Nomor Handphone"
-                className="h-[48px]"
-                {...register("username", { required: true, maxLength: 20 })}
+                placeholder="Nomor Handphone"
+                className="h-[48px] text-center text-[30px]"
+                {...register("phoneNumber", { required: true, maxLength: 20 })}
               />
-              {/* {errors.username?.type === "required" && "First name is required"} */}
+              {/* {errors.phoneNumber?.type === "required" && "First name is required"} */}
               <button className="button-primary" type="submit">
-                Daftar
+                Login
               </button>
             </div>
           </form>

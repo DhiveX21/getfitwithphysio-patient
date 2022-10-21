@@ -22,9 +22,7 @@ export default function CreateAppointment() {
 
   const onSubmit = (data) => {
     API.create.then((response) => {
-      router.push(
-        `http://localhost:3000/appointment/${response.data.id_appointment}`
-      );
+      router.push(`/appointment/${response.data.id_appointment}`);
     });
   };
 
