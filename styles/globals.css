@@ -51,14 +51,14 @@ textarea {
 
   /* text-align: center; */
 
-  color: #22a8ba;
+  color: #0795fe;
 }
 
 input:focus {
-  outline: 1px solid #22a8ba;
+  outline: 1px solid #0795fe;
 }
 textarea:focus {
-  outline: 1px solid #22a8ba;
+  outline: 1px solid #0795fe;
 }
 
 .form-hint {
@@ -75,7 +75,7 @@ textarea:focus {
 }
 
 .button-primary {
-  background: #22a8ba;
+  background: #0795fe;
   border-radius: 10px;
 
   font-weight: 400;
@@ -122,5 +122,5 @@ textarea:focus {
   font-weight: 600;
   font-size: 20px;
   line-height: 20px;
-  color: #22a8ba;
+  color: #0795fe;
 }

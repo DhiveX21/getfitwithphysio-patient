@@ -38,13 +38,20 @@ export default function Product(props) {
           <div className="product__list flex flex-col gap-[10px] mb-[20px]">
             <div className="product__carousel w-full">
               <div className="product__carousel__wrapper w-full rounded-md ">
-                <Carousel slidesPerView={1.1} spaceBetween={10}>
+                <Carousel
+                  slidesPerView={1.1}
+                  spaceBetween={10}
+                  navigation={false}
+                >
                   {[
-                    <div className="product__list__item shadow-lg p-[20px] my-[10px] rounded-[10px]">
+                    <div
+                      key={1}
+                      className="product__list__item shadow-lg p-[20px] my-[10px] rounded-[10px]"
+                    >
                       <div className="product__list__item__wrapper">
                         <div className="product__list__item__thumbnail">
                           <CardFullImage
-                            textStyle={{ marginLeft: "180px" }}
+                            textStyle={{ marginLeft: "150px" }}
                             title="Konsultasi Fisioterapi secara Online"
                             description="Efektif, On Point, dan Edukatif"
                           ></CardFullImage>
@@ -53,7 +60,7 @@ export default function Product(props) {
                           <div className="product__list__item__facility__title text-danger text-[16px] leading-[20px] py-[10px]">
                             <h3>Fasilitas</h3>
                           </div>
-                          <div className="product__list__item__facility__list flex gap-x-[20px] gap-y-[10px] flex-wrap">
+                          <div className="product__list__item__facility__list flex gap-x-[10px] gap-y-[10px] flex-wrap">
                             <div className="product__list__item__facility__list__item flex items-center justify-center gap-[3px]">
                               <p className="leading-[16px] text-[20px] text-[#5E5E5E]">
                                 HomeCare
@@ -137,18 +144,21 @@ export default function Product(props) {
                         <div className="product__list__button text-center p-[10px]">
                           <Button
                             type="button"
-                            click={console.log("terbeli")}
+                            click={() => router.push("/product/123")}
                             text="Beli Sekarang"
                             classNameInject="px-[10px] py-[5px] text-[#fff] text-[20px] bg-primary rounded-[10px] w-[200px]"
                           />
                         </div>
                       </div>
                     </div>,
-                    <div className="product__list__item shadow-lg p-[20px] my-[10px] rounded-[10px]">
+                    <div
+                      key={2}
+                      className="product__list__item shadow-lg p-[20px] my-[10px] rounded-[10px]"
+                    >
                       <div className="product__list__item__wrapper">
                         <div className="product__list__item__thumbnail">
                           <CardFullImage
-                            textStyle={{ marginLeft: "180px" }}
+                            textStyle={{ marginLeft: "150px" }}
                             title="Konsultasi Fisioterapi secara Online"
                             description="Efektif, On Point, dan Edukatif"
                           ></CardFullImage>
@@ -157,7 +167,7 @@ export default function Product(props) {
                           <div className="product__list__item__facility__title text-danger text-[16px] leading-[20px] py-[10px]">
                             <h3>Fasilitas</h3>
                           </div>
-                          <div className="product__list__item__facility__list flex gap-x-[20px] gap-y-[10px] flex-wrap">
+                          <div className="product__list__item__facility__list flex gap-x-[10px] gap-y-[10px] flex-wrap">
                             <div className="product__list__item__facility__list__item flex items-center justify-center gap-[3px]">
                               <p className="leading-[16px] text-[20px] text-[#5E5E5E]">
                                 HomeCare
@@ -241,7 +251,7 @@ export default function Product(props) {
                         <div className="product__list__button text-center p-[10px]">
                           <Button
                             type="button"
-                            click={console.log("terbeli")}
+                            click={() => router.push("/product/123")}
                             text="Beli Sekarang"
                             classNameInject="px-[10px] py-[5px] text-[#fff] text-[20px] bg-primary rounded-[10px] w-[200px]"
                           />

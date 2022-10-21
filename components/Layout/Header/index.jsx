@@ -28,7 +28,7 @@ export default function Header() {
             <picture>
               <img
                 className="opacity-[50%] cursor-pointer hover:opacity-[100] duration-500"
-                src="/images/icon/left-arrow.png"
+                src="/images/icon/back.svg"
                 alt="getfit logo"
               />
             </picture>

@@ -4,7 +4,7 @@ import Breadcrumbs from "nextjs-breadcrumbs";
 import { CardWithThumbnail } from "../../components/Card";
 import { useRouter } from "next/router";
 
-export default function index() {
+export default function Appointment() {
   const router = useRouter();
   return (
     <Layout>

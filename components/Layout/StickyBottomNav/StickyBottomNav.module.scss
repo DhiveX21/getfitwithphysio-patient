@@ -20,23 +20,31 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 5px 0px;
 
     &__item {
       width: 25%;
-      transition-duration: 500ms;
+
       &:hover {
         cursor: pointer;
-        transition-duration: 500ms;
-        transform: translateY(-10px);
+        .sticky_bottom_nav__list__item__icon {
+          transition-duration: 500ms;
+          transform: scale(1.2);
+        }
       }
       background-color: white;
-      border-radius: 10px;
+      // border-radius: 10px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       gap: 5px;
       padding: 10px;
 
       &__icon {
+        transition-duration: 500ms;
         picture {
           display: flex;
           justify-content: center;
