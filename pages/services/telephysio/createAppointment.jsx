@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../../components/Layout";
 import { MenuTitle } from "../../../components/Title";
 import Breadcrumbs from "nextjs-breadcrumbs";
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../../components/Button";
 import { useRouter } from "next/router";
 import { appointmentCreate } from "../../../endpoint/Appointment";
+import { getLocalStorage } from "../../../helpers/localStorage";
 
 export default function CreateAppointment() {
   const router = useRouter();
@@ -15,19 +16,38 @@ export default function CreateAppointment() {
     watch,
     formState: { errors },
   } = useForm();
+  let credentials = getLocalStorage("credentials");
+
+  useEffect(() => {
+    if (credentials) {
+      credentials = credentials.item;
+    } else {
+      router.push("/auth/login");
+    }
+  });
 
   const onSubmit = (data) => {
     console.log(data);
-    //   const body = {
-    //     "patient_id": 6,
-    //     "therapist_id": 2,
-    //     "date": "2022-080-11",
-    //     "time": "19.00",
-    //     "appointment_type": "home_care",
-    //     "address": "jl. Budi",
-    //     "complaints": "Sakit pinggang"
-    // }
-    //   appointmentCreate(body)
+    const body = {
+      patient_id: credentials.id,
+      therapist_id: 1,
+      date: data.appointment_date,
+      time: data.appointment_hours,
+      appointment_type: data.service,
+      address: data.address,
+      complaints: data.health_complaint,
+    };
+    appointmentCreate(body)
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Appointment berhasil di buat");
+          router.push(`/appointment/${response.data._id}`);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Terjadi Keasalahan di Server");
+      });
     // API.create.then((response) => {
     //   router.push(`/appointment/${response.data.id_appointment}`);
     // });
@@ -58,59 +78,93 @@ export default function CreateAppointment() {
               <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
                 Service
               </label>
-              <input
+              <select
                 placeholder="Tele Fisio"
+                defaultValue="tele_physio"
+                readOnly
                 {...register("service", { required: true })}
-              />
+              >
+                <option value="tele_physio">Tele Fisio</option>
+              </select>
               <span className="form-hint">Cth : Fisioterapi Home Care</span>
               {errors.service && <span>This field is required</span>}
             </div>
             <div className="field-group flex flex-col">
               <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                Nama Lengkap
+                Nama Lengkap{" "}
+                {errors.fullname && (
+                  <span className="text-[24px] text-danger font-bold">
+                    (This field is required)
+                  </span>
+                )}
               </label>
               <input
+                defaultValue={credentials ? credentials.item.name : ""}
                 placeholder="Nama Lengkap"
+                readOnly
                 {...register("fullname", { required: true })}
               />
               <span className="form-hint">Cth : John Doe</span>
-              {errors.fullname && <span>This field is required</span>}
             </div>
             <div className="field-group flex flex-col">
               <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                Tanggal Appointment
+                Tanggal Appointment{" "}
+                {errors.appointment_date && (
+                  <span className="text-[24px] text-danger font-bold">
+                    (This field is required)
+                  </span>
+                )}
               </label>
               <input
                 placeholder="12-06-22"
-                {...register("appointment_date", { required: true })}
+                type="date"
+                {...register("appointment_date", {
+                  required: true,
+                })}
               />
-              <span className="form-hint">Cth : 12 Desember 2022</span>
-              {errors.appointment_date && <span>This field is required</span>}
+              <span className="form-hint">Cth : 12 Desember 2022 </span>
             </div>
             <div className="field-group flex flex-col">
               <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                Jam Appointment
+                Jam Appointment{" "}
+                {errors.appointment_hours && (
+                  <span className="text-[24px] text-danger font-bold">
+                    (Tolong Isi Jam Appointment dengan Benar)
+                  </span>
+                )}
               </label>
               <input
                 placeholder="13 : 30"
-                {...register("appointment_hours", { required: true })}
+                {...register("appointment_hours", {
+                  required: true,
+                  pattern: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,
+                })}
               />
-              <span className="form-hint">Cth : 13 : 30 WIB </span>
-              {errors.appointment_hours && <span>This field is required</span>}
+              <span className="form-hint">Cth : 13:30 </span>
             </div>
             <div className="field-group flex flex-col">
               <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                Alamat
+                Alamat{" "}
+                {errors.address && (
+                  <span className="text-[24px] text-danger font-bold">
+                    (This field is required)
+                  </span>
+                )}
               </label>
-              <textarea
+              <input
                 placeholder="Alamat Lengkap"
+                defaultValue={credentials ? credentials.item.address : ""}
                 {...register("address", { required: true })}
               />
-              {errors.address && <span>This field is required</span>}
             </div>
             <div className="field-group flex flex-col">
               <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                Keluhan Kesehatan
+                Keluhan Kesehatan{" "}
+                {errors.health_complaint && (
+                  <span className="text-[24px] text-danger font-bold">
+                    (This field is required)
+                  </span>
+                )}
               </label>
               <textarea
                 placeholder="Keluhan Kesehatan kamu..."
@@ -120,7 +174,6 @@ export default function CreateAppointment() {
                 Cth : Saya mengalami Neckpain yang cukup mengganggu, terutama
                 pada saat malam hari.{" "}
               </span>
-              {errors.health_complaint && <span>This field is required</span>}
             </div>
             <div className="create-appointment-button w-full flex justify-center mt-[20px]">
               <Button

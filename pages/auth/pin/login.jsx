@@ -81,7 +81,7 @@ export default function LoginPin() {
         );
       })
       .catch((error) => {
-        // alert("Pin Tidak Sesuai");
+        alert("Pin Tidak Sesuai");
         console.error(error);
         dispatch(
           setControlLoading(

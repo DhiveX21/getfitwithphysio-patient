@@ -10,7 +10,7 @@ import {
   setControlLoadingWithTimer,
   setFirstLoginForm,
 } from "../../store/actions/controlActions";
-import { useSession, getSession } from "next-auth/react";
+import { useSession, getSession, signOut } from "next-auth/react";
 import StickyNotification from "./StickyNotification";
 import { patientGetOneByUserId } from "../../endpoint/User";
 import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
@@ -43,7 +43,11 @@ export default function Layout(props) {
         patientGetOneByUserId(credentials.item.id)
           .then((response) => {
             if (response.status === 200) {
-              setLocalStorage("credentials", response.data.data);
+              setLocalStorage(
+                "credentials",
+                response.data.data,
+                30 * 24 * 60 * 60
+              );
               router.reload(window.location.pathname);
             }
           })
@@ -54,6 +58,9 @@ export default function Layout(props) {
       } else {
         dispatch(setFirstLoginForm(false));
       }
+    } else {
+      signOut({ callbackUrl: "/auth/login" });
+      // signOut();
     }
 
     const handleRouteChange = (url, { shallow }) => {
