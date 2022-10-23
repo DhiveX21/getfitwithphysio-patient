@@ -39,7 +39,8 @@ a {
 /* end dark mode */
 
 input,
-textarea {
+textarea,
+select {
   background: #f0f1ff;
   box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;

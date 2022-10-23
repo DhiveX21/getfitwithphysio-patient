@@ -2,38 +2,96 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import style from "./_register.module.css";
 import { useRouter } from "next/router";
-import {
-  useSession,
-  signIn,
-  signOut,
-  getProviders,
-  getCsrfToken,
-} from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { getLocalStorage } from "../../../helpers/localStorage";
+import { userRegisterCheckOtp } from "../../../endpoint/User";
 
-// register.auth = {
-//   role: "admin",
-//   loading: "<div>loadingggggggggggggggggggggggggg</div>",
-//   unauthorized: "/auth/login", // redirect to this url
-// };
+export default function Register() {
+  const router = useRouter();
+  const [seconds, setSeconds] = useState(300);
+  const [registerAttempt, setRegisterAttempt] = useState(null);
 
-export async function getServerSideProps(context) {
-  const providers = await getProviders();
-  return {
-    props: { providers, csrfToken: await getCsrfToken(context) },
-  };
-}
+  const { data: session } = useSession();
+  if (session) {
+    router.push("/dashboard");
+  }
 
-export default function Register({ providers, csrfToken }) {
-  const { status } = useSession();
-  console.log(status);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    signIn("credentials", { otp: data.otp, phoneNumber: "0895619258715" });
+
+  const checkRegisterAttempt = () => {
+    let getRegisterAttempt = getLocalStorage("register_attempt");
+
+    if (!getRegisterAttempt || getRegisterAttempt === "expire") {
+      router.push("/auth/register");
+    } else {
+      if (!registerAttempt) {
+        let tempRegisterAttempt = getLocalStorage("register_attempt");
+        setRegisterAttempt({
+          phoneNumber: tempRegisterAttempt.item.phoneNumber,
+          expire: tempRegisterAttempt.expire,
+        });
+      }
+      return getRegisterAttempt;
+    }
   };
+
+  const onSubmit = (data) => {
+    const body = {
+      phone_number: getLocalStorage("register_attempt").item.phoneNumber,
+      otp: +data.otp,
+    };
+
+    userRegisterCheckOtp(body)
+      .then((response) => {
+        if (response.status === 200) {
+          alert(response.data.data);
+          router.push("/auth/pin/create");
+        } else {
+          alert(response.data.data);
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        alert("otp is not match");
+        console.error(error);
+      });
+    // if (data.otp == getOTP.otp) {
+    //   checkRegisterAttempt();
+    //   dispatch(
+    //     setControlLoadingWithTimer(
+    //       5000,
+    //       "Loading",
+    //       "Please Wait",
+    //       "/images/controlLoading.gif"
+    //     )
+    //   );
+    //   router.push("/auth/pin/create");
+
+    // } else {
+    //   alert("OTP SALAH");
+    // }
+  };
+
+  useEffect(() => {
+    checkRegisterAttempt();
+
+    let interval = null;
+
+    interval = setInterval(() => {
+      setSeconds((seconds) => seconds - 1);
+    }, 1000);
+
+    if (seconds < 0) {
+      router.push("/auth/register");
+    }
+
+    return () => clearInterval(interval);
+  }, [seconds]);
   return (
     <div className={style["register-page"] + " container-page"}>
       <div className={style.wrapper}>
@@ -44,9 +102,19 @@ export default function Register({ providers, csrfToken }) {
           <picture>
             <img
               src="/images/icon/verifikasi_otp.svg"
-              alt="Login illustration"
+              alt="Register illustration"
             />
           </picture>
+        </div>
+        <div className="otp__timer flex justify-center items-center">
+          <div className="otp__timer__wrapper flex flex-col gap-[5px] justify-center items-center">
+            <h4 className="text-[34px] text-[#5e5e5e] m-0 leading-[36px]">
+              Tersisa :{" "}
+            </h4>
+            <h3 className="text-[42px] text-danger m-0 leading-[45px]">
+              {seconds} Detik
+            </h3>
+          </div>
         </div>
 
         <div className="otp__note">
@@ -68,7 +136,7 @@ export default function Register({ providers, csrfToken }) {
               />
               {/* {errors.username?.type === "required" && "First name is required"} */}
               <button className="button-primary" type="submit">
-                Daftar
+                Konfirmasi
               </button>
             </div>
           </form>

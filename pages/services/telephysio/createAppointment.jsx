@@ -5,11 +5,7 @@ import Breadcrumbs from "nextjs-breadcrumbs";
 import { useForm } from "react-hook-form";
 import { Button } from "../../../components/Button";
 import { useRouter } from "next/router";
-import axios from "axios";
-
-const API = {
-  create: axios.get(`/api/createAppointment`),
-};
+import { appointmentCreate } from "../../../endpoint/Appointment";
 
 export default function CreateAppointment() {
   const router = useRouter();
@@ -21,12 +17,22 @@ export default function CreateAppointment() {
   } = useForm();
 
   const onSubmit = (data) => {
-    API.create.then((response) => {
-      router.push(`/appointment/${response.data.id_appointment}`);
-    });
+    console.log(data);
+    //   const body = {
+    //     "patient_id": 6,
+    //     "therapist_id": 2,
+    //     "date": "2022-080-11",
+    //     "time": "19.00",
+    //     "appointment_type": "home_care",
+    //     "address": "jl. Budi",
+    //     "complaints": "Sakit pinggang"
+    // }
+    //   appointmentCreate(body)
+    // API.create.then((response) => {
+    //   router.push(`/appointment/${response.data.id_appointment}`);
+    // });
   };
 
-  console.log(watch("example")); // watch input value by passing the name of it
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
