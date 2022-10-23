@@ -16,6 +16,7 @@ export default function Login({ providers, csrfToken }) {
   const router = useRouter();
 
   const { data: session } = useSession();
+  console.log(session);
   if (session) {
     router.push("/dashboard");
   }
