@@ -7,3 +7,6 @@ export function appointmentGetAll() {
 export function appointmentCreate(body) {
   return axios.post(`${urlAppointmentService}/appointments`, { ...body });
 }
+export function appointmentGetOne(appointmentId) {
+  return axios.get(`${urlAppointmentService}/appointments/${appointmentId}`);
+}
