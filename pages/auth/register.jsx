@@ -2,14 +2,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import style from "./_register.module.css";
 import { useRouter } from "next/router";
-import {
-  useSession,
-  signIn,
-  signOut,
-  getProviders,
-  getCsrfToken,
-} from "next-auth/react";
-import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
+import { getProviders, getCsrfToken, useSession } from "next-auth/react";
+import { setLocalStorage } from "../../helpers/localStorage";
+import { userRegister } from "../../endpoint/User";
+import { useEffect } from "react";
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
@@ -20,15 +16,34 @@ export async function getServerSideProps(context) {
 
 export default function Register({ providers, csrfToken }) {
   const router = useRouter();
+  const { data: session } = useSession();
+  if (session) {
+    router.push("/dashboard");
+  }
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const onSubmit = (data) => {
-    setLocalStorage("login_attempt", { phoneNumber: data.phoneNumber }, 300);
-    router.push("/auth/otp/register");
+    const body = { phone_number: data.phoneNumber };
+    userRegister(body)
+      .then((response) => {
+        console.log(response);
+        setLocalStorage(
+          "register_attempt",
+          { phoneNumber: data.phoneNumber },
+          300
+        );
+        router.push("/auth/otp/register");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
   return (
     <div className={style["register-page"] + " container-page"}>
       <div className={style.wrapper}>
@@ -63,7 +78,7 @@ export default function Register({ providers, csrfToken }) {
               />
               {/* {errors.phoneNumber?.type === "required" && "First name is required"} */}
               <button className="button-primary" type="submit">
-                Login
+                Register
               </button>
             </div>
           </form>

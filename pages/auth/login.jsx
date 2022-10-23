@@ -2,16 +2,8 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import style from "./_login.module.css";
 import { useRouter } from "next/router";
-import * as loginActions from "../../store/actions/loginActions";
-import { useDispatch } from "react-redux";
-import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
-import {
-  useSession,
-  signIn,
-  signOut,
-  getProviders,
-  getCsrfToken,
-} from "next-auth/react";
+import { setLocalStorage } from "../../helpers/localStorage";
+import { getProviders, getCsrfToken, useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
@@ -22,6 +14,12 @@ export async function getServerSideProps(context) {
 
 export default function Login({ providers, csrfToken }) {
   const router = useRouter();
+
+  const { data: session } = useSession();
+  if (session) {
+    router.push("/dashboard");
+  }
+
   const {
     register,
     formState: { errors },
@@ -29,7 +27,7 @@ export default function Login({ providers, csrfToken }) {
   } = useForm();
   const onSubmit = (data) => {
     setLocalStorage("login_attempt", { phoneNumber: data.phoneNumber }, 300);
-    router.push("/auth/otp/login");
+    router.push("/auth/pin/login");
   };
 
   return (

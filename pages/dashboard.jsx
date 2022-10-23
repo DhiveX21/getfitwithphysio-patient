@@ -20,6 +20,7 @@ export async function getServerSideProps(context) {
     .then((response) => {
       return response.data;
     });
+
   return {
     props: { medicalRecords },
   };

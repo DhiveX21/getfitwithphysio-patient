@@ -1,4 +1,8 @@
-import { CONTROL_LOADING, CONTROL_NOTIFICATION } from "../types";
+import {
+  CONTROL_LOADING,
+  CONTROL_NOTIFICATION,
+  FIRST_LOGIN_FORM,
+} from "../types";
 
 const initialState = {
   controlLoading: {
@@ -15,6 +19,9 @@ const initialState = {
         message: "Notification Message",
       },
     ],
+  },
+  firstLoginForm: {
+    active: false,
   },
 };
 
@@ -41,6 +48,13 @@ export default function (state = initialState, action) {
               message: "Notification Message",
             },
           ],
+        },
+      };
+    case FIRST_LOGIN_FORM:
+      return {
+        ...state,
+        firstLoginForm: {
+          active: action.cond,
         },
       };
     default:

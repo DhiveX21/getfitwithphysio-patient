@@ -5,9 +5,7 @@ import { createWrapper } from "next-redux-wrapper";
 import rootReducer from "./reducers";
 
 // initial states here
-const initalState = {
-logedInData : null
-};
+const initalState = {};
 
 // middleware
 const middleware = [thunk];

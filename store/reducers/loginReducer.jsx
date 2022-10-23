@@ -1,4 +1,4 @@
-import { LOGIN_USER,LOGIN_ERROR } from "../types";
+import { LOGIN_DATA, LOGIN_ERROR } from "../types";
 
 const initialState = {
   user: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case LOGIN_USER:
+    case LOGIN_DATA:
       return {
         ...state,
         user: action.payload,
