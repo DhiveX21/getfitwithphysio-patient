@@ -6,54 +6,47 @@ import { CardIdentity, FeedBackCardInput } from "../../components/Card";
 import { VerticalProgressWithIcon } from "../../components/Progress";
 import { Button } from "../../components/Button";
 import { Common1 } from "../../components/Common";
-import { setControlLoading } from "../../store/actions/controlActions";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { getProgressTelePhysio } from "../../helpers/common";
+import { appointmentGetOne } from "../../endpoint/Appointment";
 
-export default function AppointmentInfo() {
+export async function getServerSideProps(context) {
+  //lagi cancel appointment
+  const { id } = context.query;
+  const appointmentData = await appointmentGetOne(id)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  return {
+    props: { appointmentData },
+  };
+}
+
+export default function AppointmentInfo({ appointmentData }) {
   const dispatch = useDispatch();
-  const status = "finish";
-  const progressSimulation = [
-    {
-      icon: "/images/icon/search_fisio.svg",
-      title: "Memesan Tanggal Appointment",
-      description: "Sesi Booking untuk menentukan Tanggal Appointment mu",
-      status: "2",
-    },
-    {
-      icon: "/images/icon/booking-online.svg",
-      title: "Mencari Fisioterapi",
-      description: "Mencari Fisio terbaik dari kami untuk mu...",
-      status: "1",
-    },
-    {
-      icon: "/images/icon/waiting.svg",
-      title: "Nunggu Tanggal Treatment",
-      description: "Menunggu waktu pertemuan kita.",
-      status: "0",
-    },
-    {
-      icon: "/images/icon/online.svg",
-      title: "Sesi Treatment",
-      description:
-        "Kami akan selalu mengusahakan Treatment terbaik untuk masalahmu",
-      status: "0",
-    },
-    {
-      icon: "/images/icon/positive-vote.svg",
-      title: "Selesai Treatment",
-      description: "Sesi nya selesai, Kami harap kamu mendapatkan manfaat nya.",
-      status: "0",
-    },
-    {
-      icon: "/images/icon/rating.svg",
-      title: "Review",
-      description:
-        "Beri kami Penilaian dan Feedback agar kami dapat meningkatkan Layanan kami.",
-      status: "0",
-    },
-  ];
+  const status =
+    appointmentData.status === "finish"
+      ? "finish"
+      : appointmentData.status === "cancel"
+      ? "cancel"
+      : "progress";
+  // const status = "cancel";
+  const progressSimulation = getProgressTelePhysio(
+    appointmentData.status,
+    appointmentData.link_meeting
+  );
+  // const progressSimulation = getProgressTelePhysio(
+  //   "treatment",
+  //   appointmentData.link_meeting
+  // );
   const router = useRouter();
   const { id } = router.query;
+  console.log(appointmentData);
+  console.log(progressSimulation);
 
   return (
     <Layout>
@@ -73,11 +66,21 @@ export default function AppointmentInfo() {
         </div>
         <CardIdentity
           item={[
-            { name: "Muhammad Ardhiansyah" },
-            { Tanggal_Appointment: "12 Juni 2022" },
-            { Jam_Appointment: "14 : 00 WIB" },
-            { Tipe_Appointment: "Tele Fisio" },
-            { Nama_Fisio: "Rifa Rahmalia. S. Kes" },
+            { name: appointmentData.patient_detail.name },
+            {
+              Tanggal_Appointment: appointmentData.date_appointment
+                .replace(/T/, " ")
+                .replace(/\..+/, "")
+                .replace("00:00:00", ""),
+            },
+            { Jam_Appointment: `${appointmentData.time_appointment} WIB` },
+            {
+              Tipe_Appointment: appointmentData.appointment_type.replace(
+                "_",
+                " "
+              ),
+            },
+            { Nama_Fisio: appointmentData.therapist_detail.name },
           ]}
         ></CardIdentity>
 

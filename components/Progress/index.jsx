@@ -93,6 +93,7 @@ export function VerticalProgressWithIcon({
                     >
                       <p>{item.description}</p>
                     </div>
+                    {item.action ? item.action : ""}
                   </div>
                 </div>
               );

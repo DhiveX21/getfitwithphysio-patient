@@ -16,20 +16,19 @@ export default function CreateAppointment() {
     watch,
     formState: { errors },
   } = useForm();
-  let credentials = getLocalStorage("credentials");
 
+  let credentials = getLocalStorage("credentials");
   useEffect(() => {
-    if (credentials) {
-      credentials = credentials.item;
-    } else {
+    if (!credentials) {
       router.push("/auth/login");
     }
   });
 
+  console.log(credentials);
   const onSubmit = (data) => {
     console.log(data);
     const body = {
-      patient_id: credentials.id,
+      patient_id: credentials.item.id,
       therapist_id: 1,
       date: data.appointment_date,
       time: data.appointment_hours,
@@ -39,18 +38,16 @@ export default function CreateAppointment() {
     };
     appointmentCreate(body)
       .then((response) => {
+        console.log(response);
         if (response.status === 200) {
           alert("Appointment berhasil di buat");
-          router.push(`/appointment/${response.data._id}`);
+          router.push(`/appointment/${response.data.data._id}`);
         }
       })
       .catch((error) => {
         console.error(error);
         alert("Terjadi Keasalahan di Server");
       });
-    // API.create.then((response) => {
-    //   router.push(`/appointment/${response.data.id_appointment}`);
-    // });
   };
 
   return (
