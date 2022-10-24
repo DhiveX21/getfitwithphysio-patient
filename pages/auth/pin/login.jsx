@@ -10,16 +10,20 @@ import { setControlLoading } from "../../../store/actions/controlActions";
 import { signIn } from "next-auth/react";
 import { ControlLoading } from "../../../components/Control";
 import { userLogin } from "../../../endpoint/User";
+import { useEffect } from "react";
 
 export default function LoginPin() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const loginPhoneNumber = getLocalStorage("login_attempt");
+  let loginPhoneNumber = "";
+  useEffect(() => {
+    loginPhoneNumber = getLocalStorage("login_attempt");
 
-  if (!loginPhoneNumber) {
-    alert("session time out");
-    router.push("/auth/register");
-  }
+    if (!loginPhoneNumber) {
+      alert("session time out");
+      router.push("/auth/register");
+    }
+  });
 
   const {
     register,

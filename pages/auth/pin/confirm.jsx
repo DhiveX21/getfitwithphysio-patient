@@ -22,10 +22,11 @@ import { userCreatePin } from "../../../endpoint/User";
 // }
 
 export default function ConfirmPin() {
-  const createPinAttempt = getLocalStorage("createPinAttempt").item;
-  const registeredPhoneNumber = getLocalStorage("register_attempt");
-  console.log(registeredPhoneNumber.item);
+  let createPinAttempt = "";
+  let registeredPhoneNumber = "";
   useEffect(() => {
+    createPinAttempt = getLocalStorage("createPinAttempt").item;
+    registeredPhoneNumber = getLocalStorage("register_attempt");
     if (!createPinAttempt) {
       router.push("/auth/login");
     }
