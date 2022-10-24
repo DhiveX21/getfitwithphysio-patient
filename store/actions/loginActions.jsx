@@ -4,6 +4,6 @@ import axios from "axios";
 export const setLoginData = (data) => async (dispatch) => {
   dispatch({
     type: LOGIN_DATA,
-    data: data,
+    payload: data,
   });
 };

@@ -5,17 +5,31 @@ import Breadcrumbs from "nextjs-breadcrumbs";
 import { useDispatch } from "react-redux";
 import { VideoPlayer1 } from "../../../components/Video";
 import { Button } from "../../../components/Button";
+import { exerciseGetOneVideo } from "../../../endpoint/Exercise";
+import { wrapper } from "../../../store/store";
 
-export default function VideoDetail(props) {
+export async function getServerSideProps({ query, req, res }) {
+  const video = await exerciseGetOneVideo(query.id)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  return { props: { video: video } };
+}
+
+export default function VideoDetail({ video }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
+  console.log(video);
 
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
         <MenuTitle
-          text="Video1"
+          text={video.title}
           icon="/images/icon/medical-result_icon.svg"
         ></MenuTitle>
         <div className="breadcrumb">
@@ -33,7 +47,11 @@ export default function VideoDetail(props) {
         <div className="video_detail">
           <div className="video_detail__wrapper">
             <div className="video_detail__player">
-              <VideoPlayer1></VideoPlayer1>
+              <VideoPlayer1
+                title={video.title}
+                description={video.description}
+                url={video.video_url}
+              ></VideoPlayer1>
             </div>
             <hr className="solid"></hr>
             <div className="video_detail__status flex px-[5px] gap-[10px] py-[10px]">

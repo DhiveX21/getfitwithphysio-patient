@@ -53,7 +53,6 @@ export function FirstLoginForm() {
   );
   const dispatch = useDispatch();
   let credentials = getLocalStorage("credentials");
-  console.log(credentials);
   if (credentials) {
     credentials = credentials.item;
   }
@@ -73,6 +72,8 @@ export function FirstLoginForm() {
       gender: data.gender,
       age: calcAge(data.birthdate),
       address: data.address,
+      birth_date: data.birthdate,
+      email: data.email,
     };
     patientCreate(body)
       .then((responseCreate) => {
@@ -97,7 +98,7 @@ export function FirstLoginForm() {
               <MenuTitle text="Isi Kelengkapan data kamu dulu yuk..."></MenuTitle>
               <div>
                 <form
-                  className="flex-col flex gap-[10px]"
+                  className="flex-col flex gap-[10px] overflow-y-scroll max-h-[500px]"
                   onSubmit={handleSubmit(onSubmit)}
                 >
                   <div className="field-group flex flex-col">
@@ -109,6 +110,17 @@ export function FirstLoginForm() {
                       {...register("name", { required: true })}
                     />
                     <span className="form-hint">Cth : John Doe</span>
+                    {errors.name && <span>This field is required</span>}
+                  </div>
+                  <div className="field-group flex flex-col">
+                    <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                      Alamat Email
+                    </label>
+                    <input
+                      placeholder="email@gmail.com"
+                      {...register("email", { required: true })}
+                    />
+                    <span className="form-hint">Cth : getfisio@gmail.com</span>
                     {errors.name && <span>This field is required</span>}
                   </div>
                   <div className="field-group flex flex-col">
