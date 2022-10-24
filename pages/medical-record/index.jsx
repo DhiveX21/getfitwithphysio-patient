@@ -1,34 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CardWithThumbnail } from "../../components/Card";
 import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "nextjs-breadcrumbs";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { appointmentGetAllMedicalRecordByIdUser } from "../../endpoint/Appointment";
+import { formatDateRawToYMD } from "../../helpers/common";
 
-export async function getServerSideProps() {
-  // const medicalRecords = await fetch(
-  //   "http://localhost:3000/api/medical-record/getAllMedicalRecords",
-  //   {
-  //     body: JSON.stringify({ a: 1, b: "Textual content" }),
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //   }
-  // );
-  const medicalRecords = await axios
-    .get("http://localhost:3000/api/medical-record/getAllMedicalRecords")
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    props: { medicalRecords },
-  };
-}
-
-export default function MedicalRecords(props) {
+export default function MedicalRecords() {
+  const [medicalRecord, setMedicalRecord] = useState();
+  const { user } = useSelector((state) => state.logedInData);
+  console.log(user.user_id);
+  useEffect(() => {
+    if (user.user_id) {
+      appointmentGetAllMedicalRecordByIdUser(user.user_id)
+        .then((response) => {
+          console.log(response);
+          setMedicalRecord(response.data.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [user.user_id]);
   const router = useRouter();
   return (
     <Layout>
@@ -49,24 +45,26 @@ export default function MedicalRecords(props) {
             />
           </div>
           <div className="medical-record__list flex flex-col gap-[10px] mb-[20px]">
-            {props.medicalRecords.map((item, index) => {
-              return (
-                <div
-                  key={item._id}
-                  onClick={() => {
-                    router.push(`/medical-record/${item._id}`);
-                  }}
-                  className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-                >
-                  <CardWithThumbnail
-                    title={item.physio_name}
-                    description={item.medical_complaint}
-                    note={item.appointment_date}
-                    image={item.physio_photo}
-                  />
-                </div>
-              );
-            })}
+            {medicalRecord && medicalRecord.length > 0
+              ? medicalRecord.map((item, index) => {
+                  return (
+                    <div
+                      key={item._id}
+                      onClick={() => {
+                        router.push(`/medical-record/${item._id}`);
+                      }}
+                      className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
+                    >
+                      <CardWithThumbnail
+                        title={item.therapist_detail.name}
+                        description={item.records[0].value}
+                        note={item.date + " " + item.time + " WIB"}
+                        image="/images/icon/user.png"
+                      />
+                    </div>
+                  );
+                })
+              : ""}
           </div>
           <hr className="solid"></hr>
         </div>
