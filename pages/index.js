@@ -10,10 +10,8 @@ export default function Home() {
   });
 
   return (
-    <WithMaster>
-      <Layout>
-        <div></div>
-      </Layout>
-    </WithMaster>
+    <Layout>
+      <div></div>
+    </Layout>
   );
 }

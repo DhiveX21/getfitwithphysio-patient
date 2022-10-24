@@ -10,9 +10,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProgressTelePhysio } from "../../helpers/common";
 import { appointmentGetOne } from "../../endpoint/Appointment";
+import { useRef } from "react";
+import { appointmentCreateReview } from "../../endpoint/Appointment";
 
 export async function getServerSideProps(context) {
-  //lagi cancel appointment
   const { id } = context.query;
   const appointmentData = await appointmentGetOne(id)
     .then((response) => {
@@ -27,10 +28,11 @@ export async function getServerSideProps(context) {
 }
 
 export default function AppointmentInfo({ appointmentData }) {
-  const dispatch = useDispatch();
+  const [reviewPanel, setReviewPanel] = useState(true);
+  const reviewInput = useRef();
   const status =
-    appointmentData.status === "finish"
-      ? "finish"
+    appointmentData.status === "complete"
+      ? "complete"
       : appointmentData.status === "cancel"
       ? "cancel"
       : "progress";
@@ -43,6 +45,24 @@ export default function AppointmentInfo({ appointmentData }) {
   //   "treatment",
   //   appointmentData.link_meeting
   // );
+
+  function handleSubmitReview() {
+    const body = {
+      appointment_id: appointmentData._id,
+      rating: {
+        rating_value: 5,
+        comment: reviewInput.current.value,
+      },
+    };
+    appointmentCreateReview(body)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   const router = useRouter();
   const { id } = router.query;
   console.log(appointmentData);
@@ -84,12 +104,49 @@ export default function AppointmentInfo({ appointmentData }) {
           ]}
         ></CardIdentity>
 
-        {status === "finish" ? (
+        {status === "complete" && reviewPanel ? (
           <div>
             <div>
               <h3 className="text-danger text-[20px] ">Feedback</h3>
             </div>
-            <FeedBackCardInput />
+            {/* <FeedBackCardInput /> */}
+
+            <div className="w-full">
+              <div className="w-full flex flex-row items-center justify-center bg-[#EAF7FD] rounded-lg p-[10px]">
+                <div className="w-[30%] p-[20px]">
+                  <picture>
+                    <img
+                      className="rounded-lg"
+                      src="/images/icon/user.png"
+                      alt="fisio"
+                    />
+                  </picture>
+                </div>
+                <div className="flex flex-col gap-[5px] w-[70%]">
+                  <div className="w-full">
+                    <h4 className="text-[#68B2BC]">Review</h4>
+                  </div>
+                  <div className="w-full">
+                    <textarea
+                      className="w-full h-[75px] text-[20px] text-center leading-[22px] p-[10px]"
+                      placeholder="Fisionya baik dan Mengedukasi..."
+                      type="text"
+                      ref={reviewInput}
+                    />
+                  </div>
+                  <div className="w-full text-center">
+                    <Button
+                      text="Kirim"
+                      classNameInject="w-full bg-primary px-[40px] py-[5px] rounded-lg text-white"
+                      click={
+                        (() => handleSubmitReview(),
+                        () => setReviewPanel(false))
+                      }
+                    ></Button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         ) : (
           ""
@@ -104,7 +161,7 @@ export default function AppointmentInfo({ appointmentData }) {
             noteTitle="Catatan :"
             noteDescription="“Saya ada urusan pada saat tanggal Appointment”"
           />
-        ) : status === "finish" ? (
+        ) : status === "complete" ? (
           <Common1
             image="/images/finish_appointment.svg"
             title="Selesai"
@@ -117,16 +174,17 @@ export default function AppointmentInfo({ appointmentData }) {
         )}
         <div className="my-[20px] button__wrapper w-full flex flex-row justify-center items-center">
           {status === "progress" ? (
-            <Button
-              text="Cancel"
-              classNameInject="w-full bg-danger px-[40px] py-[5px] rounded-lg text-white"
-              click={() => {
-                console.log("cancel");
-              }}
-            ></Button>
+            // <Button
+            //   text="Cancel"
+            //   classNameInject="w-full bg-danger px-[40px] py-[5px] rounded-lg text-white"
+            //   click={() => {
+            //     console.log("cancel");
+            //   }}
+            // ></Button>
+            ""
           ) : status === "cancel" ? (
             ""
-          ) : status === "finish" ? (
+          ) : status === "complete" ? (
             <Button
               text="Rekam Medis"
               classNameInject="w-full bg-primary px-[40px] py-[5px] rounded-lg text-white"

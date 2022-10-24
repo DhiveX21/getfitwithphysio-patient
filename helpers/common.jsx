@@ -1,4 +1,5 @@
 const timeStamp = () => Math.floor(new Date().getTime() / 1000);
+import Link from "next/link";
 
 export function calcAge(dateString) {
   var today = new Date();
@@ -78,8 +79,9 @@ export function getProgressTelePhysio(status, linkMeeting) {
         <div className="bg-white p-[10px] rounded-lg text-center text-gray-600">
           <p>Room Treatment Telah Tersedia Silahkan Masuk...</p>
           <a
-            href={linkMeeting}
+            href={`${linkMeeting}`}
             type="button"
+            target="_blank"
             className="bg-primary px-[20px] rounded-lg text-white"
           >
             Masuk
@@ -87,7 +89,7 @@ export function getProgressTelePhysio(status, linkMeeting) {
         </div>
       );
     }
-  } else if (status === "finish") {
+  } else if (status === "complete") {
     progressSimulation[0].status = "2";
     progressSimulation[1].status = "2";
     progressSimulation[2].status = "2";
@@ -97,4 +99,8 @@ export function getProgressTelePhysio(status, linkMeeting) {
   }
 
   return progressSimulation;
+}
+
+export function formatDateRawToYMD(dateRaw) {
+  return dateRaw.replace(/T/, " ").replace(/\..+/, "").replace("00:00:00", "");
 }

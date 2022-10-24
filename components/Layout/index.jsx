@@ -14,6 +14,7 @@ import { useSession, getSession, signOut } from "next-auth/react";
 import StickyNotification from "./StickyNotification";
 import { patientGetOneByUserId } from "../../endpoint/User";
 import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
+import { setLoginData } from "../../store/actions/loginActions";
 
 export default function Layout(props) {
   const {
@@ -34,13 +35,18 @@ export default function Layout(props) {
     },
   });
 
-  //set Loading every change route
   useEffect(() => {
     //checking if the patient haven't completing the data
     const credentials = getLocalStorage("credentials");
     if (credentials) {
-      if (credentials.item.name === credentials.item.phone_number) {
-        patientGetOneByUserId(credentials.item.id)
+      // check if localstorage is from patient API
+      // if localstorage is not from patient API , soo get it
+      if (!credentials.item.user_id) {
+        patientGetOneByUserId(
+          credentials.item.user_id
+            ? credentials.item.user_id
+            : credentials.item.id
+        )
           .then((response) => {
             if (response.status === 200) {
               setLocalStorage(
@@ -48,7 +54,12 @@ export default function Layout(props) {
                 response.data.data,
                 30 * 24 * 60 * 60
               );
-              router.reload(window.location.pathname);
+              dispatch(setLoginData(response.data.data));
+              // setTimeout(() => {
+              //   if (credentials.item !== response.data.data) {
+              //     router.reload(window.location.pathname);
+              //   }
+              // }, 2000);
             }
           })
           .catch((error) => {
@@ -56,13 +67,16 @@ export default function Layout(props) {
             dispatch(setFirstLoginForm(true));
           });
       } else {
-        dispatch(setFirstLoginForm(false));
+        dispatch(setLoginData(credentials.item));
       }
     } else {
       signOut({ callbackUrl: "/auth/login" });
       // signOut();
     }
+  }, []);
 
+  //set Loading every change route
+  useEffect(() => {
     const handleRouteChange = (url, { shallow }) => {
       dispatch(
         setControlLoadingWithTimer(

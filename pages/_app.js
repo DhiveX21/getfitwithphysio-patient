@@ -7,10 +7,7 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { LoadingLogo } from "../components/Loading";
 import Head from "next/head";
 
-export default function MyApp({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <>
       <Head>
@@ -34,6 +31,8 @@ export default function MyApp({
     </>
   );
 }
+
+export default wrapper.withRedux(MyApp);
 
 function Auth({ children }) {
   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
