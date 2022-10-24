@@ -11,8 +11,14 @@ export function appointmentGetOne(appointmentId) {
   return axios.get(`${urlAppointmentService}/appointments/${appointmentId}`);
 }
 export function appointmentGetAllByUserId(userId) {
-  return axios.get(`${urlAppointmentService}//appointments/user/${userId}`);
+  return axios.get(`${urlAppointmentService}/appointments/user/${userId}`);
 }
 export function appointmentCreateReview(body) {
   return axios.post(`${urlAppointmentService}/evaluations`, { ...body });
+}
+export function appointmentGetAllMedicalRecordByIdUser(userId) {
+  return axios.get(`${urlAppointmentService}/records/user/${userId}`);
+}
+export function appointmentGetOneMedicalRecord(medicalRecordId) {
+  return axios.get(`${urlAppointmentService}/records/${medicalRecordId}`);
 }
