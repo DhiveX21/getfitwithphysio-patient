@@ -1,25 +1,21 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
-import { CardFullImage } from "../../components/Card";
-import {
-  ButtonWithIcon,
-  ButtonWithIcon2,
-  Button,
-} from "../../components/Button";
+import { ButtonWithIcon2, Button } from "../../components/Button";
 import { useRouter } from "next/router";
 import { SectionTitle } from "../../components/Title";
-import {
-  useSession,
-  signIn,
-  signOut,
-  getProviders,
-  getCsrfToken,
-} from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 
-export default function Profile() {
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  return {
+    props: { credentials: session.credentials },
+  };
+}
+
+export default function Profile({ credentials }) {
   const router = useRouter();
-  const { data: session, status } = useSession();
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
@@ -30,24 +26,24 @@ export default function Profile() {
             <picture>
               <img
                 className="w-[125px] h-[125px]"
-                src="/images/user_picture.png"
+                src="/images/icon/user.png"
                 alt="user profile"
               />
             </picture>
             <div className="profile__picture__name text-center text-primary">
-              <h3 className="text-[24px] leading-[24px]">
-                Muhammad Ardhiansyah
-              </h3>
+              <h3 className="text-[24px] leading-[24px]">{credentials.name}</h3>
             </div>
             <div className="profile__picture__gender text-center text-[#5e5e5e]">
-              <p className="text-[18px] leading-[14px]">Laki - Laki</p>
+              <p className="text-[18px] leading-[14px]">{credentials.gender}</p>
             </div>
             <div className="profile__item my-[10px]">
               <div className="profile__item__title text-primary">
                 <h3 className="text-[24px] leading-[24px]">Tanggal Lahir</h3>
               </div>
               <div className="profile__item__value text-center text-[#5e5e5e]">
-                <p className="text-[18px] leading-[14px]">12 Juni 1997</p>
+                <p className="text-[18px] leading-[14px]">
+                  {credentials.birth_date}
+                </p>
               </div>
             </div>
             <div className="profile__item my-[10px]">
@@ -56,8 +52,7 @@ export default function Profile() {
               </div>
               <div className="profile__item__value text-center text-[#5e5e5e]">
                 <p className="text-[18px] leading-[14px]">
-                  Jl. Johar No.1A, RT.5/RW.3, Gondangdia, Kec. Menteng, Kota
-                  Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350
+                  {credentials.address}
                 </p>
               </div>
             </div>
@@ -74,7 +69,7 @@ export default function Profile() {
             <ButtonWithIcon2
               text="Riwayat Appointment"
               type="button"
-              icon="/images/icon/appointment_icon.svg"
+              icon="/images/icon/calendar.png"
               click={() => router.push("/appointment")}
             ></ButtonWithIcon2>
           </div>
@@ -90,7 +85,7 @@ export default function Profile() {
             <ButtonWithIcon2
               text="Rekam Medis"
               type="button"
-              icon="/images/icon/medical-result_icon.svg"
+              icon="/images/icon/clipboard.png"
               click={() => router.push("/medical-record")}
             ></ButtonWithIcon2>
           </div>

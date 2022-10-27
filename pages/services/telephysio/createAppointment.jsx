@@ -6,10 +6,18 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../../components/Button";
 import { useRouter } from "next/router";
 import { appointmentCreate } from "../../../endpoint/Appointment";
-import { getLocalStorage } from "../../../helpers/localStorage";
 import { useState } from "react";
+import { getSession } from "next-auth/react";
 
-export default function CreateAppointment() {
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  return {
+    props: { credentials: session.credentials },
+  };
+}
+
+export default function CreateAppointment({ credentials }) {
   const [submitButton, setSubmitButton] = useState(true);
   const router = useRouter();
   const {
@@ -19,19 +27,11 @@ export default function CreateAppointment() {
     formState: { errors },
   } = useForm();
 
-  let credentials = getLocalStorage("credentials");
-  useEffect(() => {
-    if (!credentials) {
-      router.push("/auth/login");
-    }
-  });
-
-  console.log(credentials);
   const onSubmit = (data) => {
     setSubmitButton(false);
 
     const body = {
-      patient_id: credentials.item.id,
+      patient_id: credentials.id,
       therapist_id: 1,
       date: data.appointment_date,
       time: data.appointment_hours,
@@ -41,14 +41,12 @@ export default function CreateAppointment() {
     };
     appointmentCreate(body)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           alert("Appointment berhasil di buat");
           router.push(`/appointment/${response.data.data._id}`);
         }
       })
       .catch((error) => {
-        console.error(error);
         alert("Terjadi Keasalahan di Server");
         setSubmitButton(true);
       });
@@ -100,7 +98,7 @@ export default function CreateAppointment() {
                 )}
               </label>
               <input
-                defaultValue={credentials ? credentials.item.name : ""}
+                defaultValue={credentials.name}
                 placeholder="Nama Lengkap"
                 readOnly
                 {...register("fullname", { required: true })}
@@ -155,7 +153,7 @@ export default function CreateAppointment() {
               </label>
               <input
                 placeholder="Alamat Lengkap"
-                defaultValue={credentials ? credentials.item.address : ""}
+                defaultValue={credentials.address}
                 {...register("address", { required: true })}
               />
             </div>

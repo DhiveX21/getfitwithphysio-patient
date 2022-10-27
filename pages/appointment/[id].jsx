@@ -2,12 +2,11 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "nextjs-breadcrumbs";
-import { CardIdentity, FeedBackCardInput } from "../../components/Card";
+import { CardIdentity } from "../../components/Card";
 import { VerticalProgressWithIcon } from "../../components/Progress";
 import { Button } from "../../components/Button";
 import { Common1 } from "../../components/Common";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { getProgressTelePhysio } from "../../helpers/common";
 import { appointmentGetOne } from "../../endpoint/Appointment";
 import { useRef } from "react";
@@ -20,7 +19,7 @@ export async function getServerSideProps(context) {
       return response.data.data;
     })
     .catch((error) => {
-      console.error(error);
+      return [];
     });
   return {
     props: { appointmentData },
@@ -30,6 +29,7 @@ export async function getServerSideProps(context) {
 export default function AppointmentInfo({ appointmentData }) {
   const [reviewPanel, setReviewPanel] = useState(true);
   const reviewInput = useRef();
+  const router = useRouter();
   const status =
     appointmentData.status === "complete"
       ? "complete"
@@ -62,11 +62,6 @@ export default function AppointmentInfo({ appointmentData }) {
         console.error(error);
       });
   }
-
-  const router = useRouter();
-  const { id } = router.query;
-  console.log(appointmentData);
-  console.log(progressSimulation);
 
   return (
     <Layout>
