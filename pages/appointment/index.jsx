@@ -3,10 +3,8 @@ import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "nextjs-breadcrumbs";
 import { CardWithThumbnail } from "../../components/Card";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { appointmentGetAllByUserId } from "../../endpoint/Appointment";
 import { formatDateRawToYMD } from "../../helpers/common";
-import { useSelector } from "react-redux";
 import { getSession } from "next-auth/react";
 
 // export const getServerSideProps = wrapper.getServerSideProps(
@@ -41,21 +39,6 @@ export async function getServerSideProps({ req }) {
 
 export default function Appointment({ appointmentData }) {
   const router = useRouter();
-  const credentials = useSelector((state) => state.logedInData.user);
-  console.log(credentials);
-
-  // useEffect(() => {
-  //   if (credentials.user_id) {
-  //     appointmentGetAllByUserId(credentials.user_id)
-  //       .then((response) => {
-  //         setAppointmentData(response.data.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         alert("Kamu belum membuat appointment apapun.");
-  //       });
-  //   }
-  // }, [credentials]);
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px] ">
