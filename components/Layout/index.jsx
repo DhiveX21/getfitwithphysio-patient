@@ -9,14 +9,26 @@ import { useEffect } from "react";
 import {
   setControlLoadingWithTimer,
   setFirstLoginForm,
+  setControlLoading,
 } from "../../store/actions/controlActions";
-import { useSession, getSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import StickyNotification from "./StickyNotification";
-import { patientGetOneByUserId } from "../../endpoint/User";
-import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
-import { setLoginData } from "../../store/actions/loginActions";
+
+import { FullScreenModal } from "../Modal";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { signIn } from "next-auth/react";
+import { notificationGetAllByUserId } from "../../endpoint/Notification";
+import { setControlNotification } from "../../store/actions/controlActions";
 
 export default function Layout(props) {
+  const firstLoginFormCondition = useSelector(
+    (state) => state.controlData.firstLoginForm
+  );
+  const controlNotification = useSelector(
+    (state) => state.controlData.controlNotification
+  );
+
   const {
     children,
     withoutHeader = false,
@@ -26,8 +38,7 @@ export default function Layout(props) {
   } = props;
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const { data, status } = useSession({
+  const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
@@ -35,52 +46,58 @@ export default function Layout(props) {
     },
   });
 
+  //triger first form login
   useEffect(() => {
     //checking if the patient haven't completing the data
-    const credentials = getLocalStorage("credentials");
-    if (credentials) {
+    // check if localstorage is from patient API
+    // if localstorage is not from patient API , soo get it
+    if (session && !session.credentials.user_id) {
+      //get patientData by id user
+      const res = signIn("credentials", {
+        user_id: session.credentials.id,
+        type: "patient",
+        redirect: false,
+      });
+      res.then((response) => {
+        // console.log(response);
+        if (response.ok === false) {
+          dispatch(setFirstLoginForm(true));
+        }
+      });
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (session && session.credentials.user_id) {
       // check if localstorage is from patient API
       // if localstorage is not from patient API , soo get it
-      if (!credentials.item.user_id) {
-        patientGetOneByUserId(
-          credentials.item.user_id
-            ? credentials.item.user_id
-            : credentials.item.id
-        )
-          .then((response) => {
-            if (response.status === 200) {
-              setLocalStorage(
-                "credentials",
-                response.data.data,
-                30 * 24 * 60 * 60
-              );
-              dispatch(setLoginData(response.data.data));
-              // setTimeout(() => {
-              //   if (credentials.item !== response.data.data) {
-              //     router.reload(window.location.pathname);
-              //   }
-              // }, 2000);
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            dispatch(setFirstLoginForm(true));
-          });
-      } else {
-        dispatch(setLoginData(credentials.item));
-      }
-    } else {
-      signOut({ callbackUrl: "/auth/login" });
-      // signOut();
+      //  get notification by id user
+      //SAMPE SINI LAGI REQUEST IS READ
+      const body = {
+        and_broadcast: true,
+        is_important: true,
+      };
+      notificationGetAllByUserId(
+        session.credentials.user_id
+          ? session.credentials.user_id
+          : session.credentials.id,
+        body
+      )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, []);
 
   //set Loading every change route
   useEffect(() => {
-    const handleRouteChange = (url, { shallow }) => {
+    const handleRouteChange = (cond) => {
       dispatch(
-        setControlLoadingWithTimer(
-          1000,
+        setControlLoading(
+          cond,
           "Loading",
           "Please Wait",
           "/images/controlLoading.gif"
@@ -88,22 +105,43 @@ export default function Layout(props) {
       );
     };
 
-    router.events.on("routeChangeStart", handleRouteChange);
-    // If the component is unmounted, unsubscribe
-    // from the event with the `off` method:
+    router.events.on("routeChangeStart", () => {
+      handleRouteChange(true);
+    });
+    router.events.on("routeChangeComplete", () => {
+      handleRouteChange(false);
+    });
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off("routeChangeStart", () => {
+        handleRouteChange(true);
+      });
+      router.events.off("routeChangeComplete", () => {
+        handleRouteChange(false);
+      });
     };
   }, []);
+
   return (
     <>
       <ControlLoading />
-      <FirstLoginForm />
-      {!withoutHeader ? <Header /> : ""}
-      <div className={style.layout}>{children}</div>
-      {!withoutStickyNotification ? <StickyNotification /> : ""}
-      {!withoutStickyBottomNav ? <StickyBottomNav /> : ""}
-      {!withoutFooter ? <Footer /> : ""}
+      {firstLoginFormCondition.active ? (
+        <FirstLoginForm />
+      ) : controlNotification.active ? (
+        <FullScreenModal
+          show={controlNotification.active}
+          title={controlNotification.notification.title}
+          message={controlNotification.notification.message}
+          close={() => dispatch(setControlNotification(false, "", ""))}
+        ></FullScreenModal>
+      ) : (
+        <>
+          {!withoutHeader ? <Header /> : ""}
+          <div className={`${style.layout} animation-popup`}>{children}</div>
+          {!withoutStickyNotification ? <StickyNotification /> : ""}
+          {!withoutStickyBottomNav ? <StickyBottomNav /> : ""}
+          {!withoutFooter ? <Footer /> : ""}
+        </>
+      )}
     </>
   );
 }

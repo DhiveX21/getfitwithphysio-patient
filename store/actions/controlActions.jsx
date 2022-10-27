@@ -1,4 +1,8 @@
-import { CONTROL_LOADING, FIRST_LOGIN_FORM } from "../types";
+import {
+  CONTROL_LOADING,
+  FIRST_LOGIN_FORM,
+  CONTROL_NOTIFICATION,
+} from "../types";
 
 export const setControlLoading =
   (cond, title = "", desc = "", image = "/images/controlLoading.gif") =>
@@ -39,3 +43,13 @@ export const setFirstLoginForm = (cond) => async (dispatch) => {
     cond: cond,
   });
 };
+
+export const setControlNotification =
+  (cond, title, message) => async (dispatch) => {
+    dispatch({
+      type: CONTROL_NOTIFICATION,
+      cond: cond,
+      title: title,
+      message: message,
+    });
+  };

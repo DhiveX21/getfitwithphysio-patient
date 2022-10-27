@@ -2,59 +2,71 @@ import React from "react";
 import Layout from "../../components/Layout";
 import Link from "next/link";
 import { CardWithThumbnail } from "../../components/Card";
+import { getSession } from "next-auth/react";
+import { notificationGetAllByUserId } from "../../endpoint/Notification";
+import { useDispatch } from "react-redux";
+import { setControlNotification } from "../../store/actions/controlActions";
 
-export default function Notification() {
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  const body = {
+    and_broadcast: true,
+  };
+
+  const notificationData = await notificationGetAllByUserId(
+    session.credentials.user_id
+      ? session.credentials.user_id
+      : session.credentials.id,
+    body
+  )
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      return [];
+    });
+
+  return {
+    props: { notificationData },
+  };
+}
+
+export default function Notification({ notificationData }) {
+  const dispatch = useDispatch();
+  console.log(notificationData);
   return (
     <Layout>
       <div className="notification">
         <div className="notification__wrapper flex flex-col px-[20px] mb-[20px]">
           <div className="notification__list flex flex-col gap-[10px] mb-[20px]">
             <div className="notification__list__item rounded-xl flex flex-col gap-[10px]">
-              <Link href="/notification/123">
-                <div
-                  onClick={() => {
-                    // router.push(`/medical-record/${item._id}`);
-                  }}
-                  className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-                >
-                  <CardWithThumbnail
-                    title="notification 1"
-                    description="{item.medical_complaint}"
-                    note="{item.appointment_date}"
-                    image="/images/icon/notification.png"
-                  />
-                </div>
-              </Link>
-              <Link href="/notification/123">
-                <div
-                  onClick={() => {
-                    // router.push(`/medical-record/${item._id}`);
-                  }}
-                  className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-                >
-                  <CardWithThumbnail
-                    title="notification 1"
-                    description="{item.medical_complaint}"
-                    note="{item.appointment_date}"
-                    image="/images/icon/notification.png"
-                  />
-                </div>
-              </Link>
-              <Link href="/notification/123">
-                <div
-                  onClick={() => {
-                    // router.push(`/medical-record/${item._id}`);
-                  }}
-                  className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-                >
-                  <CardWithThumbnail
-                    title="notification 1"
-                    description="{item.medical_complaint}"
-                    note="{item.appointment_date}"
-                    image="/images/icon/notification.png"
-                  />
-                </div>
-              </Link>
+              {notificationData.map((item) => {
+                return (
+                  // <Link href={`/notification/${item.id}`}>
+                  <div
+                    onClick={() =>
+                      dispatch(
+                        setControlNotification(
+                          true,
+                          item.title,
+                          item.description
+                        )
+                      )
+                    }
+                    key={item.id}
+                    className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
+                  >
+                    <CardWithThumbnail
+                      title={item.title}
+                      description={item.description}
+                      note="{item.appointment_date}"
+                      image="/images/icon/mail_open.png"
+                      imageStyle="p-[10px] sm:p-[15px]"
+                    />
+                  </div>
+                  // </Link>
+                );
+              })}
             </div>
           </div>
           <hr className="solid" />

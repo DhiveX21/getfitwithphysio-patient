@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
+import { userLogin } from "../../../endpoint/User";
+import { patientGetOneByUserId } from "../../../endpoint/User";
 
 export default NextAuth({
   secret: process.env.AUTH_SECRET,
@@ -17,16 +18,26 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const user = await axios.get(`http://localhost:3000/api/login`);
-        if (user.data) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user.data;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+        let res = "";
+        if (credentials.type === "user") {
+          res = userLogin(credentials).then((response) => {
+            if (response.status == 200) {
+              return response.data.data;
+            } else {
+              return null;
+            }
+          });
         }
+        if (credentials.type === "patient") {
+          res = patientGetOneByUserId(credentials.user_id).then((response) => {
+            if (response.status == 200) {
+              return response.data.data;
+            } else {
+              return null;
+            }
+          });
+        }
+        return res;
       },
     }),
   ],
@@ -44,7 +55,7 @@ export default NextAuth({
         return true;
       } else {
         // Return false to display a default error message
-        return "/auth/login";
+        return "/auth/error";
         // Or you can return a URL to redirect to:
         // return '/unauthorized'
       }
@@ -56,16 +67,18 @@ export default NextAuth({
       else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
-    async jwt({ token, account }) {
+    async jwt({ token, account, user }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
         token.accessToken = account.access_token;
+        token.credentials = user;
       }
       return token;
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken;
+      session.credentials = token.credentials;
       return session;
     },
   },

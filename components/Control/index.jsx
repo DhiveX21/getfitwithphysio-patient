@@ -10,6 +10,7 @@ import { patientCreate, patientGetOneByUserId } from "../../endpoint/User";
 import { setFirstLoginForm } from "../../store/actions/controlActions";
 import { calcAge } from "../../helpers/common";
 import { useEffect } from "react";
+import { signOut } from "next-auth/react";
 
 export function ControlLoading({
   image = "/images/example.jpg",
@@ -95,79 +96,124 @@ export function FirstLoginForm() {
         <div className="w-full max-w-[480px] relative bg-white z-[1000000]">
           <div className="h-screen w-full max-w-[480px] fixed top-[0px] bg-white">
             <div className="px-[20px] flex flex-col gap-[10px] my-[20px] justify-center">
-              <MenuTitle text="Isi Kelengkapan data kamu dulu yuk..."></MenuTitle>
-              <div>
+              <MenuTitle text="Isi Kelengkapan data."></MenuTitle>
+              <div className="max-h-[500px] overflow-y-scroll">
                 <form
-                  className="flex-col flex gap-[10px] overflow-y-scroll max-h-[500px]"
+                  className="flex-col flex gap-[10px] "
                   onSubmit={handleSubmit(onSubmit)}
                 >
-                  <div className="field-group flex flex-col">
-                    <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                      Nama Lengkap
-                    </label>
-                    <input
-                      placeholder="Nama Lengkap"
-                      {...register("name", { required: true })}
-                    />
-                    <span className="form-hint">Cth : John Doe</span>
-                    {errors.name && <span>This field is required</span>}
+                  <div className="flex w-full gap-[10px] h-[100px]">
+                    <div className="field-group flex flex-col w-[calc(50%-5px)] ">
+                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                        Nama Lengkap
+                      </label>
+
+                      <input
+                        className={` ${
+                          errors.name && "border-red-600 border-2 border-dashed"
+                        }`}
+                        placeholder="Nama Lengkap"
+                        {...register("name", { required: true })}
+                      />
+                      <span className="form-hint">Cth : John Doe</span>
+                    </div>
+                    <div className="field-group flex flex-col w-[calc(50%-5px)]">
+                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                        Alamat Email{" "}
+                      </label>
+                      <input
+                        className={` ${
+                          errors.email &&
+                          "border-red-600 border-2 border-dashed"
+                        }`}
+                        placeholder="email@gmail.com"
+                        {...register("email", { required: true })}
+                      />
+                      <span className="form-hint">
+                        Cth : getfisio@gmail.com
+                      </span>
+                    </div>
                   </div>
-                  <div className="field-group flex flex-col">
-                    <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                      Alamat Email
-                    </label>
-                    <input
-                      placeholder="email@gmail.com"
-                      {...register("email", { required: true })}
-                    />
-                    <span className="form-hint">Cth : getfisio@gmail.com</span>
-                    {errors.name && <span>This field is required</span>}
-                  </div>
-                  <div className="field-group flex flex-col">
-                    <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                      Tanggal Lahir
-                    </label>
-                    <input
-                      type="date"
-                      placeholder="12-06-22"
-                      {...register("birthdate", { required: true })}
-                    />
-                    <span className="form-hint">Cth : 12 Desember 2022</span>
-                    {errors.birthdate && <span>This field is required</span>}
-                  </div>
-                  <div className="field-group flex flex-col">
-                    <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                      Jenis Kelamin
-                    </label>
-                    <select
-                      placeholder="13 : 30"
-                      {...register("gender", { required: true })}
-                    >
-                      <option value="male">Laki - Laki</option>
-                      <option value="female">Perempuan</option>
-                    </select>
-                    <span className="form-hint">Cth : Laki-Laki </span>
-                    {errors.gender && <span>This field is required</span>}
+                  <div className="flex w-full gap-[10px] h-[100px]">
+                    <div className="field-group flex flex-col w-1/2">
+                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                        Tanggal Lahir
+                      </label>
+                      <input
+                        className={` ${
+                          errors.birthdate &&
+                          "border-red-600 border-2 border-dashed"
+                        } w-full py-[8px]`}
+                        type="date"
+                        placeholder="12-06-22"
+                        {...register("birthdate", { required: true })}
+                      />
+                      <span className="form-hint">Cth : 12 Desember 2022</span>
+                    </div>
+                    <div className="field-group flex flex-col w-1/2">
+                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                        Jenis Kelamin{" "}
+                      </label>
+                      <select
+                        className={` ${
+                          errors.gender &&
+                          "border-red-600 border-2 border-dashed"
+                        } w-full py-[8px]`}
+                        placeholder="13 : 30"
+                        {...register("gender", { required: true })}
+                      >
+                        <option value="male">Laki - Laki</option>
+                        <option value="female">Perempuan</option>
+                      </select>
+                      <span className="form-hint">Cth : Laki-Laki </span>
+                    </div>
                   </div>
                   <div className="field-group flex flex-col">
                     <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
                       Alamat
                     </label>
                     <textarea
+                      className={` ${
+                        errors.address &&
+                        "border-red-600 border-2 border-dashed"
+                      } w-full py-[8px]`}
                       placeholder="Alamat Lengkap"
                       {...register("address", { required: true })}
                     />
-                    {errors.address && <span>This field is required</span>}
                   </div>
 
-                  <div className="create-appointment-button w-full flex justify-center mt-[20px]">
+                  {errors.address ||
+                  errors.name ||
+                  errors.email ||
+                  errors.birthdate ||
+                  errors.gender ? (
+                    <div className="mt-[20px] flex items-center">
+                      <span className="border-red-600 border-2 border-dashed mr-[10px] pt-[1%] text-white">
+                        ------
+                      </span>
+                      <h3 className="text-danger text-[22px] pt-[1%]">
+                        WAJIB DI ISI.
+                      </h3>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  <div className="create-appointment-button w-full flex gap-[20px] justify-center mt-[20px]">
                     <Button
                       type="submit"
                       text="Buat"
-                      classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-[10px] w-[200px]"
+                      classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-full w-[200px]"
                     />
                   </div>
                 </form>
+                <div className="flex justify-center mt-[20px]">
+                  <Button
+                    text="Logout"
+                    click={() => signOut({ callbackUrl: "/auth/login" })}
+                    classNameInject=" px-[10px] leading-[26px] text-danger opacity-50 text-[24px] bg-white border-2 border-red-600 py-[1%] rounded-full w-[100px]"
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -7,13 +7,18 @@ export function CardWithThumbnail({
   title = "Rifa Rahmalia. Amd. Ft",
   description = "Perbanyak konsumsi makan dan minuman yang banyak mengandung Kalsium. serta perbanyak istirahat dan Olahraga secara rutin.",
   note = "19 September 2022 15:22 WIB",
+  imageStyle = "",
 }) {
   return (
     <div className={style.card_with_thumbnail}>
       <div className={style.card_with_thumbnail__wrapper}>
         <div className={style.card_with_thumbnail__thumbnail}>
           <picture>
-            <img className="object-cover" src={image} alt="physioterapi" />
+            <img
+              className={`object-cover ${imageStyle}`}
+              src={image}
+              alt="physioterapi"
+            />
           </picture>
         </div>
         <div className={style.card_with_thumbnail__text}>

@@ -6,6 +6,7 @@ import WithMaster from "../hoc/withMaster";
 import { SessionProvider, useSession } from "next-auth/react";
 import { LoadingLogo } from "../components/Loading";
 import Head from "next/head";
+import "reactjs-popup/dist/index.css";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (

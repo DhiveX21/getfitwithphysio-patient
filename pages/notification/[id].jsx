@@ -2,26 +2,23 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { notificationGetById } from "../../endpoint/Notification";
 
-// export async function getServerSideProps(context) {
-//   const { id } = context.query;
-//   const medicalRecords = await axios
-//     .get(
-//       `http://localhost:3000/api/medical-record/getMedicalRecordById?id=${id}`
-//     )
-//     .then((response) => {
-//       return response.data;
-//     });
-//   return {
-//     props: { medicalRecords },
-//   };
-// }
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const notificationData = await notificationGetById(id)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      return null;
+    });
+  return {
+    props: { notificationData },
+  };
+}
 
-export default function NotificationDetail(props) {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const { id } = router.query;
-
+export default function NotificationDetail({ notificationData }) {
   return (
     <Layout>
       <div className="px-[20px] h-full flex flex-col gap-[10px] mb-[20px]">

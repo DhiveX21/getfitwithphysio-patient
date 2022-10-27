@@ -104,7 +104,7 @@ export default function AppointmentInfo({ appointmentData }) {
           ]}
         ></CardIdentity>
 
-        {status === "complete" && reviewPanel ? (
+        {status === "complete" && reviewPanel && !appointmentData.evaluation ? (
           <div>
             <div>
               <h3 className="text-danger text-[20px] ">Feedback</h3>
@@ -184,12 +184,12 @@ export default function AppointmentInfo({ appointmentData }) {
             ""
           ) : status === "cancel" ? (
             ""
-          ) : status === "complete" ? (
+          ) : status === "complete" && appointmentData.record._id ? (
             <Button
               text="Rekam Medis"
               classNameInject="w-full bg-primary px-[40px] py-[5px] rounded-lg text-white"
               click={() => {
-                console.log("rekam medis");
+                router.push(`/medical-record/${appointmentData.record._id}`);
               }}
             ></Button>
           ) : (

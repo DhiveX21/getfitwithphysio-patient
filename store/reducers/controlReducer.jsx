@@ -41,19 +41,24 @@ export default function (state = initialState, action) {
       return {
         ...state,
         controlNotification: {
-          active: false,
-          notification: [
-            {
-              title: "Notification Title",
-              message: "Notification Message",
-            },
-          ],
+          active: action.cond,
+          notification: {
+            title: action.title,
+            message: action.message,
+          },
         },
       };
     case FIRST_LOGIN_FORM:
       return {
         ...state,
         firstLoginForm: {
+          active: action.cond,
+        },
+      };
+    case CONTROL_NOTIFICATION:
+      return {
+        ...state,
+        notification: {
           active: action.cond,
         },
       };
