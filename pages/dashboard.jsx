@@ -7,6 +7,8 @@ import { CardWithThumbnail } from "../components/Card";
 import { SectionTitle } from "../components/Title";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 // dashboard.auth = {
 //   // role: "admin",
@@ -14,12 +16,15 @@ import axios from "axios";
 //   unauthorized: "/auth/login", // redirect to this url
 // };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ req }) {
   const medicalRecords = await axios
     .get(`http://localhost:3000/api/medical-record/getAllMedicalRecords`)
     .then((response) => {
       return response.data;
     });
+
+  // const session = await getSession({ req });
+  // console.log(session);
 
   return {
     props: { medicalRecords },
@@ -27,10 +32,13 @@ export async function getServerSideProps(context) {
 }
 
 export default function Dashboard(props) {
+  // const { data: session, status } = useSession();
+  // console.log(session)
+
   const router = useRouter();
   return (
     <Layout>
-      <div className="dashboard">
+      <div className="dashboard ">
         <div className="dashboard__wrapper flex flex-col px-[20px]">
           <div className="dashboard__action mb-[20px]">
             <div className="dashboard__action__wrapper flex flex-row justify-between w-full gap-[10px]">

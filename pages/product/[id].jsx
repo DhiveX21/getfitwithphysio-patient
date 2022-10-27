@@ -28,15 +28,11 @@ export default function ProductDetail({ productDetailData }) {
   function handleCheckout() {
     if (user.user_id) {
       const body = {
-        user_id: user.user_id,
         product_id: +id,
-        amount: productDetailData.amount,
-        price_paid: productDetailData.cost_paid,
-        quota: 1,
+        user_id: user.user_id,
       };
       orderCreate(body)
         .then((response) => {
-          console.log(response);
           router.push("/dashboard");
         })
         .catch((error) => {

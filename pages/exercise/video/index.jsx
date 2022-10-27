@@ -4,9 +4,6 @@ import { MenuTitle } from "../../../components/Title";
 import Breadcrumbs from "nextjs-breadcrumbs";
 import Link from "next/link";
 import { Button } from "../../../components/Button";
-import { HoverableCard } from "../../../components/Card";
-import { wrapper } from "../../../store/store";
-import { setVideoCategory } from "../actions/exerciseActions";
 import {
   exerciseGetAllVideoCategory,
   exerciseGetAllVideoByFilter,
@@ -65,7 +62,7 @@ export default function Video({ videoCategory }) {
                     classNameInject={`${
                       activeCategory === null
                         ? " bg-primary text-white"
-                        : " bg-white text-primary hover:bg-primary hover:text-white"
+                        : " bg-white text-primary hover:bg-primary hover:text-white duration-300"
                     } border-2 border-primary border-opacity-40 pt-[2%]  px-[10px] rounded-full`}
                     text="Semua"
                     click={() => setActiveCategory(null)}
@@ -78,7 +75,7 @@ export default function Video({ videoCategory }) {
                         classNameInject={`${
                           activeCategory === item.id
                             ? " bg-primary text-white"
-                            : " bg-white text-primary hover:bg-primary hover:text-white"
+                            : " bg-white text-primary hover:bg-primary hover:text-white duration-300"
                         } border-2 border-primary border-opacity-40 pt-[2%]  px-[10px] rounded-full`}
                         text={item.title}
                         click={() => setActiveCategory(item.id)}

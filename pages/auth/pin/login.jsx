@@ -42,60 +42,27 @@ export default function LoginPin() {
 
     const joinPin =
       data.otp1 + data.otp2 + data.otp3 + data.otp4 + data.otp5 + data.otp6;
-    console.log(joinPin);
+    // console.log(joinPin);
 
-    const body = {
+    const res = signIn("credentials", {
       phone_number: loginPhoneNumber.item.phoneNumber,
       pin: joinPin,
-    };
-    userLogin(body)
-      .then((response) => {
-        if (response.status === 200) {
-          setLocalStorage(
-            "credentials",
-            {
-              email: response.data.data.email,
-              id: response.data.data.id,
-              name: response.data.data.name,
-              phone_number: response.data.data.phone_number,
-              role: response.data.data.role,
-              token: response.data.data.token,
-              verification_date: response.data.data.verification_date,
-            },
-            3 * 24 * 60 * 60
-          );
-          signIn("credentials", {
-            email: response.data.data.email,
-            id: response.data.data.id,
-            name: response.data.data.name,
-            phone_number: response.data.data.phone_number,
-            role: response.data.data.role,
-            token: response.data.data.token,
-            verification_date: response.data.data.verification_date,
-            callbackUrl: "/dashboard",
-          });
-        }
-        dispatch(
-          setControlLoading(
-            false,
-            "Loading",
-            "Please Wait",
-            "/images/controlLoading.gif"
-          )
-        );
-      })
-      .catch((error) => {
-        alert("Pin Tidak Sesuai");
-        console.error(error);
-        dispatch(
-          setControlLoading(
-            false,
-            "Loading",
-            "Please Wait",
-            "/images/controlLoading.gif"
-          )
-        );
-      });
+      type: "user",
+      redirect: false,
+    });
+    res.then((response) => {
+      // console.log(response);
+      if (response.ok === false) {
+        alert("PIN SALAH");
+        dispatch(setControlLoading(false));
+      } else {
+        router.push("/dashboard");
+
+        setTimeout(() => {
+          dispatch(setControlLoading(false));
+        }, 2000);
+      }
+    });
   };
   return (
     <div className="w-full bg-primary px-[20px]">

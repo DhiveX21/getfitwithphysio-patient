@@ -8,24 +8,31 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { appointmentGetAllMedicalRecordByIdUser } from "../../endpoint/Appointment";
 import { formatDateRawToYMD } from "../../helpers/common";
+import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
-export default function MedicalRecords() {
-  const [medicalRecord, setMedicalRecord] = useState();
-  const { user } = useSelector((state) => state.logedInData);
-  console.log(user.user_id);
-  useEffect(() => {
-    if (user.user_id) {
-      appointmentGetAllMedicalRecordByIdUser(user.user_id)
-        .then((response) => {
-          console.log(response);
-          setMedicalRecord(response.data.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [user.user_id]);
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  const medicalRecordsData = await appointmentGetAllMedicalRecordByIdUser(
+    session.credentials.user_id
+  ).then((response) => {
+    return response.data.data;
+  });
+
+  return {
+    props: { medicalRecordsData },
+  };
+}
+
+export default function MedicalRecords({ medicalRecordsData }) {
   const router = useRouter();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      router.push("/auth/login");
+    },
+  });
   return (
     <Layout>
       <div className="medical-record">
@@ -45,8 +52,8 @@ export default function MedicalRecords() {
             />
           </div>
           <div className="medical-record__list flex flex-col gap-[10px] mb-[20px]">
-            {medicalRecord && medicalRecord.length > 0
-              ? medicalRecord.map((item, index) => {
+            {medicalRecordsData && medicalRecordsData.length > 0
+              ? medicalRecordsData.map((item, index) => {
                   return (
                     <div
                       key={item._id}

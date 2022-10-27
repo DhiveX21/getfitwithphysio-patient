@@ -5,6 +5,7 @@ export function Button({
   color = "",
   textColor = "",
   classNameInject = "text-white bg-primary",
+  disabled = false,
   click = () => {
     console.log("button is clicked");
   },
@@ -16,6 +17,7 @@ export function Button({
       type={type}
       id={id}
       onClick={click}
+      disabled={disabled}
       className={"w-full" + classNameInject}
     >
       {text}

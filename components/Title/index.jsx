@@ -25,7 +25,7 @@ export function MenuTitle({
           <picture>
             <img className="h-[75px]" src={icon} alt="menu" />
           </picture>
-          <h2 className="text-white mt-[2px]">{text}</h2>
+          <h2 className="text-white mt-[2px] leading-[24px]">{text}</h2>
         </div>
       </div>
     </>

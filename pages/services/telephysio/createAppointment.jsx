@@ -7,8 +7,10 @@ import { Button } from "../../../components/Button";
 import { useRouter } from "next/router";
 import { appointmentCreate } from "../../../endpoint/Appointment";
 import { getLocalStorage } from "../../../helpers/localStorage";
+import { useState } from "react";
 
 export default function CreateAppointment() {
+  const [submitButton, setSubmitButton] = useState(true);
   const router = useRouter();
   const {
     register,
@@ -26,7 +28,8 @@ export default function CreateAppointment() {
 
   console.log(credentials);
   const onSubmit = (data) => {
-    console.log(data);
+    setSubmitButton(false);
+
     const body = {
       patient_id: credentials.item.id,
       therapist_id: 1,
@@ -47,6 +50,7 @@ export default function CreateAppointment() {
       .catch((error) => {
         console.error(error);
         alert("Terjadi Keasalahan di Server");
+        setSubmitButton(true);
       });
   };
 
@@ -113,6 +117,7 @@ export default function CreateAppointment() {
                 )}
               </label>
               <input
+                className="py-[8px] w-full"
                 placeholder="12-06-22"
                 type="date"
                 {...register("appointment_date", {
@@ -176,6 +181,7 @@ export default function CreateAppointment() {
               <Button
                 type="submit"
                 text="Buat"
+                disabled={!submitButton}
                 classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-[10px] w-[200px]"
               />
             </div>
