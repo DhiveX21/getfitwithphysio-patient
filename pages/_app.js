@@ -16,6 +16,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           GET Fisio | One Stop Solution Women’s Health Physiotherapy Services
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
         <link rel="shortcut icon" href="/logo.png" />
       </Head>
       <SessionProvider session={session}>
