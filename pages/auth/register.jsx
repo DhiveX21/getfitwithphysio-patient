@@ -86,7 +86,7 @@ export default function Register({ providers, csrfToken }) {
         <div className={style["register-note"]}>
           <div className={style["register-note__wrapper"]}>
             <p>Sudah memiliki akun? </p>
-            <Link href="/auth/register">
+            <Link href="/auth/login">
               <a className="text-primary font-bold"> Login disini.</a>
             </Link>
           </div>
