@@ -1,29 +1,7 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import style from "./StickyNotification.module.scss";
-import { notificationGetAllByUserId } from "../../../endpoint/Notification";
-import { useSelector } from "react-redux";
 
 export default function StickyNotification() {
-  const { user } = useSelector((state) => state.logedInData);
-  const [notificationData, setNotificationData] = useState(null);
-
-  console.log(notificationData);
-  useEffect(() => {
-    if (user.user_id) {
-      const body = {
-        and_broadcast: true,
-        is_important: true,
-      };
-      notificationGetAllByUserId(user.user_id, body)
-        .then((response) => {
-          setNotificationData(response.data.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [user]);
   return (
     <>
       <div className={style.sticky_notif}>

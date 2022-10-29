@@ -44,8 +44,6 @@ export default function ConfirmPin() {
   const onSubmit = (data) => {
     const joinPin =
       data.otp1 + data.otp2 + data.otp3 + data.otp4 + data.otp5 + data.otp6;
-    console.log(createPinAttempt);
-    console.log(joinPin);
 
     if (createPinAttempt == joinPin) {
       const body = {
@@ -57,7 +55,6 @@ export default function ConfirmPin() {
           if (response.status === 200) {
             alert("registrasi PIN berhasil");
             router.push("/auth/login");
-            console.log(response);
           }
         })
         .catch((error) => {

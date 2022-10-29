@@ -8,10 +8,11 @@ export function CardWithThumbnail({
   description = "Perbanyak konsumsi makan dan minuman yang banyak mengandung Kalsium. serta perbanyak istirahat dan Olahraga secara rutin.",
   note = "19 September 2022 15:22 WIB",
   imageStyle = "",
+  cardStyle = "",
 }) {
   return (
     <div className={style.card_with_thumbnail}>
-      <div className={style.card_with_thumbnail__wrapper}>
+      <div className={`${style.card_with_thumbnail__wrapper} ${cardStyle}`}>
         <div className={style.card_with_thumbnail__thumbnail}>
           <picture>
             <img
@@ -42,10 +43,11 @@ export function CardWithThumbnail2({
   title = "Telefisio",
   description = "treatment Fisioterapi online.",
   note = "Baru",
+  cardStyle = "",
 }) {
   return (
     <div className={style.card_with_thumbnail2}>
-      <div className={style.card_with_thumbnail2__wrapper}>
+      <div className={`${style.card_with_thumbnail2__wrapper} ${cardStyle}`}>
         <div
           className={style.card_with_thumbnail2__thumbnail + " max-h-[125px]"}
         >

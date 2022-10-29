@@ -8,7 +8,7 @@ export default function WithMaster(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loginActions.getUsers());
-    console.log(Router);
+
     authCheck();
   }, []);
 

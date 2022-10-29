@@ -31,7 +31,6 @@ export default function Register({ providers, csrfToken }) {
     const body = { phone_number: data.phoneNumber };
     userRegister(body)
       .then((response) => {
-        console.log(response);
         setLocalStorage(
           "register_attempt",
           { phoneNumber: data.phoneNumber },

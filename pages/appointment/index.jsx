@@ -7,19 +7,6 @@ import { appointmentGetAllByUserId } from "../../endpoint/Appointment";
 import { formatDateRawToYMD } from "../../helpers/common";
 import { getSession } from "next-auth/react";
 
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) =>
-//     async ({ req, res }) => {
-//       const dispatch = store.dispatch;
-//       console.log(store.getState(), "hahahahhaha");
-//       console.log(dispatch, "awkdoawkdoaw");
-//       // dispatch(setControlLoading(true));
-//       // await dispatch(setControlLoading(true));
-
-//       return { props: { test: "awdawd" } };
-//     }
-// );
-
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   const appointmentData = await appointmentGetAllByUserId(

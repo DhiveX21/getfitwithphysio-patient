@@ -11,6 +11,10 @@ export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   const body = {
     and_broadcast: true,
+    order_by: {
+      key: "id",
+      value: "desc",
+    },
   };
 
   const notificationData = await notificationGetAllByUserId(
@@ -27,13 +31,12 @@ export async function getServerSideProps({ req }) {
     });
 
   return {
-    props: { notificationData },
+    props: { credentials: session.credentials, notificationData },
   };
 }
 
-export default function Notification({ notificationData }) {
+export default function Notification({ credentials, notificationData }) {
   const dispatch = useDispatch();
-  console.log(notificationData);
   return (
     <Layout>
       <div className="notification">
@@ -49,7 +52,9 @@ export default function Notification({ notificationData }) {
                         setControlNotification(
                           true,
                           item.title,
-                          item.description
+                          item.description,
+                          credentials.user_id,
+                          item.id
                         )
                       )
                     }
@@ -59,9 +64,14 @@ export default function Notification({ notificationData }) {
                     <CardWithThumbnail
                       title={item.title}
                       description={item.description}
-                      note="{item.appointment_date}"
-                      image="/images/icon/mail_open.png"
+                      note={item.created_at}
+                      image={
+                        item.is_read
+                          ? "/images/icon/mail_open.png"
+                          : "/images/icon/mail.png"
+                      }
                       imageStyle="p-[10px] sm:p-[15px]"
+                      cardStyle={item.is_read ? "opacity-30 " : "opacity-100"}
                     />
                   </div>
                   // </Link>

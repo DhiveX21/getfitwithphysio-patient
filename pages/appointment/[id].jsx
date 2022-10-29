@@ -55,9 +55,7 @@ export default function AppointmentInfo({ appointmentData }) {
       },
     };
     appointmentCreateReview(body)
-      .then((response) => {
-        console.log(response);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.error(error);
       });
@@ -67,7 +65,7 @@ export default function AppointmentInfo({ appointmentData }) {
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
         <MenuTitle text="Detail Appointment"></MenuTitle>
-        <div className="breadcrumb">
+        <div className="breadcrumb mb-[20px]">
           <div className="breadcrumb__wrapper px-[10px]">
             <Breadcrumbs
               useDefaultStyle={false}

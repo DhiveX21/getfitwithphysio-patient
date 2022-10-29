@@ -22,7 +22,7 @@ export function VideoPlayer1({
   if (ampersandPosition != -1) {
     video_id = video_id.substring(0, ampersandPosition);
   }
-  console.log(video_id);
+
   return (
     <>
       <div className={style.video_player_1}>

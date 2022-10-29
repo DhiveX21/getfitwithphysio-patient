@@ -5,10 +5,15 @@ import Breadcrumbs from "nextjs-breadcrumbs";
 import { useDispatch } from "react-redux";
 import { VideoPlayer1 } from "../../../components/Video";
 import { Button } from "../../../components/Button";
-import { exerciseGetOneVideo } from "../../../endpoint/Exercise";
+import {
+  exerciseGetOneVideo,
+  exerciseVideoSetWatch,
+} from "../../../endpoint/Exercise";
 import { wrapper } from "../../../store/store";
+import { getSession } from "next-auth/react";
 
 export async function getServerSideProps({ query, req, res }) {
+  const session = await getSession({ req });
   const video = await exerciseGetOneVideo(query.id)
     .then((response) => {
       return response.data.data;
@@ -16,14 +21,23 @@ export async function getServerSideProps({ query, req, res }) {
     .catch((error) => {
       console.error(error);
     });
-  return { props: { video: video } };
+  return { props: { credentials: session.credentials, video: video } };
 }
 
-export default function VideoDetail({ video }) {
-  const dispatch = useDispatch();
+export default function VideoDetail({ credentials, video }) {
   const router = useRouter();
-  const { id } = router.query;
-  console.log(video);
+  function handleSubmitWatch(videoId) {
+    const body = {
+      user_id: credentials.user_id,
+      video_id: videoId,
+    };
+
+    exerciseVideoSetWatch(body).then((response) => {
+      if (response.status === 200) {
+        router.reload(window.location.pathname);
+      }
+    });
+  }
 
   return (
     <Layout>
@@ -66,6 +80,7 @@ export default function VideoDetail({ video }) {
             <div className="video_detail__button text-right py-[10px]">
               <Button
                 text="Selesai"
+                click={() => handleSubmitWatch(video.id)}
                 classNameInject=" bg-primary py-[5px] rounded-[5px] text-[white] text-[20px] "
               />
             </div>

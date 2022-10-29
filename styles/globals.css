@@ -17,6 +17,25 @@ body {
   position: relative;
 }
 
+.swiper-button-next::after {
+  font-size: 20px !important;
+  color: #0795fe;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  opacity: 70%;
+  font-weight: 900;
+}
+.swiper-button-prev::after {
+  font-size: 20px !important;
+  color: #0795fe;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  opacity: 70%;
+  font-weight: 900;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 3px;

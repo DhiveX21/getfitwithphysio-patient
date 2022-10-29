@@ -10,3 +10,9 @@ export function notificationGetAllByUserId(userId, body) {
 export function notificationGetById(notificationId) {
   return axios.get(`${urlNotificationUrl}/notifications/${notificationId}`);
 }
+
+export function notificationSetRead(body) {
+  return axios.post(`${urlNotificationUrl}/notification-reads`, {
+    ...body,
+  });
+}

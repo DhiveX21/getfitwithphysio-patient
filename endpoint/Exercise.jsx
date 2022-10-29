@@ -14,3 +14,6 @@ export function exerciseGetAllVideoByFilter(categoryId = null) {
 export function exerciseGetOneVideo(videoId) {
   return axios.get(`${urlExerciseService}/videos/${videoId}`);
 }
+export function exerciseVideoSetWatch(body) {
+  return axios.post(`${urlExerciseService}/video-watches`, { ...body });
+}
