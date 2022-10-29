@@ -6,9 +6,7 @@ export function Button({
   textColor = "",
   classNameInject = "text-white bg-primary",
   disabled = false,
-  click = () => {
-    console.log("button is clicked");
-  },
+  click = () => {},
   type = "",
   id = null,
 }) {
@@ -28,9 +26,7 @@ export function Button({
 export function ButtonWithIcon({
   text = "button",
   classNameInject = "text-white bg-primary",
-  click = () => {
-    console.log("button is clicked");
-  },
+  click = () => {},
   type = "",
   id = null,
   icon = "./images/logo.png",
@@ -59,9 +55,7 @@ export function ButtonWithIcon({
 export function ButtonWithIcon2({
   text = "button",
   classNameInject = "text-primary bg-white",
-  click = () => {
-    console.log("button is clicked");
-  },
+  click = () => {},
   type = "",
   id = null,
   icon = "./images/logo.png",

@@ -4,6 +4,8 @@ import {
   CONTROL_NOTIFICATION,
 } from "../types";
 
+import { notificationSetRead } from "../../endpoint/Notification";
+
 export const setControlLoading =
   (cond, title = "", desc = "", image = "/images/controlLoading.gif") =>
   async (dispatch) => {
@@ -45,7 +47,15 @@ export const setFirstLoginForm = (cond) => async (dispatch) => {
 };
 
 export const setControlNotification =
-  (cond, title, message) => async (dispatch) => {
+  (cond, title, message, userId, notificationId) => async (dispatch) => {
+    if (userId && notificationId) {
+      const body = {
+        notification_id: notificationId,
+        user_id: userId,
+      };
+      notificationSetRead(body).then((response) => {});
+    }
+
     dispatch({
       type: CONTROL_NOTIFICATION,
       cond: cond,

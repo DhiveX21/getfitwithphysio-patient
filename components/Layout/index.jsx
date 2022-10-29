@@ -59,7 +59,6 @@ export default function Layout(props) {
         redirect: false,
       });
       res.then((response) => {
-        // console.log(response);
         if (response.ok === false) {
           dispatch(setFirstLoginForm(true));
         }
@@ -76,6 +75,10 @@ export default function Layout(props) {
       const body = {
         and_broadcast: true,
         is_important: true,
+        order_by: {
+          key: "id",
+          value: "desc",
+        },
       };
       notificationGetAllByUserId(
         session.credentials.user_id
@@ -84,13 +87,26 @@ export default function Layout(props) {
         body
       )
         .then((response) => {
-          console.log(response);
+          for (let i = 0; i < response.data.data.length; i++) {
+            if (response.data.data[i].is_read === undefined) {
+              dispatch(
+                setControlNotification(
+                  true,
+                  response.data.data[i].title,
+                  response.data.data[i].description,
+                  session.credentials.user_id,
+                  response.data.data[i].id
+                )
+              );
+              break;
+            }
+          }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
-  }, []);
+  }, [session]);
 
   //set Loading every change route
   useEffect(() => {

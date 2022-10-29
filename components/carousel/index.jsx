@@ -36,8 +36,6 @@ export default function Carousel({
       loop={true}
       autoplay={{ delay: 1500 }}
       slidesPerView={slidesPerView}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
     >
       {children.map((item, index) => {
         return <SwiperSlide key={index}>{item}</SwiperSlide>;

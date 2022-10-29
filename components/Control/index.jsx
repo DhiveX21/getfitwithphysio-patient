@@ -66,7 +66,6 @@ export function FirstLoginForm() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     const body = {
       user_id: credentials.id,
       name: data.name,
@@ -78,7 +77,6 @@ export function FirstLoginForm() {
     };
     patientCreate(body)
       .then((responseCreate) => {
-        console.log(responseCreate);
         if (responseCreate.status == 200) {
           // dispatch(setFirstLoginForm(false));
           setLocalStorage("credentials", responseCreate.data.data);

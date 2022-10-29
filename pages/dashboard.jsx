@@ -6,35 +6,29 @@ import Breadcrumbs from "nextjs-breadcrumbs";
 import { CardWithThumbnail } from "../components/Card";
 import { SectionTitle } from "../components/Title";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 import { getSession } from "next-auth/react";
-
-// dashboard.auth = {
-//   // role: "admin",
-//   // loading: "<div>loading</div>",
-//   unauthorized: "/auth/login", // redirect to this url
-// };
+import { appointmentGetAllByUserId } from "../endpoint/Appointment";
+import { formatDateRawToYMD } from "../helpers/common";
+import Link from "next/link";
 
 export async function getServerSideProps({ req }) {
-  const medicalRecords = await axios
-    .get(`http://localhost:3000/api/medical-record/getAllMedicalRecords`)
+  const session = await getSession({ req });
+  const appointmentData = await appointmentGetAllByUserId(
+    session.credentials.user_id
+  )
     .then((response) => {
-      return response.data;
+      return response.data.data;
+    })
+    .catch((error) => {
+      return [];
     });
 
-  // const session = await getSession({ req });
-  // console.log(session);
-
   return {
-    props: { medicalRecords },
+    props: { appointmentData },
   };
 }
 
-export default function Dashboard(props) {
-  // const { data: session, status } = useSession();
-  // console.log(session)
-
+export default function Dashboard({ appointmentData }) {
   const router = useRouter();
   return (
     <Layout>
@@ -43,9 +37,6 @@ export default function Dashboard(props) {
           <div className="dashboard__action mb-[20px]">
             <div className="dashboard__action__wrapper flex flex-row justify-between w-full gap-[10px]">
               <div className="dashboard__action__item w-1/2 h-auto">
-                {/* <button className="bg-primary text-white">
-                  Buat Appointment
-                </button> */}
                 <ButtonWithIcon
                   text="Buat Appointment"
                   classNameInject="text-[24px] leading-[18px] h-full bg-primary"
@@ -108,22 +99,24 @@ export default function Dashboard(props) {
                 activeItemClassName="breadcrumbs-active"
                 rootLabel="Get Physio"
               />
-              {/* <span>
-                <h4>Get Physio /</h4>
-                <h5>Home</h5>
-              </span> */}
             </div>
           </div>
-          <div className="dashboard__last-appointment mb-[20px]">
-            <div className="dashboard__last-appointment__wrapper ">
-              <CardWithThumbnail
-                image={props.medicalRecords[0].physio_photo}
-                title={props.medicalRecords[0].physio_name}
-                description={props.medicalRecords[0].medical_complaint}
-                note={props.medicalRecords[0].appointment_date}
-              ></CardWithThumbnail>
-            </div>
-          </div>
+          {appointmentData.length > 0 ? (
+            <Link href={`/appointment/${appointmentData[0]._id}`}>
+              <div className="dashboard__last-appointment mb-[20px] cursor-pointer">
+                <div className="dashboard__last-appointment__wrapper ">
+                  <CardWithThumbnail
+                    image="/images/icon/user.png"
+                    title={appointmentData[0].therapist_detail.name}
+                    description={appointmentData[0].complaints}
+                    note={formatDateRawToYMD(
+                      appointmentData[0].date_appointment
+                    )}
+                  ></CardWithThumbnail>
+                </div>
+              </div>
+            </Link>
+          ) : null}
           <div className="dashboard__menu mb-[20px]">
             <div className="dashboard__menu__wrapper">
               <div className="dashboard__menu__list  flex w-full justify-center gap-[10px] flex-wrap">

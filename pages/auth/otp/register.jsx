@@ -53,7 +53,6 @@ export default function Register() {
           router.push("/auth/pin/create");
         } else {
           alert(response.data.data);
-          console.log(response);
         }
       })
       .catch((error) => {

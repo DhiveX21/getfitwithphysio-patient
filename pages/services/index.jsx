@@ -29,18 +29,24 @@ export default function services() {
               ></CardWithThumbnail2>
             </div>
           </Link>
-          <CardWithThumbnail2
-            image="/images/article2.png"
-            title="Clinic Treatment"
-            note="Baru"
-            description="Treatment Fisioterapi inClinic, nikmati treatment dengan manfaat maksimal dengan datang ke klinik."
-          ></CardWithThumbnail2>
-          <CardWithThumbnail2
-            image="/images/article1.png"
-            title="Home Care"
-            note="Baru"
-            description="Treatment Fisioterapi di rumah, cukup rebahan kamu dapat memanggil Fisio ke rumah mu."
-          ></CardWithThumbnail2>
+          <div className="cursor-pointer hover:scale-[1.05] duration-500 ease-in-out grayscale">
+            <CardWithThumbnail2
+              cardStyle="opacity-50"
+              image="/images/article2.png"
+              title="Clinic Treatment"
+              note="Baru"
+              description="Treatment Fisioterapi inClinic, nikmati treatment dengan manfaat maksimal dengan datang ke klinik."
+            ></CardWithThumbnail2>
+          </div>
+          <div className="cursor-pointer hover:scale-[1.05] duration-500 ease-in-out grayscale">
+            <CardWithThumbnail2
+              cardStyle="opacity-50 "
+              image="/images/article1.png"
+              title="Home Care"
+              note="Baru"
+              description="Treatment Fisioterapi di rumah, cukup rebahan kamu dapat memanggil Fisio ke rumah mu."
+            ></CardWithThumbnail2>
+          </div>
         </div>
       </Layout>
     </>

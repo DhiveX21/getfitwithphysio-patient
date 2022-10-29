@@ -22,10 +22,10 @@ export default function Telephysio() {
             description="Efektif, On Point, dan Edukatif"
           ></CardFullImage>
           <div className="note_title mt-[20px]">
-            <h3 className="text-primary text-[30px] m-0">Detail : </h3>
+            <h3 className="text-primary text-center text-[24px] m-0">Detail</h3>
           </div>
-          <div className="note_desc mt-[20px]">
-            <p className="text-[#5E5E5E] text-[20px] leading-[22px] text-justify m-0">
+          <div className="note_desc mt-[10px]">
+            <p className="text-[#5E5E5E] text-[20px] leading-[18px] text-center m-0">
               COVID-19 pandemic is the biggest challenge for physiotherapists in
               providing health services to stroke patients, that
               physiotherapists must take innovative and adaptive approaches to

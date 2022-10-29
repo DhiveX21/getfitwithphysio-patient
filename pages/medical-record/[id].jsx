@@ -20,10 +20,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function AppointmentInfo({ medicalRecords }) {
-  console.log(medicalRecords);
-  const dispatch = useDispatch();
   const router = useRouter();
-  const { id } = router.query;
 
   return (
     <Layout>
