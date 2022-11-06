@@ -22,6 +22,7 @@
 .buttonWithIcon__icon {
   width: 30px;
   height: 30px;
+  object-fit: contain;
 }
 /* buttonWithIcon end */
 
@@ -61,4 +62,6 @@
 
 .buttonWithIcon2__title {
   line-height: 12px;
+  font-size: 14px;
+  font-weight: 700;
 }

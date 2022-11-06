@@ -58,7 +58,7 @@ export default function ConfirmPin() {
           }
         })
         .catch((error) => {
-          alert("terjadi kesalahan di server");
+          alert(error);
           console.error(error);
         });
     } else {

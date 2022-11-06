@@ -73,7 +73,7 @@ export function ButtonWithIcon2({
             <img src={icon} alt="menu" />
           </picture>
         </div>
-        <div className={style.buttonWithIcon2__title}>
+        <div className={`${style.buttonWithIcon2__title} text-primary`}>
           <h3>{text}</h3>
         </div>
       </div>

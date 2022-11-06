@@ -6,18 +6,18 @@ export default function Footer() {
     <div className={style.footer}>
       <div className={style.wrapper}>
         <div className={style.contact}>
-          <div className={style.title}>
+          <div className={`${style.title} text-primary`}>
             <h2>Kontak Kami</h2>
           </div>
-          <div className={style.subtitle}>
+          <div className={`${style.subtitle} text-secondary`}>
             <h3>0895619258715</h3>
           </div>
         </div>
         <div className={style.address}>
-          <div className={style.title}>
+          <div className={`${style.title} text-primary`}>
             <h2>Alamat Kami</h2>
           </div>
-          <div className={style.subtitle}>
+          <div className={`${style.subtitle} text-secondary`}>
             <h3>
               Jl. Johar No.1A, RT.5/RW.3, Gondangdia, Kec. Menteng, Kota Jakarta
               Pusat, Daerah Khusus Ibukota Jakarta 10350
@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
         </div>
         <div className={style.socmed}>
-          <div className={style.title}>
+          <div className={`${style.title} text-primary`}>
             <h2>Social Media Kami</h2>
           </div>
           <div className={style.socmed__list}>
@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
         </div>
         <div className={style.playstore}>
-          <div className={style.title}>
+          <div className={`${style.title} text-primary`}>
             <h2>Tunggu kami nanti di...</h2>
           </div>
           <div className={style.playstore__list}>

@@ -32,6 +32,7 @@ export function VideoPlayer1({
           </div>
           <div className={style.video_player_1__player}>
             <YouTube
+              autoplay={false}
               videoId={video_id}
               opts={opts}
               // onReady={this._onReady}

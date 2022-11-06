@@ -203,7 +203,7 @@ textarea:focus {
 .breadcrumbs-inactive {
   font-weight: 400;
   font-size: 18px;
-  line-height: 18px;
+  line-height: 16px;
   color: #bebebe;
 }
 
@@ -217,5 +217,5 @@ textarea:focus {
   font-weight: 600;
   font-size: 20px;
   line-height: 20px;
-  color: #0795fe;
+  color: #5aa9e6;
 }
