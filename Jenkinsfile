@@ -4,17 +4,18 @@ pipeline{
             label "fe"
         }
     }
+    tools {
+        nodejs 'node-v16'
+    }
     stages {
         stage("Build"){
             steps{
                 echo 'BUILD EXECUTION STARTED'
                 sh "sudo su root"
                 sh "whoami"
-                sh 'exec $SHELL'
-                sh 'exec $SHELL'
                 sh "node -v"
                 sh "npm install"
-                sh "yarn install"
+                yarn "install"
                 sh "npm run build"
             }
         }
