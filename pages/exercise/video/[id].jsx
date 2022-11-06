@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { VideoPlayer1 } from "../../../components/Video";
 import { Button } from "../../../components/Button";
 import {
-  exerciseGetOneVideo,
+  exerciseGetOneVideoByUserId,
   exerciseVideoSetWatch,
 } from "../../../endpoint/Exercise";
 import { wrapper } from "../../../store/store";
@@ -14,7 +14,10 @@ import { getSession } from "next-auth/react";
 
 export async function getServerSideProps({ query, req, res }) {
   const session = await getSession({ req });
-  const video = await exerciseGetOneVideo(query.id)
+  const video = await exerciseGetOneVideoByUserId(
+    query.id,
+    session.credentials.user_id
+  )
     .then((response) => {
       return response.data.data;
     })
@@ -25,6 +28,7 @@ export async function getServerSideProps({ query, req, res }) {
 }
 
 export default function VideoDetail({ credentials, video }) {
+  console.log(video);
   const router = useRouter();
   function handleSubmitWatch(videoId) {
     const body = {
@@ -41,7 +45,7 @@ export default function VideoDetail({ credentials, video }) {
 
   return (
     <Layout>
-      <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
+      <div className="px-[20px] flex flex-col  mb-[20px]">
         <MenuTitle
           text={video.title}
           icon="/images/icon/medical-result_icon.svg"
@@ -60,7 +64,7 @@ export default function VideoDetail({ credentials, video }) {
         </div>
         <div className="video_detail">
           <div className="video_detail__wrapper">
-            <div className="video_detail__player">
+            <div className="video_detail__player ">
               <VideoPlayer1
                 title={video.title}
                 description={video.description}
@@ -71,19 +75,29 @@ export default function VideoDetail({ credentials, video }) {
             <div className="video_detail__status flex px-[5px] gap-[10px] py-[10px]">
               <div className="video_detail__status__badge">Status</div>
               <div className="video_detail__status__text">
-                <span className="bg-[#05ad75] px-[10px] text-[white] rounded">
-                  Selesai
-                </span>
+                {video.is_watch ? (
+                  <span className="bg-success px-[10px] text-white rounded">
+                    Selesai di Tonton
+                  </span>
+                ) : (
+                  <span className="bg-danger px-[10px] text-[white] rounded">
+                    Selesai
+                  </span>
+                )}
               </div>
             </div>
-            <hr className="solid"></hr>
-            <div className="video_detail__button text-right py-[10px]">
-              <Button
-                text="Selesai"
-                click={() => handleSubmitWatch(video.id)}
-                classNameInject=" bg-primary py-[5px] rounded-[5px] text-[white] text-[20px] "
-              />
-            </div>
+            {video.is_watch ? null : (
+              <>
+                <hr className="solid"></hr>
+                <div className="video_detail__button text-right py-[10px]">
+                  <Button
+                    text="Selesai"
+                    click={() => handleSubmitWatch(video.id)}
+                    classNameInject=" bg-primary py-[5px] rounded-[5px] text-[white] text-[20px] "
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
         <hr className="solid"></hr>

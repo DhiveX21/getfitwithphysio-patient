@@ -23,13 +23,19 @@ export function CardWithThumbnail({
           </picture>
         </div>
         <div className={style.card_with_thumbnail__text}>
-          <div className={style.card_with_thumbnail__text__title}>
+          <div
+            className={`${style.card_with_thumbnail__text__title} text-primary`}
+          >
             <h3>{title}</h3>
           </div>
-          <div className={style.card_with_thumbnail__text__description}>
+          <div
+            className={`${style.card_with_thumbnail__text__description} text-secondary`}
+          >
             <p>{description}</p>
           </div>
-          <div className={style.card_with_thumbnail__text__date}>
+          <div
+            className={`${style.card_with_thumbnail__text__date} text-danger`}
+          >
             <p>{note}</p>
           </div>
         </div>

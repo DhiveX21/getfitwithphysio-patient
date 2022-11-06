@@ -28,7 +28,7 @@ export default function index() {
               >
                 <div className={style.sticky_bottom_nav__list__item__icon}>
                   <picture>
-                    <img src="/images/icon/home.svg" alt="menu" />
+                    <img src="/images/icon/house.png" alt="menu" />
                   </picture>
                 </div>
                 <div className={style.sticky_bottom_nav__list__item__title}>
@@ -43,7 +43,7 @@ export default function index() {
               >
                 <div className={style.sticky_bottom_nav__list__item__icon}>
                   <picture>
-                    <img src="/images/icon/calendar.svg" alt="menu" />
+                    <img src="/images/icon/calendar.png" alt="menu" />
                   </picture>
                 </div>
                 <div className={style.sticky_bottom_nav__list__item__title}>
@@ -57,7 +57,7 @@ export default function index() {
               >
                 <div className={style.sticky_bottom_nav__list__item__icon}>
                   <picture>
-                    <img src="/images/icon/user.svg" alt="menu" />
+                    <img src="/images/icon/profile.png" alt="menu" />
                   </picture>
                 </div>
                 <div className={style.sticky_bottom_nav__list__item__title}>
@@ -69,7 +69,7 @@ export default function index() {
               <div className={`${style.sticky_bottom_nav__list__item} `}>
                 <div className={style.sticky_bottom_nav__list__item__icon}>
                   <picture>
-                    <img src="/images/icon/clipboard.svg" alt="menu" />
+                    <img src="/images/icon/clipboard.png" alt="menu" />
                   </picture>
                 </div>
                 <div className={style.sticky_bottom_nav__list__item__title}>

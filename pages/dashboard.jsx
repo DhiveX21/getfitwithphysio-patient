@@ -39,7 +39,7 @@ export default function Dashboard({ appointmentData }) {
               <div className="dashboard__action__item w-1/2 h-auto">
                 <ButtonWithIcon
                   text="Buat Appointment"
-                  classNameInject="text-[24px] leading-[18px] h-full bg-primary"
+                  classNameInject="text-[18px] leading-[14px] h-full bg-primary"
                   icon="/images/icon/calendar_danger.png"
                   click={() => {
                     router.push("/services");
@@ -49,7 +49,7 @@ export default function Dashboard({ appointmentData }) {
               <div className="dashboard__action__item w-1/2 h-auto">
                 {/* <button className="bg-danger text-white">Rekam Medis</button> */}
                 <ButtonWithIcon
-                  classNameInject="bg-danger text-[24px] leading-[18px] h-full"
+                  classNameInject="bg-danger text-[18px] leading-[14px] h-full"
                   text="Rekam Medis"
                   icon="./images/icon/clipboard.png"
                   click={() => {
