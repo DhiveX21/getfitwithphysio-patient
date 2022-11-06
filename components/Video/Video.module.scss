@@ -1,0 +1,36 @@
+/* /////////////////////// */
+/* Control Loading */
+/* /////////////////////// */
+
+.video_player_1 {
+  width: 100%;
+  &__wrapper {
+    margin-top: 10px;
+  }
+
+  &__title {
+    h3 {
+      font-size: 24px;
+      color: #5d5d5d;
+      line-height: 20px;
+      padding-left: 5px;
+    }
+  }
+
+  &__player {
+    border-radius: 10px;
+    overflow: hidden;
+    video {
+      border-radius: 5px;
+    }
+  }
+
+  &__description {
+    p {
+      font-size: 20px;
+      color: #303030;
+      line-height: 24px;
+      padding: 5px 5px;
+    }
+  }
+}

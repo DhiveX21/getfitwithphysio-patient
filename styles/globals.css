@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  max-width: 480px !important;
+  /* padding: 0 20px; */
+  margin: auto;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  font-family: "Dongle", sans-serif;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.116);
+  min-height: 100vh;
+  position: relative;
+}
+
+.swiper-button-next::after {
+  font-size: 20px !important;
+  color: #0795fe;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  opacity: 70%;
+  font-weight: 900;
+}
+.swiper-button-prev::after {
+  font-size: 20px !important;
+  color: #0795fe;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  opacity: 70%;
+  font-weight: 900;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #6baee0;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0795fe;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0795fe;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes anvil {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+  }
+  1% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+.animation-popup {
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+.modal {
+  font-size: 12px;
+}
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+/* dark mode */
+/* @media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+} */
+/* end dark mode */
+
+input,
+textarea,
+select {
+  background: #f0f1ff;
+  box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 48px;
+  outline: none;
+  padding: 0px 20px;
+
+  /* text-align: center; */
+
+  color: #0795fe;
+}
+
+input:focus {
+  outline: 1px solid #0795fe;
+}
+textarea:focus {
+  outline: 1px solid #0795fe;
+}
+
+.form-hint {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+
+  color: #bebebe;
+}
+
+.container-page {
+  padding: 0px 30px;
+  margin: auto;
+}
+
+.button-primary {
+  background: #0795fe;
+  border-radius: 10px;
+
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 48px;
+  /* identical to box height, or 160% */
+
+  text-align: center;
+
+  color: #ffffff;
+  border: none;
+}
+
+.hover-float {
+  transition-duration: 0.5s;
+}
+.hover-float:hover {
+  transition-duration: 0.5s;
+  transform: translateY(-5px);
+}
+
+.breadcrumbs-container {
+  width: 100%;
+}
+
+.breadcrumbs-list {
+  display: flex;
+  align-items: center;
+}
+.breadcrumbs-inactive {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 16px;
+  color: #bebebe;
+}
+
+.breadcrumbs-inactive:after {
+  content: "/";
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.breadcrumbs-active {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  color: #5aa9e6;
+}

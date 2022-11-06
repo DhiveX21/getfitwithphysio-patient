@@ -1,0 +1,67 @@
+/* buttonWithIcon  */
+.buttonWithIcon {
+  transition-duration: 0.5s;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+}
+.buttonWithIcon:hover {
+  transition-duration: 0.5s;
+  transform: scale(105%);
+}
+
+.buttonWithIcon__wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttonWithIcon__icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+/* buttonWithIcon end */
+
+/* buttonWithIcon2  */
+.buttonWithIcon2 {
+  transition-duration: 0.5s;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+.buttonWithIcon2:hover {
+  transition-duration: 0.5s;
+  transform: scale(105%);
+}
+
+.buttonWithIcon2__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.buttonWithIcon2__icon {
+  width: 30px;
+  height: 30px;
+}
+
+.buttonWithIcon2__icon picture {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonWithIcon2__title {
+  line-height: 12px;
+  font-size: 14px;
+  font-weight: 700;
+}

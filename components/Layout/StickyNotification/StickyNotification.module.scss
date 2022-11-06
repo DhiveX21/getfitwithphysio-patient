@@ -1,0 +1,43 @@
+.sticky_notif {
+  width: 100%;
+  position: fixed;
+  bottom: 150px;
+  max-width: 480px !important;
+  padding: 10px;
+  z-index: 10000;
+
+  &__wrapper {
+    position: relative;
+  }
+  &__button {
+    position: absolute;
+    right: 0px;
+
+    &__icon {
+      max-width: 60px;
+      border-radius: 15px;
+      box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.082);
+      background-color: white;
+      padding: 15px;
+      picture {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    &__pop {
+      background-color: red;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      position: absolute;
+      top: 13px;
+      right: 17px;
+    }
+  }
+}
