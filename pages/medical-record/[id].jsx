@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
-import Breadcrumbs from "nextjs-breadcrumbs";
-import { useDispatch } from "react-redux";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import { CardWithThumbnail } from "../../components/Card";
-import axios from "axios";
 import { appointmentGetOneMedicalRecord } from "../../endpoint/Appointment";
 
 export async function getServerSideProps(context) {
@@ -31,14 +29,7 @@ export default function AppointmentInfo({ medicalRecords }) {
         ></MenuTitle>
         <div className="breadcrumb">
           <div className="breadcrumb__wrapper px-[10px]">
-            <Breadcrumbs
-              useDefaultStyle={false}
-              containerClassName="breadcrumbs-container"
-              listClassName="breadcrumbs-list"
-              inactiveItemClassName="breadcrumbs-inactive"
-              activeItemClassName="breadcrumbs-active"
-              rootLabel="Get Physio"
-            />
+            <Breadcrumbs />
           </div>
         </div>
         <div className="medical-record__info">

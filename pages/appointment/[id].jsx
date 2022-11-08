@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
-import Breadcrumbs from "nextjs-breadcrumbs";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import { CardIdentity } from "../../components/Card";
 import { VerticalProgressWithIcon } from "../../components/Progress";
 import { Button } from "../../components/Button";
@@ -67,14 +67,7 @@ export default function AppointmentInfo({ appointmentData }) {
         <MenuTitle text="Detail Appointment"></MenuTitle>
         <div className="breadcrumb mb-[20px]">
           <div className="breadcrumb__wrapper px-[10px]">
-            <Breadcrumbs
-              useDefaultStyle={false}
-              containerClassName="breadcrumbs-container"
-              listClassName="breadcrumbs-list"
-              inactiveItemClassName="breadcrumbs-inactive"
-              activeItemClassName="breadcrumbs-active"
-              rootLabel="Get Physio"
-            />
+            <Breadcrumbs />
           </div>
         </div>
         <CardIdentity
