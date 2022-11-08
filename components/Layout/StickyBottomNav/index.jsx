@@ -14,7 +14,7 @@ export default function index() {
               >
                 <div className={style.sticky_bottom_nav__list__item__icon}>
                   <picture>
-                    <img src="/images/icon/checkout.svg" alt="menu" />
+                    <img src="/images/icon/trolley.png" alt="menu" />
                   </picture>
                 </div>
                 <div className={style.sticky_bottom_nav__list__item__title}>
