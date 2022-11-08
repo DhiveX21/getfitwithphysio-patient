@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Layout from "../../../components/Layout";
 import { MenuTitle } from "../../../components/Title";
-import Breadcrumbs from "nextjs-breadcrumbs";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 import { useForm } from "react-hook-form";
 import { Button } from "../../../components/Button";
 import { useRouter } from "next/router";
@@ -58,14 +58,7 @@ export default function CreateAppointment({ credentials }) {
         <MenuTitle text="Tele Fisio Appointment"></MenuTitle>
         <div className="breadcrumb">
           <div className="breadcrumb__wrapper px-[10px]">
-            <Breadcrumbs
-              useDefaultStyle={false}
-              containerClassName="breadcrumbs-container"
-              listClassName="breadcrumbs-list"
-              inactiveItemClassName="breadcrumbs-inactive"
-              activeItemClassName="breadcrumbs-active"
-              rootLabel="Get Physio"
-            />
+            <Breadcrumbs />
           </div>
         </div>
         <div>

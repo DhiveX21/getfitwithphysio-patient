@@ -3,11 +3,8 @@ import { CardWithThumbnail } from "../../components/Card";
 import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import { MenuTitle } from "../../components/Title";
-import Breadcrumbs from "nextjs-breadcrumbs";
-import axios from "axios";
-import { useSelector } from "react-redux";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import { appointmentGetAllMedicalRecordByIdUser } from "../../endpoint/Appointment";
-import { formatDateRawToYMD } from "../../helpers/common";
 import { useSession } from "next-auth/react";
 import { getSession } from "next-auth/react";
 
@@ -42,14 +39,7 @@ export default function MedicalRecords({ medicalRecordsData }) {
             icon="/images/icon/medical-result_icon.svg"
           ></MenuTitle>
           <div className="medical-record__breadcrumb p-[10px]">
-            <Breadcrumbs
-              useDefaultStyle={false}
-              containerClassName="breadcrumbs-container"
-              listClassName="breadcrumbs-list"
-              inactiveItemClassName="breadcrumbs-inactive"
-              activeItemClassName="breadcrumbs-active"
-              rootLabel="Get Physio"
-            />
+            <Breadcrumbs />
           </div>
           <div className="medical-record__list flex flex-col gap-[10px] mb-[20px]">
             {medicalRecordsData && medicalRecordsData.length > 0

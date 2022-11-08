@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import "nextjs-breadcrumbs/dist/index.css";
 import { wrapper, store } from "../store/store";
 import { Provider } from "react-redux";
 import WithMaster from "../hoc/withMaster";

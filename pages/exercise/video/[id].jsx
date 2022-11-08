@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import { MenuTitle } from "../../../components/Title";
-import Breadcrumbs from "nextjs-breadcrumbs";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 import { useDispatch } from "react-redux";
 import { VideoPlayer1 } from "../../../components/Video";
 import { Button } from "../../../components/Button";
@@ -52,14 +52,7 @@ export default function VideoDetail({ credentials, video }) {
         ></MenuTitle>
         <div className="breadcrumb">
           <div className="breadcrumb__wrapper px-[10px]">
-            <Breadcrumbs
-              useDefaultStyle={false}
-              containerClassName="breadcrumbs-container"
-              listClassName="breadcrumbs-list"
-              inactiveItemClassName="breadcrumbs-inactive"
-              activeItemClassName="breadcrumbs-active"
-              rootLabel="Get Physio"
-            />
+            <Breadcrumbs />
           </div>
         </div>
         <div className="video_detail">

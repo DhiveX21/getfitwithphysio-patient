@@ -2288,7 +2288,7 @@
   "resolved" "https://registry.npmjs.org/next-redux-wrapper/-/next-redux-wrapper-7.0.5.tgz"
   "version" "7.0.5"
 
-"next@^11.0.1", "next@>=10.0.3", "next@12.2.4":
+"next@>=10.0.3", "next@12.2.4":
   "integrity" "sha512-b1xlxEozmAWokAXzXsi5vlmU/IfJcFNIJA8dpU5UdkFbyDPio8wwb8mAQ/Y7rGtfTgG/t/u49BiyEA+xAgFvow=="
   "resolved" "https://registry.npmjs.org/next/-/next-12.2.4.tgz"
   "version" "12.2.4"
@@ -2313,11 +2313,6 @@
     "@next/swc-win32-arm64-msvc" "12.2.4"
     "@next/swc-win32-ia32-msvc" "12.2.4"
     "@next/swc-win32-x64-msvc" "12.2.4"
-
-"nextjs-breadcrumbs@^1.1.9":
-  "integrity" "sha512-kzK1bysO5dqdlsPgJ84XgAfAFKWEqlXcSWROwuR1BqST8ibcmLc3LKgak8hiO2DH2mMdd0wTR7oCkebReyBQTg=="
-  "resolved" "https://registry.npmjs.org/nextjs-breadcrumbs/-/nextjs-breadcrumbs-1.1.9.tgz"
-  "version" "1.1.9"
 
 "node-gyp@^8.4.1":
   "integrity" "sha512-olTJRgUtAb/hOXG0E93wZDs5YiJlgbXxTwQAFHyNlRsXQnYzUaF2aGgujZbw+hR8aF4ZG/rST57bWMWD16jr9w=="
@@ -2839,7 +2834,7 @@
     "prop-types" "15.8.1"
     "youtube-player" "5.5.2"
 
-"react@*", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2", "react@^17.0.2 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=0.14.1", "react@>=16", "react@0.14 || 15 || 16 || 17 || 18", "react@18.2.0":
+"react@*", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=0.14.1", "react@>=16", "react@0.14 || 15 || 16 || 17 || 18", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

@@ -2,7 +2,7 @@ import React from "react";
 import { CardWithThumbnail2 } from "../../components/Card";
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
-import Breadcrumbs from "nextjs-breadcrumbs";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import Link from "next/link";
 
 export default function services() {
@@ -11,14 +11,9 @@ export default function services() {
       <Layout>
         <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
           <MenuTitle text="Pilih Layanan"></MenuTitle>
-          <Breadcrumbs
-            useDefaultStyle={false}
-            containerClassName="breadcrumbs-container"
-            listClassName="breadcrumbs-list"
-            inactiveItemClassName="breadcrumbs-inactive"
-            activeItemClassName="breadcrumbs-active"
-            rootLabel="Get Physio"
-          />
+          <div className="px-[10px]">
+            <Breadcrumbs />
+          </div>
           <Link href="/services/telephysio">
             <div className="cursor-pointer hover:scale-[1.05] duration-500 ease-in-out">
               <CardWithThumbnail2

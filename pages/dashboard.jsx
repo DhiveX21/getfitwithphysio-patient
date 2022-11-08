@@ -2,7 +2,8 @@ import React from "react";
 import Carousel from "../components/carousel";
 import Layout from "../components/Layout";
 import { ButtonWithIcon, ButtonWithIcon2 } from "../components/Button";
-import Breadcrumbs from "nextjs-breadcrumbs";
+// import Breadcrumbs from "nextjs-breadcrumbs";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { CardWithThumbnail } from "../components/Card";
 import { SectionTitle } from "../components/Title";
 import { useRouter } from "next/router";
@@ -91,14 +92,7 @@ export default function Dashboard({ appointmentData }) {
           </div>
           <div className="dashboard__breadcrumb my-[5px]">
             <div className="dashboard__breadcrumb__wrapper px-[10px]">
-              <Breadcrumbs
-                useDefaultStyle={false}
-                containerClassName="breadcrumbs-container"
-                listClassName="breadcrumbs-list"
-                inactiveItemClassName="breadcrumbs-inactive"
-                activeItemClassName="breadcrumbs-active"
-                rootLabel="Get Physio"
-              />
+              <Breadcrumbs />
             </div>
           </div>
           {appointmentData.length > 0 ? (

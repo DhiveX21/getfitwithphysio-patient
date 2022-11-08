@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
-import Breadcrumbs from "nextjs-breadcrumbs";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import { CardWithThumbnail } from "../../components/Card";
 import { useRouter } from "next/router";
 import { appointmentGetAllByUserId } from "../../endpoint/Appointment";
@@ -32,14 +32,7 @@ export default function Appointment({ appointmentData }) {
         <MenuTitle text="List Appointment"></MenuTitle>
         <div className="breadcrumb">
           <div className="breadcrumb__wrapper px-[10px]">
-            <Breadcrumbs
-              useDefaultStyle={false}
-              containerClassName="breadcrumbs-container"
-              listClassName="breadcrumbs-list"
-              inactiveItemClassName="breadcrumbs-inactive"
-              activeItemClassName="breadcrumbs-active"
-              rootLabel="Get Physio"
-            />
+            <Breadcrumbs />
           </div>
         </div>
         {appointmentData ? (
