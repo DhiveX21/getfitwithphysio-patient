@@ -7,13 +7,14 @@ pipeline{
         disableConcurrentBuilds()
     }
     stages {
-        stage("Build Staging"){
+        stage("Build and Deploy Staging"){
             when {
                 branch 'staging'
             }            
             agent {
                 node {
                     label "stg"
+                    customWorkspace "/var/www/patient"
                 }
             }
             steps{
@@ -24,18 +25,22 @@ pipeline{
                 sh "npm run build"
             }
         }
-        stage("Deploy to Staging"){
+        stage("Build and Deploy Production"){
             when {
-                branch 'staging'
+                branch 'main'
             }            
             agent {
                 node {
-                    label "stg"
+                    label "prod"
+                    customWorkspace "/var/www/patient"
                 }
             }
             steps{
-                echo 'DEPLOY EXECUTION STARTED'
-                sh "sudo mkdir -p /var/www/patient && sudo cp -a .next/. /var/www/patient/"
+                echo 'BUILD EXECUTION STARTED'
+                sh "node -v"
+                sh "cp config/next.config.prod next.config.js"
+                sh "npm install"
+                sh "npm run build"
             }
         }
     }
