@@ -39,7 +39,7 @@ const Breadcrumbs = () => {
     <nav aria-label="breadcrumbs">
       <ol className="breadcrumb flex text-[18px]">
         <li className="pr-[5px] text-slate-400">
-          <a href="/dashboard">Home</a>
+          <Link href="/dashboard">Home</Link>
         </li>
         {breadcrumbs.map((breadcrumb, i) => {
           return (
