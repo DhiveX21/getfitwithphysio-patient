@@ -48,9 +48,28 @@ export default function Login({ providers, csrfToken }) {
               <input
                 placeholder="Nomor Handphone"
                 className="h-[48px] text-center text-[30px]"
-                {...register("phoneNumber", { required: true, maxLength: 20 })}
+                {...register("phoneNumber", {
+                  required: true,
+                  maxLength: 20,
+                  pattern: /^(\+62)8[1-9][0-9]{6,11}$/,
+                })}
               />
               {/* {errors.phoneNumber?.type === "required" && "First name is required"} */}
+              {errors.phoneNumber?.type === "required" && (
+                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                  (Nomor HP Wajib Di isi.)
+                </span>
+              )}
+              {errors.phoneNumber?.type === "maxLength" && (
+                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                  (Maximal Nomor 20 Digit)
+                </span>
+              )}
+              {errors.phoneNumber?.type === "pattern" && (
+                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                  (Mohon Masukan Nomor HP dengan format contoh +62123456789)
+                </span>
+              )}
               <button className="button-primary" type="submit">
                 Login
               </button>

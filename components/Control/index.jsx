@@ -11,6 +11,7 @@ import { setFirstLoginForm } from "../../store/actions/controlActions";
 import { calcAge } from "../../helpers/common";
 import { useEffect } from "react";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export function ControlLoading({
   image = "/images/example.jpg",
@@ -52,11 +53,18 @@ export function FirstLoginForm() {
   const firstLoginFormCondition = useSelector(
     (state) => state.controlData.firstLoginForm
   );
+
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      router.push("/auth/login");
+    },
+  });
+
   const dispatch = useDispatch();
-  let credentials = getLocalStorage("credentials");
-  if (credentials) {
-    credentials = credentials.item;
-  }
+  let credentials = session?.credentials;
+
   const router = useRouter();
   const {
     register,

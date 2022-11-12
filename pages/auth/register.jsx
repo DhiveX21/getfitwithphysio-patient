@@ -28,6 +28,11 @@ export default function Register({ providers, csrfToken }) {
   } = useForm();
 
   const onSubmit = (data) => {
+    let standartPhoneNumber = () => {
+      if (data.phoneNumber.substring(0, 1) === 0) {
+        data;
+      }
+    };
     const body = { phone_number: data.phoneNumber };
     userRegister(body)
       .then((response) => {
@@ -73,9 +78,18 @@ export default function Register({ providers, csrfToken }) {
               <input
                 placeholder="Nomor Handphone"
                 className="h-[48px] text-center text-[30px]"
-                {...register("phoneNumber", { required: true, maxLength: 20 })}
+                {...register("phoneNumber", {
+                  required: true,
+                  maxLength: 20,
+                  pattern: /^(\+62)8[1-9][0-9]{6,11}$/,
+                })}
               />
-              {/* {errors.phoneNumber?.type === "required" && "First name is required"} */}
+              {errors.phoneNumber?.type === "required" &&
+                "Nomor HP Wajib Di isi."}
+              {errors.phoneNumber?.type === "maxLength" &&
+                "Maximal Nomor 20 Digit"}
+              {errors.phoneNumber?.type === "pattern" &&
+                "Mohon Masukan Nomor HP dengan format contoh +62123456789"}
               <button className="button-primary" type="submit">
                 Register
               </button>

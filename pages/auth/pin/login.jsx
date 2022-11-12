@@ -30,6 +30,32 @@ export default function LoginPin() {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  function handleChange(e) {
+    let id = +e.target.id.replace("otp", "");
+
+    if (e.target.value) {
+      if (id !== 6) {
+        e.preventDefault();
+        document.getElementById(`otp${id + 1}`).focus();
+
+        setTimeout(() => {
+          document.getElementById(`otp${id + 1}`).setSelectionRange(0, 1);
+        }, 0);
+      }
+    } else {
+      if (id !== 1) {
+        e.preventDefault();
+        document.getElementById(`otp${id - 1}`).focus();
+
+        setTimeout(() => {
+          document.getElementById(`otp${id - 1}`).setSelectionRange(0, 1);
+        }, 0);
+      }
+    }
+    // document.getElementById("otp2").value = "";
+  }
+
   const onSubmit = (data) => {
     dispatch(
       setControlLoading(
@@ -42,7 +68,6 @@ export default function LoginPin() {
 
     const joinPin =
       data.otp1 + data.otp2 + data.otp3 + data.otp4 + data.otp5 + data.otp6;
-    // console.log(joinPin);
 
     const res = signIn("credentials", {
       phone_number: loginPhoneNumber.item.phoneNumber,
@@ -51,7 +76,6 @@ export default function LoginPin() {
       redirect: false,
     });
     res.then((response) => {
-      // console.log(response);
       if (response.ok === false) {
         alert("PIN SALAH");
         dispatch(setControlLoading(false));
@@ -90,7 +114,7 @@ export default function LoginPin() {
               id="otp1"
               type="password"
               {...register("otp1", { required: true })}
-              onChange={() => document.getElementById("otp2").focus()}
+              onChange={(e) => handleChange(e)}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%] "
@@ -98,7 +122,7 @@ export default function LoginPin() {
               id="otp2"
               type="password"
               {...register("otp2", { required: true })}
-              onChange={() => document.getElementById("otp3").focus()}
+              onChange={(e) => handleChange(e)}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -106,7 +130,7 @@ export default function LoginPin() {
               id="otp3"
               type="password"
               {...register("otp3", { required: true })}
-              onChange={() => document.getElementById("otp4").focus()}
+              onChange={(e) => handleChange(e)}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -114,7 +138,7 @@ export default function LoginPin() {
               id="otp4"
               type="password"
               {...register("otp4", { required: true })}
-              onChange={() => document.getElementById("otp5").focus()}
+              onChange={(e) => handleChange(e)}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -122,7 +146,7 @@ export default function LoginPin() {
               type="password"
               id="otp5"
               {...register("otp5", { required: true })}
-              onChange={() => document.getElementById("otp6").focus()}
+              onChange={(e) => handleChange(e)}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -130,6 +154,7 @@ export default function LoginPin() {
               type="password"
               id="otp6"
               {...register("otp6", { required: true })}
+              onChange={(e) => handleChange(e)}
             />
             {/* {errors.username?.type === "required" && "First name is required"} */}
           </div>
