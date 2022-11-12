@@ -11,6 +11,7 @@ export default function Register() {
   const router = useRouter();
   const [seconds, setSeconds] = useState(300);
   const [registerAttempt, setRegisterAttempt] = useState(null);
+  const [phoneNumberView, setPhoneNumberView] = useState(null);
 
   const { data: session } = useSession();
   if (session) {
@@ -31,6 +32,7 @@ export default function Register() {
     } else {
       if (!registerAttempt) {
         let tempRegisterAttempt = getLocalStorage("register_attempt");
+        setPhoneNumberView(tempRegisterAttempt.item.phoneNumber);
         setRegisterAttempt({
           phoneNumber: tempRegisterAttempt.item.phoneNumber,
           expire: tempRegisterAttempt.expire,
@@ -49,10 +51,10 @@ export default function Register() {
     userRegisterCheckOtp(body)
       .then((response) => {
         if (response.status === 200) {
-          alert(response.data.data);
+          alert(response.data.data.message);
           router.push("/auth/pin/create");
         } else {
-          alert(response.data.data);
+          alert(response.data.data.message);
         }
       })
       .catch((error) => {
@@ -120,8 +122,8 @@ export default function Register() {
           <div className="otp__note__wrapper">
             <h4 className="text-[20px] text-[#5E5E5E] text-center mb-[26px] px-[20px]">
               Kami telah mengirimkan kode verifikasi ke nomor{" "}
-              <b className="text-primary">0895619258715</b>, Silahkan Cek pesan
-              masuk.
+              <b className="text-primary">{phoneNumberView}</b>, Silahkan Cek
+              pesan masuk.
             </h4>
           </div>
         </div>

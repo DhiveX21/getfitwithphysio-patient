@@ -40,7 +40,7 @@ export default function Dashboard({ appointmentData }) {
               <div className="dashboard__action__item w-1/2 h-auto">
                 <ButtonWithIcon
                   text="Buat Appointment"
-                  classNameInject="text-[18px] leading-[14px] h-full bg-primary"
+                  classNameInject=" text-[18px] leading-[14px] h-full bg-primary text-white"
                   icon="/images/icon/calendar_danger.png"
                   click={() => {
                     router.push("/services");
@@ -50,7 +50,7 @@ export default function Dashboard({ appointmentData }) {
               <div className="dashboard__action__item w-1/2 h-auto">
                 {/* <button className="bg-danger text-white">Rekam Medis</button> */}
                 <ButtonWithIcon
-                  classNameInject="bg-danger text-[18px] leading-[14px] h-full"
+                  classNameInject=" bg-danger text-[18px] leading-[14px] h-full text-white"
                   text="Rekam Medis"
                   icon="./images/icon/clipboard.png"
                   click={() => {
@@ -152,6 +152,14 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/schedule.png"
                     click={() => router.push("/appointment")}
+                  ></ButtonWithIcon2>
+                </div>
+                <div className="dashboard__menu__list__item w-1/4">
+                  <ButtonWithIcon2
+                    text="Laporan Medis Harian"
+                    type="button"
+                    icon="/images/icon/daily-calendar.png"
+                    click={() => router.push("/daily-medical-report")}
                   ></ButtonWithIcon2>
                 </div>
               </div>
