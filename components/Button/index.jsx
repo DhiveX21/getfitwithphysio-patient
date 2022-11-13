@@ -30,12 +30,14 @@ export function ButtonWithIcon({
   type = "",
   id = null,
   icon = "./images/logo.png",
+  disabled = false,
 }) {
   return (
     <button
       type={type}
       id={id}
       onClick={click}
+      disabled={disabled}
       className={style.buttonWithIcon + " " + classNameInject}
     >
       <div className={style.buttonWithIcon__wrapper}>
