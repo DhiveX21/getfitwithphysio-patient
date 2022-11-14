@@ -22,3 +22,14 @@ export function patientGetOne(patientId) {
 export function patientGetOneByUserId(userId) {
   return axios.get(`${urlUserService}/patients/user/${userId}`);
 }
+
+export function patientAddSignatureFile(userId, file) {
+  let bodyFormData = new FormData();
+  bodyFormData.append("signature", file);
+  return axios({
+    method: "post",
+    url: `${urlUserService}/patients/signature/${userId}`,
+    data: bodyFormData,
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+}

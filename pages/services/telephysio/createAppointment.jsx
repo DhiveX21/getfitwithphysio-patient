@@ -13,7 +13,7 @@ export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
 
   return {
-    props: { credentials: session.credentials },
+    props: { credentials: session?.credentials },
   };
 }
 
@@ -128,6 +128,7 @@ export default function CreateAppointment({ credentials }) {
               </label>
               <input
                 placeholder="13 : 30"
+                type="time"
                 {...register("appointment_hours", {
                   required: true,
                   pattern: /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/,

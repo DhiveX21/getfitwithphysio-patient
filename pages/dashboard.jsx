@@ -15,7 +15,7 @@ import Link from "next/link";
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   const appointmentData = await appointmentGetAllByUserId(
-    session.credentials.user_id
+    session?.credentials.user_id
   )
     .then((response) => {
       return response.data.data;

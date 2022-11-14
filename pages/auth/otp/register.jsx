@@ -132,7 +132,7 @@ export default function Register() {
             <div className={style.form__wrapper}>
               <input
                 placeholder="Masukan OTP"
-                className="h-[48px]"
+                className="h-[48px] text-center"
                 {...register("otp", { required: true, maxLength: 4 })}
               />
               {/* {errors.username?.type === "required" && "First name is required"} */}
