@@ -31,7 +31,7 @@ export async function getServerSideProps({ req }) {
     });
 
   return {
-    props: { credentials: session.credentials, notificationData },
+    props: { credentials: session?.credentials, notificationData },
   };
 }
 

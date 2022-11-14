@@ -10,7 +10,7 @@ export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
 
   return {
-    props: { credentials: session.credentials },
+    props: { credentials: session?.credentials },
   };
 }
 

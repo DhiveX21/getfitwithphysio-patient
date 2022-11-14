@@ -7,11 +7,12 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import { appointmentGetAllMedicalRecordByIdUser } from "../../endpoint/Appointment";
 import { useSession } from "next-auth/react";
 import { getSession } from "next-auth/react";
+import NotFound from "../../components/Notfound";
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   const medicalRecordsData = await appointmentGetAllMedicalRecordByIdUser(
-    session.credentials.user_id
+    session?.credentials.user_id
   ).then((response) => {
     return response.data.data;
   });
@@ -42,26 +43,31 @@ export default function MedicalRecords({ medicalRecordsData }) {
             <Breadcrumbs />
           </div>
           <div className="medical-record__list flex flex-col gap-[10px] mb-[20px]">
-            {medicalRecordsData && medicalRecordsData.length > 0
-              ? medicalRecordsData.map((item, index) => {
-                  return (
-                    <div
-                      key={item._id}
-                      onClick={() => {
-                        router.push(`/medical-record/${item._id}`);
-                      }}
-                      className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
-                    >
-                      <CardWithThumbnail
-                        title={item.therapist_detail.name}
-                        description={item.records[0].value}
-                        note={item.date + " " + item.time + " WIB"}
-                        image="/images/icon/user.png"
-                      />
-                    </div>
-                  );
-                })
-              : ""}
+            {medicalRecordsData && medicalRecordsData.length > 0 ? (
+              medicalRecordsData.map((item, index) => {
+                return (
+                  <div
+                    key={item._id}
+                    onClick={() => {
+                      router.push(`/medical-record/${item._id}`);
+                    }}
+                    className="medical-record__list__item hover:scale-[1.05] duration-500 cursor-pointer"
+                  >
+                    <CardWithThumbnail
+                      title={item.therapist_detail.name}
+                      description={item.records[0].value}
+                      note={item.date + " " + item.time + " WIB"}
+                      image="/images/icon/user.png"
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <NotFound
+                title="Umm, Sepertinya Kosong"
+                description="Apakah kamu sudah pernah membuat Appointment Fisio?, jika sudah mungkin saja fisio belum mengisi rekam medisnya untuk mu, Kita tunggu sebentar lagi yukk... :)"
+              />
+            )}
           </div>
           <hr className="solid"></hr>
         </div>

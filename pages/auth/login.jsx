@@ -26,7 +26,8 @@ export default function Login({ providers, csrfToken }) {
     handleSubmit,
   } = useForm();
   const onSubmit = (data) => {
-    setLocalStorage("login_attempt", { phoneNumber: data.phoneNumber }, 300);
+    const standartPhoneNumber = "+62" + data.phoneNumber;
+    setLocalStorage("login_attempt", { phoneNumber: standartPhoneNumber }, 300);
     router.push("/auth/pin/login");
   };
 
@@ -44,14 +45,18 @@ export default function Login({ providers, csrfToken }) {
         <div className={style.form}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-            <div className={style.form__wrapper}>
+            <div className={`${style.form__wrapper} relative`}>
+              <span className="absolute top-[7px] rounded-lg text-[30px] pt-[5px] left-[10px] text-white bg-danger px-[10px] leading-[1em] ">
+                +62
+              </span>
               <input
                 placeholder="Nomor Handphone"
-                className="h-[48px] text-center text-[30px]"
+                className="h-[48px] pl-[70px] text-[30px] pt-[5px]"
+                type="tel"
                 {...register("phoneNumber", {
                   required: true,
                   maxLength: 20,
-                  pattern: /^(\+62)8[1-9][0-9]{6,11}$/,
+                  pattern: /^8[1-9][0-9]{6,11}$/,
                 })}
               />
               {/* {errors.phoneNumber?.type === "required" && "First name is required"} */}

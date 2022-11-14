@@ -28,17 +28,14 @@ export default function Register({ providers, csrfToken }) {
   } = useForm();
 
   const onSubmit = (data) => {
-    let standartPhoneNumber = () => {
-      if (data.phoneNumber.substring(0, 1) === 0) {
-        data;
-      }
-    };
-    const body = { phone_number: data.phoneNumber };
+    const standartPhoneNumber = "+62" + data.phoneNumber;
+
+    const body = { phone_number: standartPhoneNumber };
     userRegister(body)
       .then((response) => {
         setLocalStorage(
           "register_attempt",
-          { phoneNumber: data.phoneNumber },
+          { phoneNumber: standartPhoneNumber },
           300
         );
         router.push("/auth/otp/register");
@@ -74,22 +71,37 @@ export default function Register({ providers, csrfToken }) {
         <div className={style.form}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-            <div className={style.form__wrapper}>
+            <div className={`${style.form__wrapper} relative`}>
+              <span className="absolute top-[7px] rounded-lg text-[30px] pt-[5px] left-[10px] text-white bg-danger px-[10px] leading-[1em] ">
+                +62
+              </span>
               <input
                 placeholder="Nomor Handphone"
-                className="h-[48px] text-center text-[30px]"
+                className="h-[48px] pl-[70px] text-[30px] pt-[5px]"
+                type="tel"
                 {...register("phoneNumber", {
                   required: true,
                   maxLength: 20,
-                  pattern: /^(\+62)8[1-9][0-9]{6,11}$/,
+                  pattern: /^8[1-9][0-9]{6,11}$/,
+                  // pattern: /^(\+62)8[1-9][0-9]{6,11}$/,
                 })}
               />
-              {errors.phoneNumber?.type === "required" &&
-                "Nomor HP Wajib Di isi."}
-              {errors.phoneNumber?.type === "maxLength" &&
-                "Maximal Nomor 20 Digit"}
-              {errors.phoneNumber?.type === "pattern" &&
-                "Mohon Masukan Nomor HP dengan format contoh +62123456789"}
+              {errors.phoneNumber?.type === "required" && (
+                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                  Nomor HP Wajib Di isi.
+                </span>
+              )}
+              {errors.phoneNumber?.type === "maxLength" && (
+                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                  Maximal Nomor HP 20 Digit
+                </span>
+              )}
+              {errors.phoneNumber?.type === "pattern" && (
+                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                  Mohon Masukan Nomor HP dengan format contoh : <br />
+                  [+62] 8123456789
+                </span>
+              )}
               <button className="button-primary" type="submit">
                 Register
               </button>

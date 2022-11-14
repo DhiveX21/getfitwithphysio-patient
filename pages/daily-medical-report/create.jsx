@@ -59,7 +59,7 @@ export default function CreateDailyMedicalReport() {
             description="Agara Fisio dapat melihat dan menilai perkembanganmu."
           ></CardFullImage>
           <form
-            className="flex-col flex gap-[10px]"
+            className="flex-col flex gap-[10px] mt-[20px]"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="field-group flex flex-col">
@@ -67,6 +67,7 @@ export default function CreateDailyMedicalReport() {
                 Tanggal
               </label>
               <input
+                className="w-full"
                 placeholder="Tanggal"
                 type="date"
                 {...register("date", { required: true })}

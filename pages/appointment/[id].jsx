@@ -47,6 +47,7 @@ export default function AppointmentInfo({ appointmentData }) {
   // );
 
   function handleSubmitReview() {
+    console.log("masuk");
     const body = {
       appointment_id: appointmentData._id,
       rating: {
@@ -124,10 +125,10 @@ export default function AppointmentInfo({ appointmentData }) {
                     <Button
                       text="Kirim"
                       classNameInject="w-full bg-primary px-[40px] py-[5px] rounded-lg text-white"
-                      click={
-                        (() => handleSubmitReview(),
-                        () => setReviewPanel(false))
-                      }
+                      click={() => {
+                        handleSubmitReview();
+                        setReviewPanel(false);
+                      }}
                     ></Button>
                   </div>
                 </div>
@@ -143,7 +144,7 @@ export default function AppointmentInfo({ appointmentData }) {
           <Common1
             image="/images/docsad 2.svg"
             title="Dibatalkan :’("
-            description="Kamu telah membatalkan Appointment ini pada tanggal 24 Desember 2022 15:46 WIB"
+            description="Kamu telah membatalkan Appointment ini"
             noteTitle="Catatan :"
             noteDescription="“Saya ada urusan pada saat tanggal Appointment”"
           />
@@ -151,7 +152,7 @@ export default function AppointmentInfo({ appointmentData }) {
           <Common1
             image="/images/finish_appointment.svg"
             title="Selesai"
-            description="Appointment dengan fisio Rifa telah selesai dilakukan. anda dapat melihat Rekam medis anda dengan mengklik tombol di bawah ini."
+            description={`Appointment dengan fisio ${appointmentData.therapist_detail.name} telah selesai dilakukan. anda dapat melihat Rekam medis anda dengan mengklik tombol di bawah ini.`}
             noteTitle=""
             noteDescription=""
           />
@@ -170,7 +171,7 @@ export default function AppointmentInfo({ appointmentData }) {
             ""
           ) : status === "cancel" ? (
             ""
-          ) : status === "complete" && appointmentData.record._id ? (
+          ) : status === "complete" && appointmentData?.record?._id ? (
             <Button
               text="Rekam Medis"
               classNameInject="w-full bg-primary px-[40px] py-[5px] rounded-lg text-white"

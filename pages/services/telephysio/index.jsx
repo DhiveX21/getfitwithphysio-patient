@@ -4,13 +4,33 @@ import { MenuTitle } from "../../../components/Title";
 import { CardFullImage } from "../../../components/Card";
 import { ButtonWithIcon } from "../../../components/Button";
 import { useRouter } from "next/router";
+import { patientAddSignatureFile } from "../../../endpoint/User";
+import { getSession } from "next-auth/react";
 
-export default function Telephysio() {
-  const [createButton, setCreateButton] = useState(false);
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  return {
+    props: { credentials: session?.credentials },
+  };
+}
+
+export default function Telephysio({ credentials }) {
+  const [createButton, setCreateButton] = useState(
+    credentials.signature_url ? true : false
+  );
   const [uploadSign, setUploadSign] = useState();
   const signUpload = useRef();
-  console.log(uploadSign);
   const router = useRouter();
+
+  function handleSubmit() {
+    patientAddSignatureFile(credentials.user_id, uploadSign)
+      .then((response) => {
+        router.push("/services/telephysio/createAppointment");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
@@ -44,42 +64,44 @@ export default function Telephysio() {
               with stroke patients as the study subjects.
             </p>
           </div>
-
-          <div className="note_sign w-full flex mt-[20px] flex-col">
-            <span className="text-[20px] text-center text-primary">
-              Upload Tanda Tangan Digitalmu.
-            </span>
-            <input
-              className="w-full"
-              id="sign-button"
-              type="file"
-              hidden
-              ref={signUpload}
-              accept="image/png, image/jpeg"
-              onChange={(e) =>
-                e.target.value
-                  ? (setCreateButton(true), setUploadSign(e.target.files[0]))
-                  : setCreateButton(false)
-              }
-            />
-            <label
-              className={` hover:bg-primary hover:text-white duration-200 rounded-md text-[24px] text-center px-[20px] py-[5px] cursor-pointer text-primary w-full border-2 border-dashed flex flex-col justify-center items-center leading-[1em] ${
-                uploadSign ? "border-success text-success" : "border-primary"
-              }`}
-              htmlFor="sign-button"
-            >
-              <span>
-                <img
-                  className="max-w-[50px] "
-                  src={`/images/icon/${
-                    uploadSign ? "upload-success.png" : "upload.png"
-                  }`}
-                  alt="upload"
-                />
+          {!credentials.signature_url ? (
+            <div className="note_sign w-full flex mt-[20px] flex-col">
+              <span className="text-[20px] text-center text-primary">
+                Upload Tanda Tangan Digitalmu.
               </span>
-              {uploadSign ? uploadSign.name : "Upload Tanda Tangan"}
-            </label>
-          </div>
+              <input
+                className="w-full"
+                id="sign-button"
+                type="file"
+                hidden
+                ref={signUpload}
+                accept="image/png, image/jpeg"
+                onChange={(e) =>
+                  e.target.value
+                    ? (setCreateButton(true), setUploadSign(e.target.files[0]))
+                    : setCreateButton(false)
+                }
+              />
+              <label
+                className={` hover:bg-primary hover:text-white duration-200 rounded-md text-[24px] text-center px-[20px] py-[5px] cursor-pointer text-primary w-full border-2 border-dashed flex flex-col justify-center items-center leading-[1em] ${
+                  uploadSign ? "border-success text-success" : "border-primary"
+                }`}
+                htmlFor="sign-button"
+              >
+                <span>
+                  <img
+                    className="max-w-[50px] "
+                    src={`/images/icon/${
+                      uploadSign ? "upload-success.png" : "upload.png"
+                    }`}
+                    alt="upload"
+                  />
+                </span>
+                {uploadSign ? uploadSign.name : "Upload Tanda Tangan"}
+              </label>
+            </div>
+          ) : null}
+
           <div className="note_button mt-[20px]">
             <ButtonWithIcon
               text="Buat Appointment"
@@ -88,9 +110,7 @@ export default function Telephysio() {
               }`}
               icon="/images/icon/appointment_icon.svg"
               disabled={!createButton}
-              click={() =>
-                router.push("/services/telephysio/createAppointment")
-              }
+              click={() => handleSubmit()}
             />
           </div>
         </div>

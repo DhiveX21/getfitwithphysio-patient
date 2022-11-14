@@ -76,13 +76,13 @@ export function getProgressTelePhysio(status, linkMeeting) {
     progressSimulation[5].status = "0";
     if (linkMeeting && status === "treatment") {
       progressSimulation[3].action = (
-        <div className="bg-white p-[10px] rounded-lg text-center text-gray-600">
+        <div className="bg-white p-[10px] rounded-lg text-center text-[14px] leading-[1em] text-gray-600">
           <p>Room Treatment Telah Tersedia Silahkan Masuk...</p>
           <a
             href={`${linkMeeting}`}
             type="button"
             target="_blank"
-            className="bg-primary px-[20px] rounded-lg text-white"
+            className="bg-primary px-[20px] py-[8px] rounded-lg text-white"
           >
             Masuk
           </a>

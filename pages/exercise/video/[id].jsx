@@ -11,12 +11,13 @@ import {
 } from "../../../endpoint/Exercise";
 import { wrapper } from "../../../store/store";
 import { getSession } from "next-auth/react";
+import { useRef, useState } from "react";
 
 export async function getServerSideProps({ query, req, res }) {
   const session = await getSession({ req });
   const video = await exerciseGetOneVideoByUserId(
     query.id,
-    session.credentials.user_id
+    session?.credentials.user_id
   )
     .then((response) => {
       return response.data.data;
@@ -24,16 +25,19 @@ export async function getServerSideProps({ query, req, res }) {
     .catch((error) => {
       console.error(error);
     });
-  return { props: { credentials: session.credentials, video: video } };
+  return { props: { credentials: session?.credentials, video: video } };
 }
 
 export default function VideoDetail({ credentials, video }) {
+  const inputDailyReport = useRef();
+  const [dailyReport, setDailyReport] = useState();
   console.log(video);
   const router = useRouter();
   function handleSubmitWatch(videoId) {
     const body = {
       user_id: credentials.user_id,
       video_id: videoId,
+      daily_note: dailyReport,
     };
 
     exerciseVideoSetWatch(body).then((response) => {
@@ -68,25 +72,41 @@ export default function VideoDetail({ credentials, video }) {
             <div className="video_detail__status flex px-[5px] gap-[10px] py-[10px]">
               <div className="video_detail__status__badge">Status</div>
               <div className="video_detail__status__text">
-                {video.is_watch ? (
+                {video.today_watch ? (
                   <span className="bg-success px-[10px] text-white rounded">
                     Selesai di Tonton
                   </span>
                 ) : (
                   <span className="bg-danger px-[10px] text-[white] rounded">
-                    Selesai
+                    Belum Di Tonton
                   </span>
                 )}
               </div>
             </div>
-            {video.is_watch ? null : (
+            {video.today_watch ? null : (
               <>
                 <hr className="solid"></hr>
+                <textarea
+                  type="text"
+                  ref={inputDailyReport}
+                  className="w-full leading-[1em] px-[10px] py-[5px]"
+                  rows={4}
+                  placeholder="Cth : Leher saya mulai membaik hari ini."
+                  onChange={(e) => setDailyReport(e.target.value)}
+                  required
+                ></textarea>
+                <span className="form-hint">
+                  Tulis Keadaan mu hari ini , agar Fisio dapat melihat progress
+                  mu.
+                </span>
                 <div className="video_detail__button text-right py-[10px]">
                   <Button
                     text="Selesai"
                     click={() => handleSubmitWatch(video.id)}
-                    classNameInject=" bg-primary py-[5px] rounded-[5px] text-[white] text-[20px] "
+                    disabled={dailyReport ? false : true}
+                    classNameInject={` py-[5px] rounded-[5px] text-[white] text-[20px] duration-500 ${
+                      dailyReport ? "bg-primary" : "bg-secondary"
+                    }`}
                   />
                 </div>
               </>
