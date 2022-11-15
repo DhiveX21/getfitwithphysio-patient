@@ -26,7 +26,7 @@ export default function Profile({ credentials }) {
             <picture>
               <img
                 className="w-[125px] h-[125px]"
-                src="/images/icon/user.png"
+                src="/images/icon/user_2.png"
                 alt="user profile"
               />
             </picture>

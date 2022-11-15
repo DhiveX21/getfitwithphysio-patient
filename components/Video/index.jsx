@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Video.module.scss";
 import { useSelector } from "react-redux";
 import YouTube from "react-youtube";
+import NotFound from "../Notfound";
 
 const opts = {
   height: "300px",
@@ -18,9 +19,11 @@ export function VideoPlayer1({
   description = "Description Common1",
 }) {
   var video_id = url.split("v=")[1];
-  var ampersandPosition = video_id.indexOf("&");
-  if (ampersandPosition != -1) {
-    video_id = video_id.substring(0, ampersandPosition);
+  if (video_id) {
+    var ampersandPosition = video_id.indexOf("&");
+    if (ampersandPosition != -1) {
+      video_id = video_id.substring(0, ampersandPosition);
+    }
   }
 
   return (
@@ -31,12 +34,19 @@ export function VideoPlayer1({
             <h3>{title}</h3>
           </div>
           <div className={style.video_player_1__player}>
-            <YouTube
-              autoplay={false}
-              videoId={video_id}
-              opts={opts}
-              // onReady={this._onReady}
-            />
+            {video_id ? (
+              <YouTube
+                autoplay={false}
+                videoId={video_id}
+                opts={opts}
+                // onReady={this._onReady}
+              />
+            ) : (
+              <NotFound
+                title="Sepertinya Video nya Tidak dapat di putar."
+                description="Kami akan memperbaikinnya secepat mungkin."
+              ></NotFound>
+            )}
           </div>
           <div className={style.video_player_1__description}>
             <p>{description}</p>

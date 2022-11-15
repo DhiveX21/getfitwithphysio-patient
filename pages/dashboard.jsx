@@ -100,7 +100,7 @@ export default function Dashboard({ appointmentData }) {
               <div className="dashboard__last-appointment mb-[20px] cursor-pointer">
                 <div className="dashboard__last-appointment__wrapper ">
                   <CardWithThumbnail
-                    image="/images/icon/user.png"
+                    image={`/images/${appointmentData[0].therapist_detail.name}.png`}
                     title={appointmentData[0].therapist_detail.name}
                     description={appointmentData[0].complaints}
                     note={formatDateRawToYMD(

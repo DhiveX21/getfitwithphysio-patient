@@ -104,3 +104,14 @@ export function getProgressTelePhysio(status, linkMeeting) {
 export function formatDateRawToYMD(dateRaw) {
   return dateRaw.replace(/T/, " ").replace(/\..+/, "").replace("00:00:00", "");
 }
+
+export function getYoutubeId(url) {
+  var video_id = url.split("v=")[1];
+  if (video_id) {
+    var ampersandPosition = video_id.indexOf("&");
+    if (ampersandPosition != -1) {
+      video_id = video_id.substring(0, ampersandPosition);
+    }
+  }
+  return video_id;
+}

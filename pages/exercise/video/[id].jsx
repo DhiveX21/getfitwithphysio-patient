@@ -25,13 +25,13 @@ export async function getServerSideProps({ query, req, res }) {
     .catch((error) => {
       console.error(error);
     });
+
   return { props: { credentials: session?.credentials, video: video } };
 }
 
 export default function VideoDetail({ credentials, video }) {
   const inputDailyReport = useRef();
   const [dailyReport, setDailyReport] = useState();
-  console.log(video);
   const router = useRouter();
   function handleSubmitWatch(videoId) {
     const body = {

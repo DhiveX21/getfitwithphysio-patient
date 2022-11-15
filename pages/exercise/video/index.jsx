@@ -10,6 +10,7 @@ import {
 } from "../../../endpoint/Exercise";
 import { useEffect } from "react";
 import { useState } from "react";
+import { getYoutubeId } from "../../../helpers/common";
 
 export async function getServerSideProps() {
   const videoCategory = await exerciseGetAllVideoCategory()
@@ -90,19 +91,21 @@ export default function Video({ videoCategory }) {
                     >
                       <Link href={`/exercise/video/${item.id}`}>
                         <div className="video__list__item__thumbnail flex h-full">
-                          <picture>
+                          <picture className="w-[40%]">
                             <img
                               className=" rounded-xl h-full"
-                              src="/images/servicelist_1.png"
+                              src={`https://img.youtube.com/vi/${getYoutubeId(
+                                item.video_url
+                              )}/maxresdefault.jpg`}
                               alt="video list"
                             />
                           </picture>
-                          <div className="flex flex-col justify-center p-[10px]">
+                          <div className="flex flex-col justify-center p-[10px] w-[60%]">
                             <div className="video__list__item__title py-[5px] text-primary  text-[24px] leading-[24px]">
                               <h3>{item.title}</h3>
                             </div>
                             <div className="video__list__item__description text-[#5d5d5d]  text-[16px] leading-[12px]">
-                              <p>{item.description}</p>
+                              <p className="line-clamp-3">{item.description}</p>
                             </div>
                           </div>
                         </div>
