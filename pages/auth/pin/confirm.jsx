@@ -116,7 +116,7 @@ export default function ConfirmPin() {
               id="otp1"
               type="password"
               pattern="[0-9]*"
-              inputmode="numeric"
+              inputMode="numeric"
               {...register("otp1", { required: true })}
               onChange={(e) => handleChange(e)}
             />
@@ -126,7 +126,7 @@ export default function ConfirmPin() {
               id="otp2"
               type="password"
               pattern="[0-9]*"
-              inputmode="numeric"
+              inputMode="numeric"
               {...register("otp2", { required: true })}
               onChange={(e) => handleChange(e)}
             />
@@ -136,7 +136,7 @@ export default function ConfirmPin() {
               id="otp3"
               type="password"
               pattern="[0-9]*"
-              inputmode="numeric"
+              inputMode="numeric"
               {...register("otp3", { required: true })}
               onChange={(e) => handleChange(e)}
             />
@@ -146,7 +146,7 @@ export default function ConfirmPin() {
               id="otp4"
               type="password"
               pattern="[0-9]*"
-              inputmode="numeric"
+              inputMode="numeric"
               {...register("otp4", { required: true })}
               onChange={(e) => handleChange(e)}
             />
@@ -155,7 +155,7 @@ export default function ConfirmPin() {
               maxLength={1}
               type="password"
               pattern="[0-9]*"
-              inputmode="numeric"
+              inputMode="numeric"
               id="otp5"
               {...register("otp5", { required: true })}
               onChange={(e) => handleChange(e)}
@@ -165,7 +165,7 @@ export default function ConfirmPin() {
               maxLength={1}
               type="password"
               pattern="[0-9]*"
-              inputmode="numeric"
+              inputMode="numeric"
               id="otp6"
               {...register("otp6", { required: true })}
               onChange={(e) => handleChange(e)}
