@@ -81,10 +81,11 @@ export default function ConfirmPin() {
           if (response.status === 200) {
             alert("registrasi PIN berhasil");
             router.push("/auth/login");
+          } else {
+            alert(response.data.message);
           }
         })
         .catch((error) => {
-          alert(error);
           console.error(error);
         });
     } else {

@@ -154,14 +154,14 @@ export default function Dashboard({ appointmentData }) {
                     click={() => router.push("/appointment")}
                   ></ButtonWithIcon2>
                 </div>
-                <div className="dashboard__menu__list__item w-1/4">
+                {/* <div className="dashboard__menu__list__item w-1/4">
                   <ButtonWithIcon2
                     text="Laporan Medis Harian"
                     type="button"
                     icon="/images/icon/daily-calendar.png"
                     click={() => router.push("/daily-medical-report")}
                   ></ButtonWithIcon2>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
