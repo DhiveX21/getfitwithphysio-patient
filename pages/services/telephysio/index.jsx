@@ -23,13 +23,17 @@ export default function Telephysio({ credentials }) {
   const router = useRouter();
 
   function handleSubmit() {
-    patientAddSignatureFile(credentials.user_id, uploadSign)
-      .then((response) => {
-        router.push("/services/telephysio/createAppointment");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    if (!credentials.signature_url) {
+      patientAddSignatureFile(credentials.user_id, uploadSign)
+        .then((response) => {
+          router.push("/services/telephysio/createAppointment");
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } else {
+      router.push("/services/telephysio/createAppointment");
+    }
   }
   return (
     <Layout>
