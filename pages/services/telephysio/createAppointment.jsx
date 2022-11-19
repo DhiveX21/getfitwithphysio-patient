@@ -161,6 +161,8 @@ export default function CreateAppointment({ credentials }) {
                 )}
               </label>
               <textarea
+                className=" text-[24px] leading-[28px] py-[10px]"
+                rows={4}
                 placeholder="Keluhan Kesehatan kamu..."
                 {...register("health_complaint", { required: true })}
               />

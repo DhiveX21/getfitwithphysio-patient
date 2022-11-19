@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components/Button";
 import { MenuTitle } from "../../components/Title";
 import { productGetOne } from "../../endpoint/Product";
 import { orderCreate } from "../../endpoint/Order";
-import { useEffect } from "react";
+import { getSession } from "next-auth/react";
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, req }) {
+  const session = await getSession({ req });
   const productDetailData = await productGetOne(query.id)
     .then((response) => {
       return response.data.data;
@@ -16,23 +16,23 @@ export async function getServerSideProps({ query }) {
       console.error(error);
     });
   return {
-    props: { productDetailData },
+    props: { credentials: session?.credentials, productDetailData },
   };
 }
 
-export default function ProductDetail({ productDetailData }) {
+export default function ProductDetail({ credentials, productDetailData }) {
   const router = useRouter();
   const { id } = router.query;
-  const { user } = useSelector((state) => state.logedInData);
 
   function handleCheckout() {
-    if (user.user_id) {
+    if (credentials?.user_id) {
       const body = {
         product_id: +id,
-        user_id: user.user_id,
+        user_id: credentials?.user_id,
       };
       orderCreate(body)
         .then((response) => {
+          alert("Order Berhasil");
           router.push("/dashboard");
         })
         .catch((error) => {
