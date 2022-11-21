@@ -57,7 +57,7 @@ export default function MedicalRecords({ medicalRecordsData }) {
                       title={item.therapist_detail.name}
                       description={item.records[0].value}
                       note={item.date + " " + item.time + " WIB"}
-                      image="/images/icon/user.png"
+                      image={`/images/${item.therapist_detail.name}.png`}
                     />
                   </div>
                 );
