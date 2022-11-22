@@ -41,7 +41,7 @@ export default function Register({ providers, csrfToken }) {
         router.push("/auth/otp/register");
       })
       .catch((error) => {
-        console.error(error);
+        alert(error.response.data.data.message);
       });
   };
 
