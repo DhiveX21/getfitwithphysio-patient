@@ -215,6 +215,7 @@ export default function LoginPin() {
 
           <div className=" w-full flex flex-col items-center gap-[10px] justify-center mt-[20px] ">
             <a
+              rel="noreferrer"
               type="button"
               href="https://wa.me/6281286412292?text=Halo%20Sepertinya%20Saya%20lupa%20akan%20PIN%20Akun%20saya.%20Bisakah%20Admin%20GetFisio%20Membantu%20Saya?"
               target="_blank"

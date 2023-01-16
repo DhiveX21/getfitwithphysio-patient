@@ -4,7 +4,7 @@ import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { CardIdentity } from "../../components/Card";
 import { VerticalProgressWithIcon } from "../../components/Progress";
-import { SubmitButton } from "../../components/Button";
+import { SubmitButton, Button } from "../../components/Button";
 import { Common1 } from "../../components/Common";
 import { useState } from "react";
 import { getProgressTelePhysio } from "../../helpers/common";
