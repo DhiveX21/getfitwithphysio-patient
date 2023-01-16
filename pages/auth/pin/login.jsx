@@ -1,18 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import {
-  setLocalStorage,
-  getLocalStorage,
-} from "../../../helpers/localStorage";
+import { getLocalStorage } from "../../../helpers/localStorage";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setControlLoading } from "../../../store/actions/controlActions";
 import { signIn } from "next-auth/react";
 import { ControlLoading } from "../../../components/Control";
-import { userLogin } from "../../../endpoint/User";
 import { useEffect } from "react";
+import { useState } from "react";
 
 export default function LoginPin() {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
   let loginPhoneNumber = "";
@@ -38,33 +36,32 @@ export default function LoginPin() {
       if (id !== 6) {
         e.preventDefault();
         document.getElementById(`otp${id + 1}`).focus();
-
-        setTimeout(() => {
-          document.getElementById(`otp${id + 1}`).setSelectionRange(0, 1);
-        }, 0);
+        document.getElementById(`otp${id + 1}`).value = null;
+        // setTimeout(() => {
+        //   document.getElementById(`otp${id + 1}`).setSelectionRange(0, 1);
+        // }, 0);
       }
     } else {
       if (id !== 1) {
         e.preventDefault();
         document.getElementById(`otp${id - 1}`).focus();
-
-        setTimeout(() => {
-          document.getElementById(`otp${id - 1}`).setSelectionRange(0, 1);
-        }, 0);
+        document.getElementById(`otp${id - 1}`).value = null;
+        // setTimeout(() => {
+        //   document.getElementById(`otp${id - 1}`).setSelectionRange(0, 1);
+        // }, 0);
       }
     }
     // document.getElementById("otp2").value = "";
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Backspace" || event.key === "Delete") {
+      handleChange(event);
+    }
+  };
+
   const onSubmit = (data) => {
-    dispatch(
-      setControlLoading(
-        true,
-        "Loading",
-        "Please Wait",
-        "/images/controlLoading.gif"
-      )
-    );
+    setIsLoading(true);
 
     const joinPin =
       data.otp1 + data.otp2 + data.otp3 + data.otp4 + data.otp5 + data.otp6;
@@ -78,14 +75,22 @@ export default function LoginPin() {
     res.then((response) => {
       if (response.ok === false) {
         alert("PIN SALAH");
-        dispatch(setControlLoading(false));
+        // dispatch(setControlLoading(false));
       } else {
+        dispatch(
+          setControlLoading(
+            true,
+            "Loading",
+            "Please Wait",
+            "/images/controlLoading.webm"
+          )
+        );
         router.push("/dashboard");
-
         setTimeout(() => {
           dispatch(setControlLoading(false));
         }, 2000);
       }
+      setIsLoading(false);
     });
   };
   return (
@@ -117,6 +122,7 @@ export default function LoginPin() {
               inputMode="numeric"
               {...register("otp1", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%] "
@@ -127,6 +133,7 @@ export default function LoginPin() {
               inputMode="numeric"
               {...register("otp2", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -137,6 +144,7 @@ export default function LoginPin() {
               inputMode="numeric"
               {...register("otp3", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -147,6 +155,7 @@ export default function LoginPin() {
               inputMode="numeric"
               {...register("otp4", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -157,6 +166,7 @@ export default function LoginPin() {
               id="otp5"
               {...register("otp5", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -167,16 +177,51 @@ export default function LoginPin() {
               id="otp6"
               {...register("otp6", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             {/* {errors.username?.type === "required" && "First name is required"} */}
           </div>
-          <div className=" w-full flex justify-center mt-[20px]">
+          <div className=" w-full flex flex-col items-center gap-[10px] justify-center mt-[20px] ">
             <button
+              className={` ${
+                isLoading
+                  ? "bg-white rounded-lg px-[20px] py-[3px] text-white text-[30px] duration-500"
+                  : "px-[20px] py-[5px] hover:scale-105 duration-500 text-gray-700 text-[24px] bg-white rounded-[10px] w-[200px]"
+              }`}
               type="submit"
-              className="px-[20px] py-[5px] hover:scale-105 duration-500 text-gray-700 text-[24px] bg-white rounded-[10px] w-[200px]"
+              disabled={isLoading}
             >
-              Konfirmasi
+              <span className="flex justify-center duration-200">
+                {isLoading ? (
+                  <img
+                    className="animation-popup"
+                    src="/images/loading-button.gif"
+                    width={"45px"}
+                    alt="loading"
+                  ></img>
+                ) : (
+                  <p className="animation-popup">Konfirmasi</p>
+                )}
+              </span>
             </button>
+            <button
+              type="button"
+              onClick={() => router.push("/auth/login")}
+              className="px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-[24px]  w-[200px]"
+            >
+              Batal
+            </button>
+          </div>
+
+          <div className=" w-full flex flex-col items-center gap-[10px] justify-center mt-[20px] ">
+            <a
+              type="button"
+              href="https://wa.me/6281286412292?text=Halo%20Sepertinya%20Saya%20lupa%20akan%20PIN%20Akun%20saya.%20Bisakah%20Admin%20GetFisio%20Membantu%20Saya?"
+              target="_blank"
+              className="underline px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-[24px]"
+            >
+              Apakah Kamu lupa PIN mu?
+            </a>
           </div>
         </form>
       </div>

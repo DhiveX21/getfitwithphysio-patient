@@ -2,6 +2,7 @@ import {
   CONTROL_LOADING,
   CONTROL_NOTIFICATION,
   FIRST_LOGIN_FORM,
+  CONTROL_SUB_LOADING,
 } from "../types";
 
 const initialState = {
@@ -9,7 +10,10 @@ const initialState = {
     active: false,
     title: "Loading...",
     description: "Please Wait",
-    image: "/images/controlLoading.gif",
+    image: "/images/controlLoading.webm",
+  },
+  controlSubLoading: {
+    active: false,
   },
   controlNotification: {
     active: false,
@@ -35,6 +39,13 @@ export default function (state = initialState, action) {
           title: action.title,
           description: action.desc,
           image: action.image,
+        },
+      };
+    case CONTROL_SUB_LOADING:
+      return {
+        ...state,
+        controlSubLoading: {
+          active: action.cond,
         },
       };
     case CONTROL_NOTIFICATION:

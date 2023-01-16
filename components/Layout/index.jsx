@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import {
-  setControlLoadingWithTimer,
   setFirstLoginForm,
   setControlLoading,
 } from "../../store/actions/controlActions";
@@ -15,7 +14,6 @@ import { useSession } from "next-auth/react";
 import StickyNotification from "./StickyNotification";
 
 import { FullScreenModal } from "../Modal";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { signIn } from "next-auth/react";
 import { notificationGetAllByUserId } from "../../endpoint/Notification";
@@ -116,7 +114,7 @@ export default function Layout(props) {
           cond,
           "Loading",
           "Please Wait",
-          "/images/controlLoading.gif"
+          "/images/controlLoading.webm"
         )
       );
     };

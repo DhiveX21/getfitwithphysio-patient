@@ -1,5 +1,8 @@
 import axios from "axios";
 
+/////////////////////////////////
+//////////////POST///////////////
+/////////////////////////////////
 const urlNotificationUrl = process.env.URL_NOTIFICATION_SERVICE;
 export function notificationGetAllByUserId(userId, body) {
   return axios.post(`${urlNotificationUrl}/notifications/${userId}`, {
@@ -7,12 +10,15 @@ export function notificationGetAllByUserId(userId, body) {
   });
 }
 
-export function notificationGetById(notificationId) {
-  return axios.get(`${urlNotificationUrl}/notifications/${notificationId}`);
-}
-
 export function notificationSetRead(body) {
   return axios.post(`${urlNotificationUrl}/notification-reads`, {
     ...body,
   });
+}
+
+/////////////////////////////////
+//////////////GET///////////////
+/////////////////////////////////
+export function notificationGetById(notificationId) {
+  return axios.get(`${urlNotificationUrl}/notifications/${notificationId}`);
 }

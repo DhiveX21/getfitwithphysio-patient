@@ -5,7 +5,9 @@ import { useRouter } from "next/router";
 import { getProviders, getCsrfToken, useSession } from "next-auth/react";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { userRegister } from "../../endpoint/User";
-import { useEffect } from "react";
+import { useState } from "react";
+import { SubmitButton } from "../../components/Button";
+import { useDispatch } from "react-redux";
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
@@ -15,6 +17,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function Register({ providers, csrfToken }) {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { data: session } = useSession();
   if (session) {
@@ -31,7 +34,7 @@ export default function Register({ providers, csrfToken }) {
     const standartPhoneNumber = "+62" + data.phoneNumber;
 
     const body = { phone_number: standartPhoneNumber };
-    userRegister(body)
+    dispatch(userRegister(body))
       .then((response) => {
         setLocalStorage(
           "register_attempt",
@@ -102,9 +105,29 @@ export default function Register({ providers, csrfToken }) {
                   [+62] 8123456789
                 </span>
               )}
-              <button className="button-primary" type="submit">
-                Register
-              </button>
+              {/* <button
+                className={` ${
+                  isLoading
+                    ? "bg-gray-200 rounded-lg px-[20px] py-[3px] text-white text-[30px]"
+                    : "bg-primary rounded-lg px-[20px] py-[3px] text-white text-[30px]"
+                }`}
+                type="submit"
+                disabled={isLoading}
+              >
+                <span className="flex justify-center ">
+                  {isLoading ? (
+                    <img
+                      className="animation-popup"
+                      src="/images/loading-button.gif"
+                      width={"45px"}
+                      alt="loading"
+                    ></img>
+                  ) : (
+                    <p className="animation-popup">Register</p>
+                  )}
+                </span>
+              </button> */}
+              <SubmitButton text="Register"></SubmitButton>
             </div>
           </form>
         </div>

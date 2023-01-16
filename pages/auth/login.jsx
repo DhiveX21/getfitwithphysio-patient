@@ -4,6 +4,10 @@ import style from "./_login.module.css";
 import { useRouter } from "next/router";
 import { setLocalStorage } from "../../helpers/localStorage";
 import { getProviders, getCsrfToken, useSession } from "next-auth/react";
+import { checkUserExist } from "../../endpoint/User";
+
+import { useDispatch } from "react-redux";
+import { SubmitButton } from "../../components/Button";
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
@@ -13,6 +17,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function Login({ providers, csrfToken }) {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const { data: session } = useSession();
@@ -27,8 +32,32 @@ export default function Login({ providers, csrfToken }) {
   } = useForm();
   const onSubmit = (data) => {
     const standartPhoneNumber = "+62" + data.phoneNumber;
-    setLocalStorage("login_attempt", { phoneNumber: standartPhoneNumber }, 300);
-    router.push("/auth/pin/login");
+    const body = { phone_number: standartPhoneNumber };
+    dispatch(checkUserExist(body))
+      .then((response) => {
+        setLocalStorage(
+          "login_attempt",
+          { phoneNumber: standartPhoneNumber },
+          300
+        );
+        router.push("/auth/pin/login");
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          setLocalStorage(
+            "register_attempt",
+            { phoneNumber: standartPhoneNumber },
+            300
+          );
+          alert(
+            "Sepertinya kamu belum membuat PIN , ayo kita buat PIN Keamanan Terlebih dahulu"
+          );
+          router.push("/auth/pin/create");
+        }
+        if (error.response.status === 401) {
+          alert("Nomor HP tidak ditemukan");
+        }
+      });
   };
 
   return (
@@ -39,7 +68,7 @@ export default function Login({ providers, csrfToken }) {
         </div>
         <div className={style.illustration}>
           <picture>
-            <img src="/images/login.png" alt="Login illustration" />
+            <img src="/images/loginV2.jpeg" alt="Login illustration" />
           </picture>
         </div>
         <div className={style.form}>
@@ -75,9 +104,7 @@ export default function Login({ providers, csrfToken }) {
                   (Mohon Masukan Nomor HP dengan format contoh +62123456789)
                 </span>
               )}
-              <button className="button-primary" type="submit">
-                Login
-              </button>
+              <SubmitButton text="Login" />
             </div>
           </form>
         </div>

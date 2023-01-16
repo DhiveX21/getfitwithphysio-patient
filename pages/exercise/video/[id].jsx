@@ -2,16 +2,16 @@ import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import { MenuTitle } from "../../../components/Title";
 import Breadcrumbs from "../../../components/Breadcrumbs";
-import { useDispatch } from "react-redux";
 import { VideoPlayer1 } from "../../../components/Video";
-import { Button } from "../../../components/Button";
+import { Button, SubmitButton } from "../../../components/Button";
 import {
   exerciseGetOneVideoByUserId,
   exerciseVideoSetWatch,
 } from "../../../endpoint/Exercise";
-import { wrapper } from "../../../store/store";
 import { getSession } from "next-auth/react";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 export async function getServerSideProps({ query, req, res }) {
   const session = await getSession({ req });
@@ -23,13 +23,23 @@ export async function getServerSideProps({ query, req, res }) {
       return response.data.data;
     })
     .catch((error) => {
-      console.error(error);
+      return null;
     });
 
   return { props: { credentials: session?.credentials, video: video } };
 }
 
 export default function VideoDetail({ credentials, video }) {
+  useEffect(() => {
+    if (video === null) {
+      alert(
+        "Maaf Saat ini Video Exercise ini sedang dalam perbaikan, Coba tonton Video Lain aja yukk! :D"
+      );
+      router.push("/exercise/video");
+    }
+  }, [video]);
+
+  const dispatch = useDispatch();
   const inputDailyReport = useRef();
   const [dailyReport, setDailyReport] = useState();
   const router = useRouter();
@@ -40,7 +50,7 @@ export default function VideoDetail({ credentials, video }) {
       daily_note: dailyReport,
     };
 
-    exerciseVideoSetWatch(body).then((response) => {
+    dispatch(exerciseVideoSetWatch(body)).then((response) => {
       if (response.status === 200) {
         router.reload(window.location.pathname);
       }
@@ -51,7 +61,7 @@ export default function VideoDetail({ credentials, video }) {
     <Layout>
       <div className="px-[20px] flex flex-col  mb-[20px]">
         <MenuTitle
-          text={video.title}
+          text={video?.title}
           icon="/images/icon/medical-result_icon.svg"
         ></MenuTitle>
         <div className="breadcrumb">
@@ -63,16 +73,16 @@ export default function VideoDetail({ credentials, video }) {
           <div className="video_detail__wrapper">
             <div className="video_detail__player ">
               <VideoPlayer1
-                title={video.title}
-                description={video.description}
-                url={video.video_url}
+                title={video?.title}
+                description={video?.description}
+                url={video?.video_url}
               ></VideoPlayer1>
             </div>
             <hr className="solid"></hr>
             <div className="video_detail__status flex px-[5px] gap-[10px] py-[10px]">
               <div className="video_detail__status__badge">Status</div>
               <div className="video_detail__status__text">
-                {video.today_watch ? (
+                {video?.today_watch ? (
                   <span className="bg-success px-[10px] text-white rounded">
                     Selesai di Tonton
                   </span>
@@ -83,7 +93,7 @@ export default function VideoDetail({ credentials, video }) {
                 )}
               </div>
             </div>
-            {video.today_watch ? null : (
+            {video?.today_watch ? null : (
               <>
                 <hr className="solid"></hr>
                 <textarea
@@ -100,14 +110,23 @@ export default function VideoDetail({ credentials, video }) {
                   mu.
                 </span>
                 <div className="video_detail__button text-right py-[10px]">
-                  <Button
+                  {/* <Button
                     text="Selesai"
-                    click={() => handleSubmitWatch(video.id)}
+                    click={() => handleSubmitWatch(video?.id)}
                     disabled={dailyReport ? false : true}
                     classNameInject={` py-[5px] rounded-[5px] text-[white] text-[20px] duration-500 ${
                       dailyReport ? "bg-primary" : "bg-secondary"
                     }`}
-                  />
+                  /> */}
+
+                  <SubmitButton
+                    text="Selesai"
+                    click={() => handleSubmitWatch(video?.id)}
+                    disabled={dailyReport ? false : true}
+                    classNameInject={` w-full py-[5px] rounded-[5px] text-[white] text-[20px] duration-500 ${
+                      dailyReport ? "bg-primary" : "bg-secondary"
+                    }`}
+                  ></SubmitButton>
                 </div>
               </>
             )}
