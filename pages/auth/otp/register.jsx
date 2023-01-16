@@ -6,8 +6,11 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { getLocalStorage } from "../../../helpers/localStorage";
 import { userRegisterCheckOtp } from "../../../endpoint/User";
+import { useDispatch } from "react-redux";
+import { SubmitButton } from "../../../components/Button";
 
 export default function Register() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [seconds, setSeconds] = useState(300);
   const [registerAttempt, setRegisterAttempt] = useState(null);
@@ -48,7 +51,7 @@ export default function Register() {
       otp: +data.otp,
     };
 
-    userRegisterCheckOtp(body)
+    dispatch(userRegisterCheckOtp(body))
       .then((response) => {
         if (response.status === 200) {
           alert(response.data.data.message);
@@ -68,7 +71,7 @@ export default function Register() {
     //       5000,
     //       "Loading",
     //       "Please Wait",
-    //       "/images/controlLoading.gif"
+    //       "/images/controlLoading.webm"
     //     )
     //   );
     //   router.push("/auth/pin/create");
@@ -136,8 +139,17 @@ export default function Register() {
                 {...register("otp", { required: true, maxLength: 4 })}
               />
               {/* {errors.username?.type === "required" && "First name is required"} */}
-              <button className="button-primary" type="submit">
-                Konfirmasi
+
+              <SubmitButton
+                text="Lanjut"
+                classNameInject="w-[200px] self-center rounded-xl bg-primary"
+              ></SubmitButton>
+              <button
+                type="button"
+                onClick={() => router.push("/auth/register")}
+                className="px-[20px] py-[5px] hover:scale-105 duration-500 text-danger  rounded-full w-1/2 self-center  text-[24px] leading-[24px]"
+              >
+                Batal
               </button>
             </div>
           </form>

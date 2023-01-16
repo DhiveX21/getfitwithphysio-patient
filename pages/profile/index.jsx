@@ -19,7 +19,7 @@ export default function Profile({ credentials }) {
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
-        <MenuTitle text="Tele Fisio" icon="/images/icon/user_2.png"></MenuTitle>
+        <MenuTitle text="Profile" icon="/images/icon/user_2.png"></MenuTitle>
 
         <div className=" p-[10px] rounded-[20px] text-center">
           <div className="profile__picture flex justify-center flex-col items-center">

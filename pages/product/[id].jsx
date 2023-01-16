@@ -5,6 +5,8 @@ import { MenuTitle } from "../../components/Title";
 import { productGetOne } from "../../endpoint/Product";
 import { orderCreate } from "../../endpoint/Order";
 import { getSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { SubmitButton } from "../../components/Button";
 
 export async function getServerSideProps({ query, req }) {
   const session = await getSession({ req });
@@ -21,6 +23,7 @@ export async function getServerSideProps({ query, req }) {
 }
 
 export default function ProductDetail({ credentials, productDetailData }) {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
 
@@ -30,7 +33,7 @@ export default function ProductDetail({ credentials, productDetailData }) {
         product_id: +id,
         user_id: credentials?.user_id,
       };
-      orderCreate(body)
+      dispatch(orderCreate(body))
         .then((response) => {
           alert("Order Berhasil");
           router.push("/dashboard");
@@ -108,10 +111,10 @@ export default function ProductDetail({ credentials, productDetailData }) {
             </div>
           </div>
           <div className="product-detail__button flex justify-center">
-            <Button
+            <SubmitButton
               text="Bayar Sekarang"
-              classNameInject=" bg-primary text-white p-[5px] max-w-[140px] rounded-lg"
               click={() => handleCheckout()}
+              classNameInject=" bg-primary text-white text-[20px] shadow-md p-[5px]  rounded-lg"
             />
           </div>
         </div>

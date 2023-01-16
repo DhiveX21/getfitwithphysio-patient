@@ -2,12 +2,13 @@ import {
   CONTROL_LOADING,
   FIRST_LOGIN_FORM,
   CONTROL_NOTIFICATION,
+  CONTROL_SUB_LOADING,
 } from "../types";
 
 import { notificationSetRead } from "../../endpoint/Notification";
 
 export const setControlLoading =
-  (cond, title = "", desc = "", image = "/images/controlLoading.gif") =>
+  (cond, title = "", desc = "", image = "/images/controlLoading.webm") =>
   async (dispatch) => {
     dispatch({
       type: CONTROL_LOADING,
@@ -18,8 +19,15 @@ export const setControlLoading =
     });
   };
 
+export const setControlSubLoading = (cond) => async (dispatch) => {
+  dispatch({
+    type: CONTROL_SUB_LOADING,
+    cond: cond,
+  });
+};
+
 export const setControlLoadingWithTimer =
-  (timer = 300, title = "", desc = "", image = "/images/controlLoading.gif") =>
+  (timer = 300, title = "", desc = "", image = "/images/controlLoading.webm") =>
   async (dispatch) => {
     dispatch({
       type: CONTROL_LOADING,

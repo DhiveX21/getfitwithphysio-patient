@@ -68,7 +68,7 @@ export default function LoginOtp({ providers, csrfToken, getOTP }) {
           5000,
           "Loading",
           "Please Wait",
-          "/images/controlLoading.gif"
+          "/images/controlLoading.webm"
         )
       );
       signIn("credentials", {

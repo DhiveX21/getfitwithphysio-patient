@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "../../../components/Layout";
 import { MenuTitle } from "../../../components/Title";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { useForm } from "react-hook-form";
-import { Button } from "../../../components/Button";
+import { SubmitButton } from "../../../components/Button";
 import { useRouter } from "next/router";
 import { appointmentCreate } from "../../../endpoint/Appointment";
-import { useState } from "react";
 import { getSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
@@ -18,7 +18,7 @@ export async function getServerSideProps({ req }) {
 }
 
 export default function CreateAppointment({ credentials }) {
-  const [submitButton, setSubmitButton] = useState(true);
+  const dispatch = useDispatch();
   const router = useRouter();
   const {
     register,
@@ -28,8 +28,6 @@ export default function CreateAppointment({ credentials }) {
   } = useForm();
 
   const onSubmit = (data) => {
-    setSubmitButton(false);
-
     const body = {
       patient_id: credentials.id,
       therapist_id: 1,
@@ -39,7 +37,7 @@ export default function CreateAppointment({ credentials }) {
       address: data.address,
       complaints: data.health_complaint,
     };
-    appointmentCreate(body)
+    dispatch(appointmentCreate(body))
       .then((response) => {
         if (response.status === 200) {
           alert("Appointment berhasil di buat");
@@ -48,7 +46,6 @@ export default function CreateAppointment({ credentials }) {
       })
       .catch((error) => {
         alert("Terjadi Keasalahan di Server");
-        setSubmitButton(true);
       });
   };
 
@@ -172,12 +169,10 @@ export default function CreateAppointment({ credentials }) {
               </span>
             </div>
             <div className="create-appointment-button w-full flex justify-center mt-[20px]">
-              <Button
-                type="submit"
+              <SubmitButton
                 text="Buat"
-                disabled={!submitButton}
                 classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-[10px] w-[200px]"
-              />
+              ></SubmitButton>
             </div>
           </form>
         </div>

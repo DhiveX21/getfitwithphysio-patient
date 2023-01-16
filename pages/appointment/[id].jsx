@@ -4,13 +4,14 @@ import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { CardIdentity } from "../../components/Card";
 import { VerticalProgressWithIcon } from "../../components/Progress";
-import { Button } from "../../components/Button";
+import { SubmitButton } from "../../components/Button";
 import { Common1 } from "../../components/Common";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getProgressTelePhysio } from "../../helpers/common";
 import { appointmentGetOne } from "../../endpoint/Appointment";
 import { useRef } from "react";
 import { appointmentCreateReview } from "../../endpoint/Appointment";
+import { useDispatch } from "react-redux";
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
@@ -27,6 +28,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function AppointmentInfo({ appointmentData }) {
+  const dispatch = useDispatch();
   const [reviewPanel, setReviewPanel] = useState(true);
   const reviewInput = useRef();
   const router = useRouter();
@@ -47,7 +49,6 @@ export default function AppointmentInfo({ appointmentData }) {
   // );
 
   function handleSubmitReview() {
-    console.log("masuk");
     const body = {
       appointment_id: appointmentData._id,
       rating: {
@@ -55,8 +56,10 @@ export default function AppointmentInfo({ appointmentData }) {
         comment: reviewInput.current.value,
       },
     };
-    appointmentCreateReview(body)
-      .then((response) => {})
+    dispatch(appointmentCreateReview(body))
+      .then((response) => {
+        setReviewPanel(false);
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -122,14 +125,13 @@ export default function AppointmentInfo({ appointmentData }) {
                     />
                   </div>
                   <div className="w-full text-center">
-                    <Button
+                    <SubmitButton
                       text="Kirim"
-                      classNameInject="w-full bg-primary px-[40px] py-[5px] rounded-lg text-white"
                       click={() => {
                         handleSubmitReview();
-                        setReviewPanel(false);
                       }}
-                    ></Button>
+                      classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-[10px] w-[200px]"
+                    ></SubmitButton>
                   </div>
                 </div>
               </div>

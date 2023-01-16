@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "../../../components/Button";
-import {
-  setLocalStorage,
-  getLocalStorage,
-} from "../../../helpers/localStorage";
+import { getLocalStorage } from "../../../helpers/localStorage";
 import { useRouter } from "next/router";
-import { userRegister } from "../../../endpoint/User";
 import { userCreatePin } from "../../../endpoint/User";
+import { useDispatch } from "react-redux";
+import { SubmitButton } from "../../../components/Button";
 
 // export async function getServerSideProps(context) {
 //   const providers = await getProviders();
@@ -22,6 +19,7 @@ import { userCreatePin } from "../../../endpoint/User";
 // }
 
 export default function ConfirmPin() {
+  const dispatch = useDispatch();
   let createPinAttempt = "";
   let registeredPhoneNumber = "";
   useEffect(() => {
@@ -49,23 +47,29 @@ export default function ConfirmPin() {
       if (id !== 6) {
         e.preventDefault();
         document.getElementById(`otp${id + 1}`).focus();
-
-        setTimeout(() => {
-          document.getElementById(`otp${id + 1}`).setSelectionRange(0, 1);
-        }, 0);
+        document.getElementById(`otp${id + 1}`).value = null;
+        // setTimeout(() => {
+        //   document.getElementById(`otp${id + 1}`).setSelectionRange(0, 1);
+        // }, 0);
       }
     } else {
       if (id !== 1) {
         e.preventDefault();
         document.getElementById(`otp${id - 1}`).focus();
-
-        setTimeout(() => {
-          document.getElementById(`otp${id - 1}`).setSelectionRange(0, 1);
-        }, 0);
+        document.getElementById(`otp${id - 1}`).value = null;
+        // setTimeout(() => {
+        //   document.getElementById(`otp${id - 1}`).setSelectionRange(0, 1);
+        // }, 0);
       }
     }
     // document.getElementById("otp2").value = "";
   }
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Backspace" || event.key === "Delete") {
+      handleChange(event);
+    }
+  };
 
   const onSubmit = (data) => {
     const joinPin =
@@ -76,7 +80,7 @@ export default function ConfirmPin() {
         phone_number: registeredPhoneNumber.item.phoneNumber,
         pin: joinPin,
       };
-      userCreatePin(body)
+      dispatch(userCreatePin(body))
         .then((response) => {
           if (response.status === 200) {
             alert("registrasi PIN berhasil");
@@ -120,6 +124,7 @@ export default function ConfirmPin() {
               inputMode="numeric"
               {...register("otp1", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%] "
@@ -130,6 +135,7 @@ export default function ConfirmPin() {
               inputMode="numeric"
               {...register("otp2", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -140,6 +146,7 @@ export default function ConfirmPin() {
               inputMode="numeric"
               {...register("otp3", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -150,6 +157,7 @@ export default function ConfirmPin() {
               inputMode="numeric"
               {...register("otp4", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -160,6 +168,7 @@ export default function ConfirmPin() {
               id="otp5"
               {...register("otp5", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             <input
               className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
@@ -170,16 +179,15 @@ export default function ConfirmPin() {
               id="otp6"
               {...register("otp6", { required: true })}
               onChange={(e) => handleChange(e)}
+              onKeyDown={handleKeyDown}
             />
             {/* {errors.username?.type === "required" && "First name is required"} */}
           </div>
           <div className=" w-full flex justify-center mt-[20px]">
-            <button
-              type="submit"
-              className="px-[20px] py-[5px] hover:scale-105 duration-500 text-gray-700 text-[24px] bg-white rounded-[10px] w-[200px]"
-            >
-              Konfirmasi
-            </button>
+            <SubmitButton
+              classNameInject="  text-gray-700 shadow-md text-[24px] bg-white rounded-xl w-[200px] "
+              text="Konfirmasi"
+            ></SubmitButton>
           </div>
         </form>
       </div>

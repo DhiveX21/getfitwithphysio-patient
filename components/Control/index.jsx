@@ -5,21 +5,14 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Button } from "../Button";
 import { MenuTitle } from "../Title";
-import { getLocalStorage, setLocalStorage } from "../../helpers/localStorage";
-import { patientCreate, patientGetOneByUserId } from "../../endpoint/User";
-import { setFirstLoginForm } from "../../store/actions/controlActions";
+import { setLocalStorage } from "../../helpers/localStorage";
+import { patientCreate } from "../../endpoint/User";
 import { calcAge } from "../../helpers/common";
-import { useEffect } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { SubmitButton } from "../Button";
 
-export function ControlLoading({
-  image = "/images/example.jpg",
-  title = "Title Common1",
-  description = "Description Common1",
-  noteTitle = "noteTitle",
-  noteDescription = "note Description",
-}) {
+export function ControlLoading() {
   const loadingCondition = useSelector((state) => state.controlData);
   return (
     <>
@@ -27,12 +20,22 @@ export function ControlLoading({
         <div className={style.control_loading}>
           <div className={style.control_loading__wrapper}>
             <div className={style.control_loading__image}>
-              <picture>
+              {/* <picture>
                 <img
                   src={loadingCondition.controlLoading.image}
                   alt="loading..."
                 />
-              </picture>
+              </picture> */}
+
+              <video
+                className="mb-[20px]"
+                autoPlay
+                playsInline
+                muted
+                loop
+                width={150}
+                src={loadingCondition.controlLoading.image}
+              />
             </div>
             <div className={style.control_loading__title + " animate-pulse"}>
               <h2>{loadingCondition.controlLoading.title}</h2>
@@ -83,7 +86,7 @@ export function FirstLoginForm() {
       birth_date: data.birthdate,
       email: data.email,
     };
-    patientCreate(body)
+    dispatch(patientCreate(body))
       .then((responseCreate) => {
         if (responseCreate.status == 200) {
           // dispatch(setFirstLoginForm(false));
@@ -206,8 +209,7 @@ export function FirstLoginForm() {
                   )}
 
                   <div className="create-appointment-button w-full flex gap-[20px] justify-center mt-[20px]">
-                    <Button
-                      type="submit"
+                    <SubmitButton
                       text="Buat"
                       classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-full w-[200px]"
                     />
