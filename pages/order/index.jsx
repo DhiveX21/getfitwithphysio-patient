@@ -127,8 +127,8 @@ export default function Order({ credentials, orderData }) {
                                     >
                                       {item.product?.sub_products ? (
                                         item.product?.sub_products?.map(
-                                          (subProduct) => (
-                                            <li>
+                                          (subProduct, index) => (
+                                            <li key={index}>
                                               {subProduct.name}{" "}
                                               <span className="font-bold">
                                                 ({subProduct.quota}x)
