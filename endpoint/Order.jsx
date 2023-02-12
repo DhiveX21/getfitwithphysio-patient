@@ -19,3 +19,11 @@ export const orderCreate = (body) => async (dispatch) => {
     return Promise.reject(error);
   }
 };
+
+/////////////////////////////////
+//////////////GET////////////////
+/////////////////////////////////
+
+export function orderGetAllByUserId(userId) {
+  return axios.get(`${urlOrderService}/orders/user/${userId}`);
+}

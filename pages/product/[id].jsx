@@ -7,6 +7,10 @@ import { orderCreate } from "../../endpoint/Order";
 import { getSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { SubmitButton } from "../../components/Button";
+import PaymentMethodList from "../../components/PaymentMethodList";
+import { paymentMethodGetAll } from "../../endpoint/Transaction";
+import { useState } from "react";
+import { formatCurrency } from "../../helpers/common";
 
 export async function getServerSideProps({ query, req }) {
   const session = await getSession({ req });
@@ -17,26 +21,50 @@ export async function getServerSideProps({ query, req }) {
     .catch((error) => {
       console.error(error);
     });
+
+  const paymentMethodData = await paymentMethodGetAll()
+    .then((response) => {
+      console.log(response);
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   return {
-    props: { credentials: session?.credentials, productDetailData },
+    props: {
+      credentials: session?.credentials,
+      productDetailData,
+      paymentMethodData,
+    },
   };
 }
 
-export default function ProductDetail({ credentials, productDetailData }) {
+export default function ProductDetail({
+  credentials,
+  productDetailData,
+  paymentMethodData,
+}) {
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
   function handleCheckout() {
     if (credentials?.user_id) {
       const body = {
         product_id: +id,
         user_id: credentials?.user_id,
+        payment_type: selectedPaymentMethod,
       };
       dispatch(orderCreate(body))
         .then((response) => {
           alert("Order Berhasil");
-          router.push("/dashboard");
+          console.log(response.data);
+          window.open(response.data.data.payment_url, "_blank", "noreferrer");
+          setTimeout(() => {
+            router.push("/order");
+          }, 3000);
         })
         .catch((error) => {
           console.error(error);
@@ -105,12 +133,28 @@ export default function ProductDetail({ credentials, productDetailData }) {
                   <span className="text-primary">(Promo)</span>
                 </span>
                 <span className="text-[25px] leading-[22px] text-danger mt-[1%] animate-pulse">
-                  Rp. {productDetailData.cost_paid}
+                  {formatCurrency(productDetailData.cost_paid)}
                 </span>
               </div>
             </div>
           </div>
-          <div className="product-detail__button flex justify-center">
+
+          <div className="product-detail__segment my-[20px]">
+            <div className="product-detail__segment__title flex bg-slate-200 py-[5px] px-[10px] rounded-lg">
+              <h2 className="text-[22px] leading-[22px] text-gray-600 mt-[1%]">
+                Pilih Pembayaran
+              </h2>
+            </div>
+
+            <div className="product-detail__segment__payment-method my-[20px] px-[10px]">
+              <PaymentMethodList
+                paymentMethodData={paymentMethodData}
+                valueStorageSetState={(e) => setSelectedPaymentMethod(e)}
+              />
+            </div>
+          </div>
+
+          <div className="product-detail__button flex justify-center z-0">
             <SubmitButton
               text="Bayar Sekarang"
               click={() => handleCheckout()}

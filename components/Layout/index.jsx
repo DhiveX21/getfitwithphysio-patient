@@ -10,7 +10,7 @@ import {
   setFirstLoginForm,
   setControlLoading,
 } from "../../store/actions/controlActions";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import StickyNotification from "./StickyNotification";
 
 import { FullScreenModal } from "../Modal";
@@ -33,6 +33,7 @@ export default function Layout(props) {
     withoutFooter = false,
     withoutStickyNotification = false,
     withoutStickyBottomNav = false,
+    notificationData,
   } = props;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ export default function Layout(props) {
   }, [session]);
 
   useEffect(() => {
+    console.log(notificationData);
     if (session && session.credentials.user_id) {
       // check if localstorage is from patient API
       // if localstorage is not from patient API , soo get it
