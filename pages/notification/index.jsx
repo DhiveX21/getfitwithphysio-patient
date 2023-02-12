@@ -6,6 +6,8 @@ import { getSession } from "next-auth/react";
 import { notificationGetAllByUserId } from "../../endpoint/Notification";
 import { useDispatch } from "react-redux";
 import { setControlNotification } from "../../store/actions/controlActions";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
@@ -36,6 +38,7 @@ export async function getServerSideProps({ req }) {
 }
 
 export default function Notification({ credentials, notificationData }) {
+  const router = useRouter();
   const dispatch = useDispatch();
   return (
     <Layout>

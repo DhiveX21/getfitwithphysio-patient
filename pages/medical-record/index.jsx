@@ -7,7 +7,7 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import { appointmentGetAllMedicalRecordByIdUser } from "../../endpoint/Appointment";
 import { useSession } from "next-auth/react";
 import { getSession } from "next-auth/react";
-import NotFound from "../../components/Notfound";
+import { NotFound } from "../../components/Notfound";
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });

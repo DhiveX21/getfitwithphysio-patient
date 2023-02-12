@@ -10,6 +10,7 @@ const nextConfig = {
     URL_PRODUCT_SERVICE: "https://api.getfitwithphysio.com/product-service/api",
     URL_ORDER_SERVICE: "https://api.getfitwithphysio.com/order-service/api",
     URL_NOTIFICATION_SERVICE: "https://api.getfitwithphysio.com/notification-service/api",
+    URL_TRANSACTION_SERVICE: "https://api.getfitwithphysio.com/transaction-service/api",
   },
 };
 

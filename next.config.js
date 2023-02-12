@@ -11,6 +11,8 @@ const nextConfig = {
     URL_ORDER_SERVICE: "http://103.250.11.128:8002/order-service/api",
     URL_NOTIFICATION_SERVICE:
       "http://103.250.11.128:8002/notification-service/api",
+    URL_TRANSACTION_SERVICE:
+      "http://103.250.11.128:8002/transaction-service/api",
   },
 };
 

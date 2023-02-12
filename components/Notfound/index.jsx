@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function NotFound({
+export function NotFound({
   image = "/images/icon/404.png",
   title = "umm, Sepertinya Kosong.",
   description = "Belum ada apa-apa disini, mungkin kamu perlu mengisi nya terlebih dahulu.",

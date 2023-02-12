@@ -115,3 +115,11 @@ export function getYoutubeId(url) {
   }
   return video_id;
 }
+
+export function formatCurrency(value) {
+  let rupiah = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "IDR",
+  }).format(value);
+  return rupiah;
+}

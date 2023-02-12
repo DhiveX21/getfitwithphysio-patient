@@ -70,8 +70,8 @@ export default function Dashboard({ appointmentData }) {
                   >
                     <picture>
                       <img
-                        className="w-full object-cover"
-                        src="./images/servicelist_1.png"
+                        className="w-full object-cover aspect-[2/1]"
+                        src="./images/banner1.png"
                       />
                     </picture>
                   </div>,
@@ -81,8 +81,8 @@ export default function Dashboard({ appointmentData }) {
                   >
                     <picture>
                       <img
-                        className="w-full object-cover"
-                        src="./images/servicelist_1.png"
+                        className="w-full object-cover aspect-[2/1]"
+                        src="./images/banner2.png"
                       />
                     </picture>
                   </div>,
@@ -152,6 +152,14 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/schedule.png"
                     click={() => router.push("/appointment")}
+                  ></ButtonWithIcon2>
+                </div>
+                <div className="dashboard__menu__list__item w-1/4">
+                  <ButtonWithIcon2
+                    text="Riwayat Transaksi"
+                    type="button"
+                    icon="/images/icon/exchange.png"
+                    click={() => router.push("/order")}
                   ></ButtonWithIcon2>
                 </div>
                 {/* <div className="dashboard__menu__list__item w-1/4">
