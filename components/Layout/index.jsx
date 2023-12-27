@@ -66,7 +66,6 @@ export default function Layout(props) {
   }, [session]);
 
   useEffect(() => {
-    console.log(notificationData);
     if (session && session.credentials.user_id) {
       // check if localstorage is from patient API
       // if localstorage is not from patient API , soo get it

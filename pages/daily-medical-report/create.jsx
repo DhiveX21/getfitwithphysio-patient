@@ -63,9 +63,7 @@ export default function CreateDailyMedicalReport() {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="field-group flex flex-col">
-              <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                Tanggal
-              </label>
+              <label className="text-lg  text-get_desc">Tanggal</label>
               <input
                 className="w-full"
                 placeholder="Tanggal"
@@ -76,10 +74,10 @@ export default function CreateDailyMedicalReport() {
               {errors.date && <span>This field is required</span>}
             </div>
             <div className="field-group flex flex-col">
-              <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+              <label className="text-lg  text-get_desc">
                 Laporan Kondisi Kesehatan
                 {errors.report && (
-                  <span className="text-[24px] text-danger font-bold">
+                  <span className="text-lg text-get_pink font-bold">
                     (This field is required)
                   </span>
                 )}
@@ -98,7 +96,7 @@ export default function CreateDailyMedicalReport() {
               <Button
                 type="submit"
                 text="Buat"
-                classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-[10px] w-[200px]"
+                classNameInject="px-[20px] py-[5px] text-white text-lg bg-primary rounded-[10px] w-[200px]"
               />
             </div>
           </form>

@@ -66,12 +66,12 @@ export default function CreateAppointment({ credentials }) {
             <div className="field-group flex flex-col">
               <label className="text-sm  text-get_text">Service</label>
               <select
-                placeholder="Tele Fisio"
-                defaultValue="tele_physio"
+                placeholder="HomeCare"
+                defaultValue="home_care"
                 readOnly
                 {...register("service", { required: true })}
               >
-                <option value="tele_physio">Tele Fisio</option>
+                <option value="home_care">Home Care</option>
               </select>
               <span className="form-hint">Cth : Fisioterapi Home Care</span>
               {errors.service && <span>This field is required</span>}

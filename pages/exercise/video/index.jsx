@@ -50,27 +50,30 @@ export default function Video({ videoCategory }) {
           </div>
           <div className="video__category">
             <div className="video__category__wrapper">
-              <div className="video__category__list flex gap-[7px] overflow-x-scroll py-[10px]">
-                <div className="video__category__list__item ">
+              <div className="video__category__list flex items-center h-full gap-[7px] overflow-x-scroll py-[10px]">
+                <div className="video__category__list__item h-full">
                   <Button
                     classNameInject={`${
                       activeCategory === null
-                        ? " bg-primary text-white"
-                        : " bg-white text-primary hover:bg-primary hover:text-white duration-300"
-                    } border-2 border-primary border-opacity-40 pt-[2%]  px-[10px] rounded-full`}
+                        ? " bg-get_blue text-white text-sm h-full rounded-md whitespace-nowrap"
+                        : " bg-white text-get_blue text-sm hover:bg-get_blue hover:text-white duration-300 h-full whitespace-nowrap"
+                    } border-2 border-get_blue border-opacity-40 rounded-md  px-[10px] py-[5px]`}
                     text="Semua"
                     click={() => setActiveCategory(null)}
                   />
                 </div>
                 {videoCategory.map((item) => {
                   return (
-                    <div key={item.id} className="video__category__list__item ">
+                    <div
+                      key={item.id}
+                      className="video__category__list__item h-full"
+                    >
                       <Button
                         classNameInject={`${
                           activeCategory === item.id
-                            ? " bg-primary text-white"
-                            : " bg-white text-primary hover:bg-primary hover:text-white duration-300"
-                        } border-2 border-primary border-opacity-40 pt-[2%]  px-[10px] rounded-full`}
+                            ? " bg-get_blue text-white text-sm h-full rounded-md whitespace-nowrap"
+                            : " bg-white text-get_blue text-sm hover:bg-get_blue hover:text-white duration-300 h-full whitespace-nowrap"
+                        } border-2 border-get_blue border-opacity-40  rounded-md px-[10px] py-[5px]`}
                         text={item.title}
                         click={() => setActiveCategory(item.id)}
                       />
@@ -87,7 +90,7 @@ export default function Video({ videoCategory }) {
                   return (
                     <div
                       key={item.id}
-                      className="video__list__item hover:cursor-pointer bg-slate-100 hover:bg-slate-200 duration-300 w-full max-h-[100px]  p-[5px] rounded-xl"
+                      className="video__list__item hover:cursor-pointer animation-popup bg-slate-100 hover:bg-slate-200 duration-300 w-full max-h-[100px]  p-[5px] rounded-xl"
                     >
                       <Link href={`/exercise/video/${item.id}`}>
                         <div className="video__list__item__thumbnail flex h-full">
@@ -101,10 +104,10 @@ export default function Video({ videoCategory }) {
                             />
                           </picture>
                           <div className="flex flex-col justify-center p-[10px] w-[60%]">
-                            <div className="video__list__item__title py-[5px] text-primary  text-[24px] leading-[24px]">
+                            <div className="video__list__item__title py-[5px] text-get_blue  text-base font-bold ">
                               <h3>{item.title}</h3>
                             </div>
-                            <div className="video__list__item__description text-[#5d5d5d]  text-[16px] leading-[12px]">
+                            <div className="video__list__item__description text-get_desc  text-xs ">
                               <p className="line-clamp-3">{item.description}</p>
                             </div>
                           </div>
@@ -121,7 +124,7 @@ export default function Video({ videoCategory }) {
                       alt="not found video"
                     />
                   </picture>
-                  <h3 className="text-[34px] text-slate-400">
+                  <h3 className="text-xl text-get_light_desc">
                     {" "}
                     Video Tidak Tersedia
                   </h3>

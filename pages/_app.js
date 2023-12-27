@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/animation.css";
 import { wrapper, store } from "../store/store";
 import { Provider } from "react-redux";
 import WithMaster from "../hoc/withMaster";
@@ -45,56 +46,4 @@ function Auth({ children }) {
   }
 
   return children;
-}
-
-export async function getStaticProps({ req }) {
-  console.log(req);
-  const session = await getSession({ req });
-  const body = {
-    and_broadcast: true,
-    order_by: {
-      key: "id",
-      value: "desc",
-    },
-  };
-
-  const notificationData = await notificationGetAllByUserId(
-    session.credentials.user_id
-      ? session.credentials.user_id
-      : session.credentials.id,
-    body
-  )
-    .then((response) => {
-      console.log(response);
-      return response.data.data;
-    })
-    .catch((error) => {
-      return [];
-    });
-
-  return {
-    props: { credentials: session?.credentials, notificationData },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every 10 seconds
-    revalidate: 10, // In seconds
-  };
-}
-
-// This function gets called at build time on server-side.
-// It may be called again, on a serverless function, if
-// the path has not been generated.
-export async function getStaticPaths() {
-  const res = await fetch("https://.../posts");
-  const posts = await res.json();
-
-  // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post) => ({
-    params: { id: post.id },
-  }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: blocking } will server-render pages
-  // on-demand if the path doesn't exist.
-  return { paths, fallback: "blocking" };
 }

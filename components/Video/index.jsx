@@ -30,7 +30,9 @@ export function VideoPlayer1({
     <>
       <div className={style.video_player_1}>
         <div className={style.video_player_1__wrapper}>
-          <div className={style.video_player_1__title}>
+          <div
+            className={`${style.video_player_1__title} text-sm text-get_text font-bold`}
+          >
             <h3>{title}</h3>
           </div>
           <div className={style.video_player_1__player}>
@@ -48,7 +50,9 @@ export function VideoPlayer1({
               ></NotFound>
             )}
           </div>
-          <div className={style.video_player_1__description}>
+          <div
+            className={`${style.video_player_1__description} text-sm text-get_light_desc`}
+          >
             <p>{description}</p>
           </div>
         </div>

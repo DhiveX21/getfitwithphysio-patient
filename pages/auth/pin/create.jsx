@@ -58,17 +58,17 @@ export default function CreatePin() {
     }
   };
   return (
-    <div className="w-full bg-primary px-[20px]">
+    <div className="w-full bg-get_blue px-[20px]">
       <div className="flex flex-col gap-[20px] justify-center min-h-screen">
         <div className="w-full flex justify-center">
           <picture>
             <img className="h-[100px]" src="/images/password.png" alt="PIN" />
           </picture>
         </div>
-        <div className="text-center text-[30px] text-white">
+        <div className="text-center text-xl text-white font-bold">
           <h3>Buat PIN Anda</h3>
         </div>
-        <div className="text-center text-[20px] px-[40px] leading-[20px] text-white">
+        <div className="text-center text-sm px-[40px]  text-white">
           <p>
             Pastikan Jaga Kerahasiaan PIN anda dan <b>JANGAN</b> berikan PIN
             kepada orang lain.
@@ -80,7 +80,7 @@ export default function CreatePin() {
         >
           <div className="flex gap-[10px] ">
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp1"
               type="password"
@@ -91,7 +91,7 @@ export default function CreatePin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%] "
+              className=" w-[40px] text-center text-xl p-[0px]  "
               maxLength={1}
               id="otp2"
               type="password"
@@ -102,7 +102,7 @@ export default function CreatePin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp3"
               type="password"
@@ -113,7 +113,7 @@ export default function CreatePin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp4"
               type="password"
@@ -124,7 +124,7 @@ export default function CreatePin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               type="password"
               pattern="[0-9]*"
@@ -135,7 +135,7 @@ export default function CreatePin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               type="password"
               pattern="[0-9]*"
@@ -150,14 +150,14 @@ export default function CreatePin() {
           <div className=" w-full flex flex-col items-center gap-[10px] justify-center mt-[20px]">
             <button
               type="submit"
-              className="px-[20px] py-[5px]  text-gray-700 text-[24px] bg-white rounded-[10px] w-[200px]"
+              className="px-[20px] py-[5px]  text-get_desc text-lg bg-white rounded-[10px] w-[200px]"
             >
               Submit
             </button>
             <button
               type="button"
               onClick={() => router.push("/auth/login")}
-              className="px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-[24px]  w-[200px]"
+              className="px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-lg  w-[200px]"
             >
               Batal
             </button>

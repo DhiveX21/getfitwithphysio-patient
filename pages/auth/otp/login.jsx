@@ -126,7 +126,7 @@ export default function LoginOtp({ providers, csrfToken, getOTP }) {
           <div className="otp__note__wrapper">
             <h4 className="text-[20px] text-[#5E5E5E] text-center mb-[26px] px-[20px]">
               Kami telah mengirimkan kode verifikasi ke nomor{" "}
-              <b className="text-primary">
+              <b className="text-get_blue">
                 {loginAttempt ? loginAttempt.phoneNumber : ""}
               </b>
               , Silahkan Cek pesan masuk.
@@ -142,7 +142,7 @@ export default function LoginOtp({ providers, csrfToken, getOTP }) {
                 {...register("otp", { required: true, maxLength: 4 })}
               />
               {/* {errors.username?.type === "required" && "First name is required"} */}
-              <button className="button-primary" type="submit">
+              <button className="button-get_blue" type="submit">
                 Daftar
               </button>
             </div>
@@ -152,7 +152,7 @@ export default function LoginOtp({ providers, csrfToken, getOTP }) {
           <div className={style["login-note__wrapper"]}>
             <p>Sudah memiliki akun? </p>
             <Link href="/auth/login">
-              <a className="text-primary font-bold"> Login disini.</a>
+              <a className="text-get_blue font-bold"> Login disini.</a>
             </Link>
           </div>
         </div>

@@ -27,20 +27,10 @@
 }
 
 .title {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 14px;
-  /* identical to box height, or 70% */
-
   text-align: center;
 }
 
 .subtitle {
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 14px;
-  /* or 88% */
-
   text-align: center;
 }
 

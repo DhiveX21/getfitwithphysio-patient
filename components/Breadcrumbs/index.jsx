@@ -36,24 +36,24 @@ const Breadcrumbs = () => {
   }
 
   return (
-    <nav aria-label="breadcrumbs">
-      <ol className="breadcrumb flex text-[18px]">
-        <li className="pr-[5px] text-slate-400">
+    <nav aria-label="breadcrumbs ">
+      <ol className="breadcrumb flex text-xs font-bold ">
+        <li className="pr-[5px] text-get_light_desc animation-popup">
           <Link href="/dashboard">Home</Link>
         </li>
         {breadcrumbs.map((breadcrumb, i) => {
           return (
             <li
               key={breadcrumb.href}
-              className={`pr-[5px] ${
-                i === breadcrumbs.length - 1 ? "text-primary" : "text-slate-400"
+              className={`pr-[5px] animation-popup-1 ${
+                i === breadcrumbs.length - 1
+                  ? "text-get_blue"
+                  : "text-get_light_desc"
               }`}
             >
+              <span className="pr-[5px] ">/</span>
               <Link href={breadcrumb.href}>
-                <a>
-                  <span className="pr-[5px]">/</span>
-                  {convertBreadcrumb(breadcrumb.breadcrumb)}
-                </a>
+                <a>{convertBreadcrumb(breadcrumb.breadcrumb)}</a>
               </Link>
             </li>
           );

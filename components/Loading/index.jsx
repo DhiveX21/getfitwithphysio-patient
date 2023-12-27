@@ -11,7 +11,7 @@ export function LoadingLogo({ icon = "./images/logoLoading.png" }) {
             </picture>
           </div>
           <div className={style.loadingLogo__text}>
-            <h3 className="text-gray">Loading</h3>
+            <h3 className="text-gray text-xl">Loading</h3>
           </div>
         </div>
       </div>

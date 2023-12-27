@@ -65,7 +65,7 @@ export default function VideoDetail({ credentials, video }) {
           icon="/images/icon/medical-result_icon.svg"
         ></MenuTitle>
         <div className="breadcrumb">
-          <div className="breadcrumb__wrapper px-[10px]">
+          <div className="breadcrumb__wrapper px-[5px] py-[10px]">
             <Breadcrumbs />
           </div>
         </div>
@@ -80,14 +80,16 @@ export default function VideoDetail({ credentials, video }) {
             </div>
             <hr className="solid"></hr>
             <div className="video_detail__status flex px-[5px] gap-[10px] py-[10px]">
-              <div className="video_detail__status__badge">Status</div>
+              <div className="video_detail__status__badge text-sm font-bold">
+                Status
+              </div>
               <div className="video_detail__status__text">
                 {video?.today_watch ? (
-                  <span className="bg-success px-[10px] text-white rounded">
+                  <span className="bg-success px-[10px] text-xs py-[5px] text-white rounded">
                     Selesai di Tonton
                   </span>
                 ) : (
-                  <span className="bg-danger px-[10px] text-[white] rounded">
+                  <span className="bg-get_pink px-[10px] text-xs py-[5px] text-white rounded">
                     Belum Di Tonton
                   </span>
                 )}
@@ -114,8 +116,8 @@ export default function VideoDetail({ credentials, video }) {
                     text="Selesai"
                     click={() => handleSubmitWatch(video?.id)}
                     disabled={dailyReport ? false : true}
-                    classNameInject={` py-[5px] rounded-[5px] text-[white] text-[20px] duration-500 ${
-                      dailyReport ? "bg-primary" : "bg-secondary"
+                    classNameInject={` py-[5px] rounded-[5px] text-white text-sm duration-500 ${
+                      dailyReport ? "bg-get_blue" : "bg-get_desc"
                     }`}
                   /> */}
 
@@ -123,8 +125,8 @@ export default function VideoDetail({ credentials, video }) {
                     text="Selesai"
                     click={() => handleSubmitWatch(video?.id)}
                     disabled={dailyReport ? false : true}
-                    classNameInject={` w-full py-[5px] rounded-[5px] text-[white] text-[20px] duration-500 ${
-                      dailyReport ? "bg-primary" : "bg-secondary"
+                    classNameInject={` w-full py-[10px] rounded-[5px]  text-white text-sm duration-500 ${
+                      dailyReport ? "bg-get_blue" : "bg-get_desc"
                     }`}
                   ></SubmitButton>
                 </div>

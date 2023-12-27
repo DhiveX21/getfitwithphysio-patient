@@ -11,6 +11,9 @@ import { getSession } from "next-auth/react";
 import { appointmentGetAllByUserId } from "../endpoint/Appointment";
 import { formatDateRawToYMD } from "../helpers/common";
 import Link from "next/link";
+import { FacilityListWithQuota } from "../components/FacilityLists";
+import { patientQuotaGetAllProduct } from "../endpoint/User";
+import Image from "next/image";
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
@@ -24,12 +27,22 @@ export async function getServerSideProps({ req }) {
       return [];
     });
 
+  const userQuotaData = await patientQuotaGetAllProduct(
+    session?.credentials.user_id
+  )
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      return [];
+    });
+
   return {
-    props: { appointmentData },
+    props: { appointmentData, userQuotaData },
   };
 }
 
-export default function Dashboard({ appointmentData }) {
+export default function Dashboard({ appointmentData, userQuotaData }) {
   const router = useRouter();
   return (
     <Layout>
@@ -40,7 +53,7 @@ export default function Dashboard({ appointmentData }) {
               <div className="dashboard__action__item w-1/2 h-auto">
                 <ButtonWithIcon
                   text="Buat Appointment"
-                  classNameInject=" text-[18px] leading-[14px] h-full bg-primary text-white"
+                  classNameInject=" text-xs h-full font-semibold bg-get_blue text-white"
                   icon="/images/icon/calendar_danger.png"
                   click={() => {
                     router.push("/services");
@@ -50,7 +63,7 @@ export default function Dashboard({ appointmentData }) {
               <div className="dashboard__action__item w-1/2 h-auto">
                 {/* <button className="bg-danger text-white">Rekam Medis</button> */}
                 <ButtonWithIcon
-                  classNameInject=" bg-danger text-[18px] leading-[14px] h-full text-white"
+                  classNameInject=" bg-get_pink text-xs font-semibold h-full text-white"
                   text="Rekam Medis"
                   icon="./images/icon/clipboard.png"
                   click={() => {
@@ -69,9 +82,13 @@ export default function Dashboard({ appointmentData }) {
                     className="w-full rounded-[10px] overflow-hidden"
                   >
                     <picture>
-                      <img
+                      <Image
                         className="w-full object-cover aspect-[2/1]"
-                        src="./images/banner1.png"
+                        src="/images/banner1.png"
+                        width={440}
+                        height={220}
+                        layout="responsive"
+                        loading="lazy"
                       />
                     </picture>
                   </div>,
@@ -80,9 +97,13 @@ export default function Dashboard({ appointmentData }) {
                     className="w-full rounded-[10px] overflow-hidden"
                   >
                     <picture>
-                      <img
+                      <Image
                         className="w-full object-cover aspect-[2/1]"
-                        src="./images/banner2.png"
+                        src="/images/banner2.png"
+                        width={440}
+                        height={220}
+                        layout="responsive"
+                        loading="lazy"
                       />
                     </picture>
                   </div>,
@@ -91,7 +112,7 @@ export default function Dashboard({ appointmentData }) {
             </div>
           </div>
           <div className="dashboard__breadcrumb my-[5px]">
-            <div className="dashboard__breadcrumb__wrapper px-[10px]">
+            <div className="dashboard__breadcrumb__wrapper p-[5px]">
               <Breadcrumbs />
             </div>
           </div>
@@ -106,11 +127,30 @@ export default function Dashboard({ appointmentData }) {
                     note={formatDateRawToYMD(
                       appointmentData[0].date_appointment
                     )}
+                    cardStyle=" bg-get_blue rounded-md"
+                    titleStyle="text-white text-base font-bold"
+                    descStyle="text-white text-sm font-light"
+                    noteStyle="text-white text-xs font-bold"
                   ></CardWithThumbnail>
                 </div>
               </div>
             </Link>
           ) : null}
+          <div
+            className="mb-[10px]"
+            style={{ width: "calc(100% + 40px)", marginLeft: "-20px" }}
+          >
+            <SectionTitle text="Total Quota"></SectionTitle>
+          </div>
+          <div className="dashboard__facility-list ">
+            <FacilityListWithQuota data={userQuotaData} />
+          </div>
+          <div
+            className="mb-[20px]"
+            style={{ width: "calc(100% + 40px)", marginLeft: "-20px" }}
+          >
+            <SectionTitle text="Main Menu"></SectionTitle>
+          </div>
           <div className="dashboard__menu mb-[20px]">
             <div className="dashboard__menu__wrapper">
               <div className="dashboard__menu__list  flex w-full justify-center gap-[10px] flex-wrap">
@@ -120,6 +160,7 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/calendar.png"
                     click={() => router.push("/services")}
+                    classNameInject=" text-get_light_desc font-semibold text-xxs"
                   ></ButtonWithIcon2>
                 </div>
                 <div className="dashboard__menu__list__item w-1/4">
@@ -128,6 +169,7 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/clipboard.png"
                     click={() => router.push("/medical-record")}
+                    classNameInject=" text-get_light_desc font-semibold text-xxs"
                   ></ButtonWithIcon2>
                 </div>
                 <div className="dashboard__menu__list__item w-1/4">
@@ -136,6 +178,7 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/video-call.png"
                     click={() => router.push("/services/telephysio")}
+                    classNameInject=" text-get_light_desc font-semibold text-xxs"
                   ></ButtonWithIcon2>
                 </div>
                 <div className="dashboard__menu__list__item w-1/4">
@@ -144,6 +187,7 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/excercise.png"
                     click={() => router.push("/exercise")}
+                    classNameInject=" text-get_light_desc font-semibold text-xxs"
                   ></ButtonWithIcon2>
                 </div>
                 <div className="dashboard__menu__list__item w-1/4">
@@ -152,6 +196,7 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/schedule.png"
                     click={() => router.push("/appointment")}
+                    classNameInject=" text-get_light_desc font-semibold text-xxs"
                   ></ButtonWithIcon2>
                 </div>
                 <div className="dashboard__menu__list__item w-1/4">
@@ -160,6 +205,7 @@ export default function Dashboard({ appointmentData }) {
                     type="button"
                     icon="/images/icon/exchange.png"
                     click={() => router.push("/order")}
+                    classNameInject=" text-get_light_desc font-semibold text-xxs"
                   ></ButtonWithIcon2>
                 </div>
                 {/* <div className="dashboard__menu__list__item w-1/4">

@@ -26,7 +26,9 @@ export function VerticalProgressWithIcon({
   return (
     <div className={style.vertical_progress_with_icon}>
       <div className={style.vertical_progress_with_icon__wrapper}>
-        <div className={style.vertical_progress_with_icon__title}>
+        <div
+          className={`${style.vertical_progress_with_icon__title} text-lg text-get_pink font-semibold`}
+        >
           <h3>Status</h3>
         </div>
         <div className={style.vertical_progress_with_icon__item}>
@@ -37,7 +39,13 @@ export function VerticalProgressWithIcon({
                   key={index}
                   className={`${
                     style.vertical_progress_with_icon__item__card
-                  } ${item.status === "1" ? "animate-pulse" : ""}`}
+                  } ${
+                    item.status === "1"
+                      ? "border-l-4 border-get_blue"
+                      : item.status === "2"
+                      ? "border-l-4 border-get_cyan"
+                      : ""
+                  }`}
                   style={
                     item.status === "0"
                       ? {
@@ -48,15 +56,15 @@ export function VerticalProgressWithIcon({
                         }
                       : item.status === "1"
                       ? {
-                          backgroundColor: "#a6fc9ea8",
+                          backgroundColor: "#78dcca89",
                           width: "100%",
                           opacity: "100%",
                         }
                       : item.status === "2"
                       ? {
-                          backgroundColor: "#a6fc9ea8",
+                          backgroundColor: "#78dcca89",
                           width: "95%",
-                          opacity: "30%",
+                          opacity: "50%",
                         }
                       : {
                           backgroundColor: "#BEBEBE",
@@ -70,26 +78,20 @@ export function VerticalProgressWithIcon({
                       style.vertical_progress_with_icon__item__card__thumbnail
                     }
                   >
-                    <picture>
+                    <picture className="aspect-square">
                       <img src={item.icon} alt="progress status" />
                     </picture>
                   </div>
                   <div
-                    className={
-                      style.vertical_progress_with_icon__item__card__content
-                    }
+                    className={`${style.vertical_progress_with_icon__item__card__content}`}
                   >
                     <div
-                      className={
-                        style.vertical_progress_with_icon__item__card__content__title
-                      }
+                      className={`${style.vertical_progress_with_icon__item__card__content__title} text-sm text-get_blue font-bold`}
                     >
                       <h3>{item.title}</h3>
                     </div>
                     <div
-                      className={
-                        style.vertical_progress_with_icon__item__card__content__subtitle
-                      }
+                      className={`${style.vertical_progress_with_icon__item__card__content__subtitle} text-xs text-get_desc`}
                     >
                       <p>{item.description}</p>
                     </div>

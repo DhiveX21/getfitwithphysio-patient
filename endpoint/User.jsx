@@ -93,3 +93,6 @@ export function patientGetOne(patientId) {
 export function patientGetOneByUserId(userId) {
   return axios.get(`${urlUserService}/patients/user/${userId}`);
 }
+export function patientQuotaGetAllProduct(userId) {
+  return axios.get(`${urlUserService}/user-quotas/${userId}/total`);
+}

@@ -12,10 +12,10 @@ export function NotFound({
           <img className="w-1/2" src={image} alt="not found" />
         </picture>
       </div>
-      <div className="not_found__title text-[30px] leading-[30px] text-danger">
+      <div className="not_found__title text-lg  text-get_pink font-bold">
         <h3>{title}</h3>
       </div>
-      <div className="not_found__description text-[20px] leading-[20px] text-center text-slate-400">
+      <div className="not_found__description text-sm  text-center text-get_light_desc">
         <p>{description}</p>
       </div>
     </div>

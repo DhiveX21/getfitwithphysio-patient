@@ -46,7 +46,7 @@ export default function DailyMedicalReport() {
             <ButtonWithIcon
               text="Tambah Laporan"
               icon="/images/icon/pencil.png"
-              classNameInject=" text-[24px] bg-white border-2 border-dashed border-primary text-blue-500 h-[60px] px-[10px] py-[10px] hover:bg-primary hover:text-white"
+              classNameInject=" text-lg bg-white border-2 border-dashed border-primary text-get_blue h-[60px] px-[10px] py-[10px] hover:bg-primary hover:text-white"
               click={() => router.push("/daily-medical-report/create")}
             ></ButtonWithIcon>
           </div>

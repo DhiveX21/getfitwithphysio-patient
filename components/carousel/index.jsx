@@ -29,17 +29,19 @@ export default function Carousel({
 }) {
   SwiperCore.use([Autoplay]);
   return (
-    <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
-      spaceBetween={spaceBetween}
-      navigation={navigation}
-      loop={true}
-      autoplay={{ delay: 1500 }}
-      slidesPerView={slidesPerView}
-    >
-      {children.map((item, index) => {
-        return <SwiperSlide key={index}>{item}</SwiperSlide>;
-      })}
-    </Swiper>
+    <div className="animation-scale-up-center">
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={spaceBetween}
+        navigation={navigation}
+        loop={true}
+        autoplay={{ delay: 3000 }}
+        slidesPerView={slidesPerView}
+      >
+        {children.map((item, index) => {
+          return <SwiperSlide key={index}>{item}</SwiperSlide>;
+        })}
+      </Swiper>
+    </div>
   );
 }

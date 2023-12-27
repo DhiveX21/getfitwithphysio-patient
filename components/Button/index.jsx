@@ -17,7 +17,7 @@ export function Button({
       id={id}
       onClick={click}
       disabled={disabled}
-      className={"w-full" + classNameInject}
+      className={"w-full animation-scale-up-center" + classNameInject}
     >
       {text}
     </button>
@@ -39,9 +39,9 @@ export function SubmitButton({
     <button
       className={` ${
         subLoading.active
-          ? "bg-gray-200 rounded-lg px-[20px] py-[3px] text-white text-[30px] " +
+          ? "bg-gray-200 rounded-lg px-[20px] py-[3px] text-white animation-scale-up-center " +
             classNameInject
-          : "rounded-lg px-[20px] py-[3px] text-white text-[30px] " +
+          : "rounded-lg px-[20px] py-[3px] text-white animation-scale-up-center " +
             classNameInject
       }`}
       type={type}
@@ -80,17 +80,19 @@ export function ButtonWithIcon({
       id={id}
       onClick={click}
       disabled={disabled}
-      className={style.buttonWithIcon + " " + classNameInject}
+      className={
+        style.buttonWithIcon + " animation-scale-up-center " + classNameInject
+      }
     >
-      <div className={style.buttonWithIcon__wrapper}>
+      <div className={`${style.buttonWithIcon__wrapper}`}>
         <picture>
           <img
-            className={style.buttonWithIcon__icon}
+            className={`${style.buttonWithIcon__icon} animation-popup-1`}
             src={icon}
             alt="button logo"
           />
         </picture>
-        <p>{text}</p>
+        <p className="animation-popup-2">{text}</p>
       </div>
     </button>
   );
@@ -109,15 +111,17 @@ export function ButtonWithIcon2({
       type={type}
       id={id}
       onClick={click}
-      className={style.buttonWithIcon2 + " " + classNameInject}
+      className={
+        style.buttonWithIcon2 + " animation-scale-up-center " + classNameInject
+      }
     >
-      <div className={style.buttonWithIcon2__wrapper}>
-        <div className={style.buttonWithIcon2__icon}>
-          <picture>
+      <div className={`${style.buttonWithIcon2__wrapper} `}>
+        <div className={`${style.buttonWithIcon2__icon} animation-popup`}>
+          <picture className="aspect-square">
             <img src={icon} alt="menu" />
           </picture>
         </div>
-        <div className={`${style.buttonWithIcon2__title} text-primary`}>
+        <div className={`${style.buttonWithIcon2__title} animation-popup-2`}>
           <h3>{text}</h3>
         </div>
       </div>

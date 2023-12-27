@@ -2,12 +2,8 @@ import React from "react";
 import Layout from "../../components/Layout";
 import { MenuTitle } from "../../components/Title";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import Link from "next/link";
-import { CardWithThumbnail } from "../../components/Card";
 import { getSession } from "next-auth/react";
-import { notificationGetAllByUserId } from "../../endpoint/Notification";
 import { useDispatch } from "react-redux";
-import { setControlNotification } from "../../store/actions/controlActions";
 import { orderGetAllByUserId } from "../../endpoint/Order";
 import { useRouter } from "next/router";
 import { formatCurrency } from "../../helpers/common";
@@ -38,7 +34,6 @@ export async function getServerSideProps({ req }) {
 }
 
 export default function Order({ credentials, orderData }) {
-  console.log(orderData);
   const router = useRouter();
   const dispatch = useDispatch();
   return (
@@ -69,22 +64,22 @@ export default function Order({ credentials, orderData }) {
                   image="/images/icon/user.png"
                 /> */}
                   <div className="order__list__card ">
-                    <div className="order__list__card__wrapper flex flex-col gap-[10px] border-l-4 border-danger p-[20px] shadow-md rounded-md">
-                      <div className="order__list__card__title text-2xl leading-[16px] flex items-center justify-between">
+                    <div className="order__list__card__wrapper flex flex-col gap-[5px] border-l-4 border-danger p-[20px] shadow-md rounded-md">
+                      <div className="order__list__card__title text-sm flex items-center justify-between">
                         <h3>{item.product.name}</h3>
                         {item.status === "unpaid" ? (
                           <Button
-                            classNameInject=" bg-primary hover:bg-blue-600 text-white w-1/4 px-[10px] py-[5px] rounded font-thin text-[18px]"
+                            classNameInject=" bg-primary hover:bg-get_blue text-white w-1/4 px-[10px] py-[5px] rounded  text-sm "
                             text="Bayar"
                             click={() => router.push(`${item.payment_url}`)}
                           />
                         ) : null}
                       </div>
-                      <div className="order__list__card__price text-lg leading-[12px]">
+                      <div className="order__list__card__price text-sm ">
                         <span>{formatCurrency(item.amount)}</span>
                       </div>
                       <div
-                        className={`order__list__card__status text-xl font-bold leading-[12px]  ${
+                        className={`order__list__card__status font-bold text-sm ${
                           item.status === "unpaid"
                             ? "text-red-600"
                             : "text-green-500"
@@ -94,16 +89,16 @@ export default function Order({ credentials, orderData }) {
                       </div>
                       <div className="order__list__card__content">
                         <div className="order__list__card__content__wrapper overflow-y-scroll h-0 group-hover:h-[200px] duration-500 ">
-                          <div className="order__list__card__content__title text-xl">
+                          <div className="order__list__card__content__title text-sm">
                             <span>Deskripsi</span>
                           </div>
                           <div className="order__list__card__content__item p-[20px]">
                             <table className="w-full">
-                              <tbody className="text-slate-600 font-thin text-xl leading-[22px] flex flex-col gap-[20px]">
+                              <tbody className="text-get_desc text-sm  flex flex-col gap-[20px]">
                                 <tr className=" w-full">
                                   <td>
                                     <ul
-                                      className="pl-[25px]"
+                                      className="pl-[25px] text-get_light_desc"
                                       style={{ listStyleType: "circle" }}
                                     >
                                       <li>
@@ -137,7 +132,7 @@ export default function Order({ credentials, orderData }) {
                                           )
                                         )
                                       ) : (
-                                        <span className="font-bold text-slate-500">
+                                        <span className="font-bold text-get_desc">
                                           (Tidak ada Fasilitas)
                                         </span>
                                       )}

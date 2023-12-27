@@ -1,0 +1,16 @@
+{
+  "services": [
+    {
+      "image": "/images/article3.png",
+      "url": "telephysio"
+    },
+    {
+      "image": "/images/article2.png",
+      "url": "homecare"
+    },
+    {
+      "image": "/images/article1.png",
+      "url": "inclinic"
+    }
+  ]
+}

@@ -48,12 +48,12 @@ export default function DetailDailyMedicalReport() {
             description="Agara Fisio dapat melihat dan menilai perkembanganmu."
           ></CardFullImage>
           <div className="note_title mt-[20px]">
-            <h3 className="text-primary text-center text-[24px] m-0">
+            <h3 className="text-get_blue text-center text-lg m-0">
               12 September 2022
             </h3>
           </div>
           <div className="note_desc mt-[10px]">
-            <p className="text-[#5E5E5E] text-[20px] leading-[18px] text-center m-0">
+            <p className="text-get_desc text-sm  text-center m-0">
               COVID-19 pandemic is the biggest challenge for physiotherapists in
               providing health services to stroke patients, that
               physiotherapists must take innovative and adaptive approaches to
@@ -71,7 +71,7 @@ export default function DetailDailyMedicalReport() {
           <div className="note_button mt-[50px]">
             <Button
               text="Kembali"
-              classNameInject=" text-[24px] leading-[18px] h-full bg-danger w-full py-[10px] text-white rounded-lg"
+              classNameInject=" text-lg  h-full bg-get_pink w-full py-[10px] text-white rounded-lg"
               click={() => router.push("/daily-medical-report")}
             ></Button>
           </div>

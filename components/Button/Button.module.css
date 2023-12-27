@@ -58,9 +58,3 @@
   display: flex;
   justify-content: center;
 }
-
-.buttonWithIcon2__title {
-  line-height: 12px;
-  font-size: 14px;
-  font-weight: 700;
-}

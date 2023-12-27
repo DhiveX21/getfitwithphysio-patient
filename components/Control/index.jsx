@@ -17,7 +17,7 @@ export function ControlLoading() {
   return (
     <>
       {loadingCondition.controlLoading.active ? (
-        <div className={style.control_loading}>
+        <div className={`${style.control_loading} animation-fade`}>
           <div className={style.control_loading__wrapper}>
             <div className={style.control_loading__image}>
               {/* <picture>
@@ -37,10 +37,15 @@ export function ControlLoading() {
                 src={loadingCondition.controlLoading.image}
               />
             </div>
-            <div className={style.control_loading__title + " animate-pulse"}>
+            <div
+              className={
+                style.control_loading__title +
+                " animate-pulse text-get_blue text-2xl font-semibold"
+              }
+            >
               <h2>{loadingCondition.controlLoading.title}</h2>
             </div>
-            <div className={style.control_loading__desc}>
+            <div className={`${style.control_loading__desc} text-get_desc`}>
               <p>{loadingCondition.controlLoading.description}</p>
             </div>
           </div>
@@ -102,18 +107,18 @@ export function FirstLoginForm() {
   return (
     <>
       {firstLoginFormCondition.active ? (
-        <div className="w-full max-w-[480px] relative bg-white z-[1000000]">
+        <div className="w-full max-w-[480px] relative bg-white z-[1000000] animation-scale-up-center">
           <div className="h-screen w-full max-w-[480px] fixed top-[0px] bg-white">
             <div className="px-[20px] flex flex-col gap-[10px] my-[20px] justify-center">
               <MenuTitle text="Isi Kelengkapan data."></MenuTitle>
-              <div className="max-h-[500px] overflow-y-scroll">
+              <div className="max-h-[500px] px-[10px]">
                 <form
                   className="flex-col flex gap-[10px] "
                   onSubmit={handleSubmit(onSubmit)}
                 >
-                  <div className="flex w-full gap-[10px] h-[100px]">
-                    <div className="field-group flex flex-col w-[calc(50%-5px)] ">
-                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                  <div className="flex w-full gap-[10px] ">
+                    <div className="field-group flex flex-col w-[calc(50%-5px)] animation-popup-2">
+                      <label className="text-sm   text-get_text">
                         Nama Lengkap
                       </label>
 
@@ -126,8 +131,8 @@ export function FirstLoginForm() {
                       />
                       <span className="form-hint">Cth : John Doe</span>
                     </div>
-                    <div className="field-group flex flex-col w-[calc(50%-5px)]">
-                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                    <div className="field-group flex flex-col w-[calc(50%-5px)] animation-popup-2">
+                      <label className="text-sm   text-get_text">
                         Alamat Email{" "}
                       </label>
                       <input
@@ -143,9 +148,9 @@ export function FirstLoginForm() {
                       </span>
                     </div>
                   </div>
-                  <div className="flex w-full gap-[10px] h-[100px]">
-                    <div className="field-group flex flex-col w-1/2">
-                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                  <div className="flex w-full gap-[10px] ">
+                    <div className="field-group flex flex-col w-1/2 animation-popup-2">
+                      <label className="text-sm   text-get_text">
                         Tanggal Lahir
                       </label>
                       <input
@@ -159,8 +164,8 @@ export function FirstLoginForm() {
                       />
                       <span className="form-hint">Cth : 12 Desember 2022</span>
                     </div>
-                    <div className="field-group flex flex-col w-1/2">
-                      <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
+                    <div className="field-group flex flex-col w-1/2 animation-popup-2">
+                      <label className="text-sm   text-get_text">
                         Jenis Kelamin{" "}
                       </label>
                       <select
@@ -177,11 +182,10 @@ export function FirstLoginForm() {
                       <span className="form-hint">Cth : Laki-Laki </span>
                     </div>
                   </div>
-                  <div className="field-group flex flex-col">
-                    <label className="text-[24px] leading-[28px] text-[#5E5E5E]">
-                      Alamat
-                    </label>
+                  <div className="field-group flex flex-col animation-popup-2">
+                    <label className="text-sm   text-get_text">Alamat</label>
                     <textarea
+                      rows={5}
                       className={` ${
                         errors.address &&
                         "border-red-600 border-2 border-dashed"
@@ -200,7 +204,7 @@ export function FirstLoginForm() {
                       <span className="border-red-600 border-2 border-dashed mr-[10px] pt-[1%] text-white">
                         ------
                       </span>
-                      <h3 className="text-danger text-[22px] pt-[1%]">
+                      <h3 className="text-danger text-xs pt-[1%]">
                         WAJIB DI ISI.
                       </h3>
                     </div>
@@ -211,15 +215,15 @@ export function FirstLoginForm() {
                   <div className="create-appointment-button w-full flex gap-[20px] justify-center mt-[20px]">
                     <SubmitButton
                       text="Buat"
-                      classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-full w-[200px]"
+                      classNameInject="px-[20px] py-[10px] text-white text-sm bg-primary rounded-full w-[200px]"
                     />
                   </div>
                 </form>
-                <div className="flex justify-center mt-[20px]">
+                <div className="flex justify-center mt-[20px] animation-popup">
                   <Button
                     text="Logout"
                     click={() => signOut({ callbackUrl: "/auth/login" })}
-                    classNameInject=" px-[10px] leading-[26px] text-danger opacity-50 text-[24px] bg-white border-2 border-red-600 py-[1%] rounded-full w-[100px]"
+                    classNameInject=" px-[10px] py-[5px] text-danger opacity-50 text-sm bg-white border-2 border-red-600  rounded-full w-[100px]"
                   />
                 </div>
               </div>
