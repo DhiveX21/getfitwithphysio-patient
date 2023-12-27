@@ -41,7 +41,8 @@ export default function AppointmentInfo({ appointmentData }) {
   // const status = "cancel";
   const progressSimulation = getProgressTelePhysio(
     appointmentData.status,
-    appointmentData.link_meeting
+    appointmentData.link_meeting,
+    appointmentData.appointment_type
   );
   // const progressSimulation = getProgressTelePhysio(
   //   "treatment",
@@ -97,7 +98,7 @@ export default function AppointmentInfo({ appointmentData }) {
         {status === "complete" && reviewPanel && !appointmentData.evaluation ? (
           <div>
             <div>
-              <h3 className="text-danger text-[20px] ">Feedback</h3>
+              <h3 className="text-get_pink text-sm font-semibold">Feedback</h3>
             </div>
             {/* <FeedBackCardInput /> */}
 
@@ -114,11 +115,11 @@ export default function AppointmentInfo({ appointmentData }) {
                 </div>
                 <div className="flex flex-col gap-[5px] w-[70%]">
                   <div className="w-full">
-                    <h4 className="text-[#68B2BC]">Review</h4>
+                    <h4 className="text-get_blue">Review</h4>
                   </div>
                   <div className="w-full">
                     <textarea
-                      className="w-full h-[75px] text-[20px] text-center leading-[22px] p-[10px]"
+                      className="w-full h-[75px] text-sm text-center p-[10px]"
                       placeholder="Fisionya baik dan Mengedukasi..."
                       type="text"
                       ref={reviewInput}
@@ -130,7 +131,7 @@ export default function AppointmentInfo({ appointmentData }) {
                       click={() => {
                         handleSubmitReview();
                       }}
-                      classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-primary rounded-[10px] w-[200px]"
+                      classNameInject="px-[20px] py-[5px] text-white bg-primary rounded-[10px] w-[200px]"
                     ></SubmitButton>
                   </div>
                 </div>

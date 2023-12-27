@@ -9,10 +9,15 @@ export function CardWithThumbnail({
   note = "19 September 2022 15:22 WIB",
   imageStyle = "",
   cardStyle = "",
+  titleStyle = "",
+  descStyle = "",
+  noteStyle = "",
 }) {
   return (
     <div className={style.card_with_thumbnail}>
-      <div className={`${style.card_with_thumbnail__wrapper} ${cardStyle}`}>
+      <div
+        className={`${style.card_with_thumbnail__wrapper} ${cardStyle} animation-scale-up-center`}
+      >
         <div className={style.card_with_thumbnail__thumbnail}>
           <picture>
             <img
@@ -24,17 +29,17 @@ export function CardWithThumbnail({
         </div>
         <div className={style.card_with_thumbnail__text}>
           <div
-            className={`${style.card_with_thumbnail__text__title} text-primary`}
+            className={`${style.card_with_thumbnail__text__title} ${titleStyle} animation-popup`}
           >
             <h3>{title}</h3>
           </div>
           <div
-            className={`${style.card_with_thumbnail__text__description} text-secondary`}
+            className={`${style.card_with_thumbnail__text__description} ${descStyle} animation-popup-1`}
           >
             <p>{description}</p>
           </div>
           <div
-            className={`${style.card_with_thumbnail__text__date} text-danger`}
+            className={`${style.card_with_thumbnail__text__date} ${noteStyle} animation-popup-2`}
           >
             <p>{note}</p>
           </div>
@@ -50,10 +55,15 @@ export function CardWithThumbnail2({
   description = "treatment Fisioterapi online.",
   note = "Baru",
   cardStyle = "",
+  titleStyle = "",
+  descStyle = "",
+  badgeStyle = "",
 }) {
   return (
     <div className={style.card_with_thumbnail2}>
-      <div className={`${style.card_with_thumbnail2__wrapper} ${cardStyle}`}>
+      <div
+        className={`${style.card_with_thumbnail2__wrapper} ${cardStyle} animation-scale-up-center`}
+      >
         <div
           className={style.card_with_thumbnail2__thumbnail + " max-h-[125px]"}
         >
@@ -66,15 +76,19 @@ export function CardWithThumbnail2({
           </picture>
         </div>
         <div className={style.card_with_thumbnail2__text}>
-          <div className={style.card_with_thumbnail2__text__title}>
+          <div
+            className={`${style.card_with_thumbnail2__text__title} ${titleStyle} animation-popup`}
+          >
             <h3>{title}</h3>
           </div>
-          <div className={style.card_with_thumbnail2__text__description}>
+          <div
+            className={`${style.card_with_thumbnail2__text__description} ${descStyle} animation-popup-2`}
+          >
             <p>{description}</p>
           </div>
         </div>
-        <div className={style.card_with_thumbnail2__badge}>
-          <h4 className="m-0 text-center">{note}</h4>
+        <div className={`${style.card_with_thumbnail2__badge} ${badgeStyle} `}>
+          <h4 className="m-0 text-center animation-popup-3">{note}</h4>
         </div>
       </div>
     </div>
@@ -88,16 +102,20 @@ export function CardFullImage({
   textStyle = {},
 }) {
   return (
-    <div className={style.card_full_image}>
+    <div className={`${style.card_full_image} animation-scale-up-center`}>
       <div
         className={style.card_full_image__wrapper}
         style={{ backgroundImage: `url(${image})`, backgroundSize: "cover" }}
       >
         <div className={style.card_full_image__text} style={textStyle}>
-          <div className={style.card_full_image__text__title}>
-            <h3>{title}</h3>
+          <div
+            className={`${style.card_full_image__text__title} text-sm text-get_desc`}
+          >
+            <h3 className="animation-popup">{title}</h3>
           </div>
-          <div className={style.card_full_image__text__description}>
+          <div
+            className={`${style.card_full_image__text__description} text-xs text-get_light_desc animation-popup-2`}
+          >
             <p>{description}</p>
           </div>
         </div>
@@ -111,17 +129,24 @@ export function CardIdentity({
   item = [{ name: "MuhammadArdhiansyah" }],
 }) {
   return (
-    <div className={style.card_identity}>
+    <div className={`${style.card_identity} animation-scale-up-center`}>
       <div className={style.card_identity__wrapper}>
-        <div className={style.card_identity__title}>
-          <span>{title}</span>
+        <div className={`${style.card_identity__title} text-sm text-white`}>
+          <span className="animation-popup-2">{title}</span>
         </div>
         {item.map((value, index) => {
           return (
-            <div key={index} className={style.card_identity__item}>
-              <label>{Object.keys(item[index])[0].replace("_", " ")}</label>
-              <span>:</span>
-              <p>{Object.values(item[index])[0]}</p>
+            <div
+              key={index}
+              className={`${style.card_identity__item} text-xs text-get_text`}
+            >
+              <label className="font-extrabold animation-popup-2">
+                {Object.keys(item[index])[0].replace("_", " ")}
+              </label>
+              <span className="animation-popup-2">:</span>
+              <p className="font-medium animation-popup-2">
+                {Object.values(item[index])[0]}
+              </p>
             </div>
           );
         })}
@@ -150,7 +175,7 @@ export function FeedBackCardInput({
           <div className="w-full">
             <form action="">
               <textarea
-                className="w-full h-[75px] text-[20px] text-center leading-[22px] p-[10px]"
+                className="w-full h-[75px] text-sm text-center  p-[10px]"
                 placeholder="Fisionya baik dan Mengedukasi..."
                 type="text"
               />
@@ -177,16 +202,20 @@ export function HoverableCard({
   description = "Pelatihan dengan bentuk Video",
 }) {
   return (
-    <div className={style.hoverable_card}>
+    <div className={`${style.hoverable_card} animation-scale-up-center`}>
       <div
         className={style.hoverable_card__wrapper}
         style={{ backgroundImage: `url(${image})` }}
       >
         <div className={style.hoverable_card__content}>
-          <div className={style.hoverable_card__title}>
+          <div
+            className={`${style.hoverable_card__title} text-lg text-white font-bold animation-popup`}
+          >
             <h3>{title}</h3>
           </div>
-          <div className={style.hoverable_card__description}>
+          <div
+            className={`${style.hoverable_card__description} text-sm text-white animation-popup-2`}
+          >
             <p>{description}</p>
           </div>
         </div>

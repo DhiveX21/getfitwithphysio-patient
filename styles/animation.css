@@ -1,0 +1,107 @@
+@keyframes anvil {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+  }
+  1% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+.animation-popup {
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+.animation-popup-1 {
+  -webkit-animation: anvil 0.5s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+.animation-popup-2 {
+  -webkit-animation: anvil 0.7s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+.animation-popup-3 {
+  -webkit-animation: anvil 1s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+/* div {
+    -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+  } */
+
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animation-scale-up-center {
+  -webkit-animation: scale-up-center 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: scale-up-center 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
+  }
+
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
+  }
+
+  75% {
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+
+.animation-wobble {
+  -webkit-animation: wobble 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: wobble 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animation-fade {
+  -webkit-animation: fade 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}

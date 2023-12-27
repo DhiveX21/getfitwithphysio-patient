@@ -55,12 +55,12 @@ export default function PaymentMethodList({
               </picture>
             </div>
             <div className="flex flex-col justify-center">
-              <div className="payment-method-list__options__item__title text-[24px] leading-[24px] p-0 ">
+              <div className="payment-method-list__options__item__title text-lg font-semibold text-get_desc  p-0 ">
                 <span>{selectedPayment?.display_name}</span>
               </div>
-              <div className="payment-method-list__options__item__desc text-[18px] leading-[18px] text-gray-500">
+              <div className="payment-method-list__options__item__desc text-sm  text-get_light_desc">
                 <p>
-                  Biaya Transaksi Rp.{" "}
+                  Biaya Transaksi{" "}
                   {formatCurrency(selectedPayment?.admin_fee?.IDR.currency_val)}
                 </p>
               </div>
@@ -80,7 +80,7 @@ export default function PaymentMethodList({
                 });
               }}
             >
-              <span className="text-[22px] text-secondary">
+              <span className="text-sm text-get_light_desc">
                 Klik untuk merubah metode pembayaran &raquo;
               </span>
             </button>
@@ -92,7 +92,7 @@ export default function PaymentMethodList({
           className={` animation-popup fixed  top-0 w-full left-0 h-full overflow-y-scroll bg-white`}
         >
           <div className="payment-method-list__options__wrapper px-[20px] py-[40px]">
-            <div className="payment-method-list__options__title  text-2xl text-secondary mb-[10px]">
+            <div className="payment-method-list__options__title  text-2xl text-get_light_desc mb-[10px]">
               <h3>Bank Transfer</h3>
             </div>
             <div className="payment-method-list__options__item__wrapper flex flex-col gap-[10px] mb-[10px]">
@@ -117,10 +117,10 @@ export default function PaymentMethodList({
                       </picture>
                     </div>
                     <div className="flex flex-col justify-center">
-                      <div className="payment-method-list__options__item__title text-[24px] leading-[24px] p-0 ">
+                      <div className="payment-method-list__options__item__title text-lg font-semibold text-get_desc  p-0 ">
                         <span>{item.display_name}</span>
                       </div>
-                      <div className="payment-method-list__options__item__desc text-[18px] leading-[18px] text-gray-500">
+                      <div className="payment-method-list__options__item__desc text-sm  text-get_light_desc">
                         <p>
                           Biaya Transaksi{" "}
                           {formatCurrency(item.admin_fee.IDR.currency_val)}
@@ -138,7 +138,7 @@ export default function PaymentMethodList({
                 </label>
               ))}
             </div>
-            <div className="payment-method-list__options__title  text-2xl text-secondary mb-[10px]">
+            <div className="payment-method-list__options__title  text-2xl text-get_light_desc mb-[10px]">
               <h3>E-Wallets</h3>
             </div>
             <div className="payment-method-list__options__item__wrapper flex flex-col gap-[10px] mb-[10px]">
@@ -163,10 +163,10 @@ export default function PaymentMethodList({
                       </picture>
                     </div>
                     <div className="flex flex-col justify-center">
-                      <div className="payment-method-list__options__item__title text-[24px] leading-[24px] p-0 ">
+                      <div className="payment-method-list__options__item__title text-lg font-semibold text-get_desc  p-0 ">
                         <span>{item.display_name}</span>
                       </div>
-                      <div className="payment-method-list__options__item__desc text-[18px] leading-[18px] text-gray-500">
+                      <div className="payment-method-list__options__item__desc text-sm  text-get_light_desc">
                         <p>
                           Biaya Transaksi{" "}
                           {formatCurrency(item.admin_fee.IDR.currency_val)}
@@ -187,13 +187,13 @@ export default function PaymentMethodList({
             <div className="payment-method-list__options__button w-full flex justify-center mt-[20px]">
               <div className="w-1/2">
                 {/* <ButtonWithIcon
-                  classNameInject="w-1/2 bg-slate-200 text-[22px] "
+                  classNameInject="w-1/2 bg-slate-200 text-sm "
                   icon="/images/logo.png"
                   text="Tutup"
                   click={() => setShowOptions(!showOptions)}
                 /> */}
                 <Button
-                  classNameInject=" bg-danger border-2 border-danger rounded-md text-[22px] text-white"
+                  classNameInject=" bg-danger border-2 border-danger rounded-md text-sm text-white"
                   icon="/images/logo.png"
                   text="&laquo; Kembali"
                   click={() => setShowOptions(!showOptions)}

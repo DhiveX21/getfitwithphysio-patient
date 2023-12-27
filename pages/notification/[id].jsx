@@ -24,7 +24,7 @@ export default function NotificationDetail({ notificationData }) {
       <div className="px-[20px] h-full flex flex-col gap-[10px] mb-[20px]">
         <div className="notification-detail__content">
           <div className="notification-detail__content__wrapper h-full p-[15px] bg-[#f3f3ff] shadow-xl rounded-xl">
-            <p className="leading-[17px] text-[20px] text-gray-700">
+            <p className=" text-sm text-get_desc">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
               quis, modi minus quos, dolorum consequatur saepe, ipsam quaerat
               sit molestias veritatis blanditiis. Illo, ea tenetur eos ex

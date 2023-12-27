@@ -64,7 +64,7 @@ export default function Login({ providers, csrfToken }) {
     <div className={style["login-page"] + " container-page"}>
       <div className={style.wrapper}>
         <div className={style.title}>
-          <h2 className="m-0 my-4 ">Login</h2>
+          <h2 className="m-0 my-4 text-get_blue ">Get Fisio Login</h2>
         </div>
         <div className={style.illustration}>
           <picture>
@@ -75,12 +75,12 @@ export default function Login({ providers, csrfToken }) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div className={`${style.form__wrapper} relative`}>
-              <span className="absolute top-[7px] rounded-lg text-[30px] pt-[5px] left-[10px] text-white bg-danger px-[10px] leading-[1em] ">
+              <span className="absolute top-[7px] rounded-lg text-lg left-[10px] text-white bg-get_pink py-[3px] px-[10px]  ">
                 +62
               </span>
               <input
                 placeholder="Nomor Handphone"
-                className="h-[48px] pl-[70px] text-[30px] pt-[5px]"
+                className="h-[48px] pl-[70px] text-lg "
                 type="tel"
                 {...register("phoneNumber", {
                   required: true,
@@ -90,21 +90,24 @@ export default function Login({ providers, csrfToken }) {
               />
               {/* {errors.phoneNumber?.type === "required" && "First name is required"} */}
               {errors.phoneNumber?.type === "required" && (
-                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                <span className="text-sm text-get_pink font-bold  mt-[-10px] text-center animate-pulse">
                   (Nomor HP Wajib Di isi.)
                 </span>
               )}
               {errors.phoneNumber?.type === "maxLength" && (
-                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                <span className="text-sm text-get_pink font-bold  mt-[-10px] text-center animate-pulse">
                   (Maximal Nomor 20 Digit)
                 </span>
               )}
               {errors.phoneNumber?.type === "pattern" && (
-                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                <span className="text-sm text-get_pink font-bold  mt-[-10px] text-center animate-pulse">
                   (Mohon Masukan Nomor HP dengan format contoh +62123456789)
                 </span>
               )}
-              <SubmitButton text="Login" />
+              <SubmitButton
+                text="Login"
+                classNameInject="px-[20px] py-[10px] text-white text-sm bg-get_blue rounded-[5px] "
+              />
             </div>
           </form>
         </div>
@@ -150,9 +153,9 @@ export default function Login({ providers, csrfToken }) {
         </div>
         <div className={style["register-note"]}>
           <div className={style["register-note__wrapper"]}>
-            <p>Belum memiliki akun? </p>
+            <p className="text-get_desc">Belum memiliki akun? </p>
             <Link href="/auth/register">
-              <a className="text-primary font-bold"> Daftar disini.</a>
+              <a className="text-get_blue font-bold"> Daftar disini.</a>
             </Link>
           </div>
         </div>

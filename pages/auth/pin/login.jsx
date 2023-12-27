@@ -94,7 +94,7 @@ export default function LoginPin() {
     });
   };
   return (
-    <div className="w-full bg-primary px-[20px]">
+    <div className="w-full bg-get_blue px-[20px]">
       <ControlLoading />
       <div className="flex flex-col gap-[20px] justify-center min-h-screen">
         <div className="w-full flex justify-center">
@@ -102,10 +102,10 @@ export default function LoginPin() {
             <img className="h-[100px]" src="/images/reset.png" alt="PIN" />
           </picture>
         </div>
-        <div className="text-center text-[30px] text-white">
+        <div className="text-center text-xl text-white font-bold">
           <h3>Masukan PIN</h3>
         </div>
-        <div className="text-center text-[20px] px-[40px] leading-[20px] text-white">
+        <div className="text-center text-sm px-[40px]  text-white">
           <p>Masukan PIN Akunmu.</p>
         </div>
         <form
@@ -114,7 +114,7 @@ export default function LoginPin() {
         >
           <div className="flex gap-[10px] ">
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp1"
               type="password"
@@ -125,7 +125,7 @@ export default function LoginPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%] "
+              className=" w-[40px] text-center text-xl p-[0px]  "
               maxLength={1}
               id="otp2"
               type="password"
@@ -136,7 +136,7 @@ export default function LoginPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp3"
               type="password"
@@ -147,7 +147,7 @@ export default function LoginPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp4"
               type="password"
@@ -158,7 +158,7 @@ export default function LoginPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               type="password"
               pattern="[0-9]*"
@@ -169,7 +169,7 @@ export default function LoginPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               type="password"
               pattern="[0-9]*"
@@ -185,8 +185,8 @@ export default function LoginPin() {
             <button
               className={` ${
                 isLoading
-                  ? "bg-white rounded-lg px-[20px] py-[3px] text-white text-[30px] duration-500"
-                  : "px-[20px] py-[5px] hover:scale-105 duration-500 text-gray-700 text-[24px] bg-white rounded-[10px] w-[200px]"
+                  ? "bg-white rounded-lg px-[20px] py-[3px] text-white text-xl duration-500"
+                  : "px-[20px] py-[5px] hover:scale-105 duration-500 text-get_desc text-lg bg-white rounded-[10px] w-[200px]"
               }`}
               type="submit"
               disabled={isLoading}
@@ -200,14 +200,14 @@ export default function LoginPin() {
                     alt="loading"
                   ></img>
                 ) : (
-                  <p className="animation-popup">Konfirmasi</p>
+                  <p className="animation-popup text-get_blue">Konfirmasi</p>
                 )}
               </span>
             </button>
             <button
               type="button"
               onClick={() => router.push("/auth/login")}
-              className="px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-[24px]  w-[200px]"
+              className="px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-lg  w-[200px]"
             >
               Batal
             </button>
@@ -219,7 +219,7 @@ export default function LoginPin() {
               type="button"
               href="https://wa.me/6281286412292?text=Halo%20Sepertinya%20Saya%20lupa%20akan%20PIN%20Akun%20saya.%20Bisakah%20Admin%20GetFisio%20Membantu%20Saya?"
               target="_blank"
-              className="underline px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-[24px]"
+              className="underline px-[20px] py-[5px] hover:scale-105 duration-500 text-white shadow-red-600  text-sm"
             >
               Apakah Kamu lupa PIN mu?
             </a>

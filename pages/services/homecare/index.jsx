@@ -14,7 +14,7 @@ export async function getServerSideProps({ req }) {
   };
 }
 
-export default function Telephysio({ credentials }) {
+export default function HomeCare({ credentials }) {
   const [createButton, setCreateButton] = useState(
     credentials.signature_url ? true : false
   );
@@ -26,28 +26,28 @@ export default function Telephysio({ credentials }) {
     if (!credentials.signature_url) {
       patientAddSignatureFile(credentials.user_id, uploadSign)
         .then((response) => {
-          router.push("/services/telephysio/createAppointment");
+          router.push("/services/homecare/createAppointment");
         })
         .catch((error) => {
           alert(error.message);
         });
     } else {
-      router.push("/services/telephysio/createAppointment");
+      router.push("/services/homecare/createAppointment");
     }
   }
   return (
     <Layout>
       <div className="px-[20px] flex flex-col gap-[10px] mb-[20px]">
         <MenuTitle
-          text="Tele Fisio"
+          text="Home Care"
           icon="/images/icon/tele_physio_icon.png"
         ></MenuTitle>
 
         <div className="bg-[#dfdfdf48] p-[10px] rounded-[20px]">
           <CardFullImage
             textStyle={{ marginLeft: "38%" }}
-            title="Konsultasi Fisioterapi secara Online"
-            description="Efektif, On Point, dan Edukatif"
+            title="Treatment Fisioterapi on Demand"
+            description="Mudah, Cepat & Praktis"
           ></CardFullImage>
           <div className="note_title mt-[20px]">
             <h3 className="text-get_blue text-center text-lg m-0">Detail</h3>

@@ -30,30 +30,26 @@ export default function Profile({ credentials }) {
                 alt="user profile"
               />
             </picture>
-            <div className="profile__picture__name text-center text-primary">
-              <h3 className="text-[24px] leading-[24px]">{credentials.name}</h3>
+            <div className="profile__picture__name text-center text-get_blue">
+              <h3 className="text-lg ">{credentials.name}</h3>
             </div>
-            <div className="profile__picture__gender text-center text-[#5e5e5e]">
-              <p className="text-[18px] leading-[14px]">{credentials.gender}</p>
+            <div className="profile__picture__gender text-center text-get_desc">
+              <p className="text-sm ">{credentials.gender}</p>
             </div>
             <div className="profile__item my-[10px]">
-              <div className="profile__item__title text-primary">
-                <h3 className="text-[24px] leading-[24px]">Tanggal Lahir</h3>
+              <div className="profile__item__title text-get_blue">
+                <h3 className="text-lg ">Tanggal Lahir</h3>
               </div>
-              <div className="profile__item__value text-center text-[#5e5e5e]">
-                <p className="text-[18px] leading-[14px]">
-                  {credentials.birth_date}
-                </p>
+              <div className="profile__item__value text-center text-get_desc">
+                <p className="text-sm ">{credentials.birth_date}</p>
               </div>
             </div>
             <div className="profile__item my-[10px]">
-              <div className="profile__item__title text-primary">
-                <h3 className="text-[24px] leading-[24px]">Alamat</h3>
+              <div className="profile__item__title text-get_blue">
+                <h3 className="text-lg ">Alamat</h3>
               </div>
-              <div className="profile__item__value text-center text-[#5e5e5e]">
-                <p className="text-[18px] leading-[14px]">
-                  {credentials.address}
-                </p>
+              <div className="profile__item__value text-center text-get_desc">
+                <p className="text-sm ">{credentials.address}</p>
               </div>
             </div>
           </div>
@@ -71,6 +67,7 @@ export default function Profile({ credentials }) {
               type="button"
               icon="/images/icon/calendar.png"
               click={() => router.push("/appointment")}
+              classNameInject=" text-get_light_desc font-semibold text-xxs"
             ></ButtonWithIcon2>
           </div>
           <div className="profile__menu__list__item w-1/4">
@@ -78,7 +75,8 @@ export default function Profile({ credentials }) {
               text="Riwayat Pembelian"
               type="button"
               icon="/images/icon/checkout.png"
-              click={() => router.push("/orders")}
+              click={() => router.push("/order")}
+              classNameInject=" text-get_light_desc font-semibold text-xxs"
             ></ButtonWithIcon2>
           </div>
           <div className="profile__menu__list__item w-1/4">
@@ -87,6 +85,7 @@ export default function Profile({ credentials }) {
               type="button"
               icon="/images/icon/clipboard.png"
               click={() => router.push("/medical-record")}
+              classNameInject=" text-get_light_desc font-semibold text-xxs"
             ></ButtonWithIcon2>
           </div>
         </div>
@@ -105,7 +104,7 @@ export default function Profile({ credentials }) {
                 : "";
             }}
             text="Keluar Akun"
-            classNameInject="px-[20px] py-[5px] text-[#fff] text-[24px] bg-danger rounded-[10px] w-[200px]"
+            classNameInject="px-[20px]  text-white text-sm py-[10px] bg-get_pink rounded-[10px] w-[200px]"
           />
         </div>
         <hr className="solid my-[20px]" />

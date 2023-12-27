@@ -65,7 +65,7 @@ export default function Register({ providers, csrfToken }) {
 
         <div className="otp__note">
           <div className="otp__note__wrapper">
-            <h4 className="text-[20px] text-[#5E5E5E] text-center mb-[26px] px-[20px]">
+            <h4 className="text-sm text-get_desc text-center mb-[26px] px-[20px]">
               Pastikan kamu menggunakan nomor HP yang aktif, kami akan mengirim
               OTP untuk mengkonfirmasi akun anda.
             </h4>
@@ -75,12 +75,12 @@ export default function Register({ providers, csrfToken }) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div className={`${style.form__wrapper} relative`}>
-              <span className="absolute top-[7px] rounded-lg text-[30px] pt-[5px] left-[10px] text-white bg-danger px-[10px] leading-[1em] ">
+              <span className="absolute top-[7px] rounded-lg text-lg py-[3px] left-[10px] text-white bg-get_pink px-[10px]  ">
                 +62
               </span>
               <input
                 placeholder="Nomor Handphone"
-                className="h-[48px] pl-[70px] text-[30px] pt-[5px]"
+                className="h-[48px] pl-[70px] text-lg "
                 type="tel"
                 {...register("phoneNumber", {
                   required: true,
@@ -90,17 +90,17 @@ export default function Register({ providers, csrfToken }) {
                 })}
               />
               {errors.phoneNumber?.type === "required" && (
-                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                <span className="text-sm text-get_pink font-bold  mt-[-10px] text-center animate-pulse">
                   Nomor HP Wajib Di isi.
                 </span>
               )}
               {errors.phoneNumber?.type === "maxLength" && (
-                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                <span className="text-sm text-get_pink font-bold  mt-[-10px] text-center animate-pulse">
                   Maximal Nomor HP 20 Digit
                 </span>
               )}
               {errors.phoneNumber?.type === "pattern" && (
-                <span className="text-[24px] text-danger font-bold leading-[24px] mt-[-10px] text-center animate-pulse">
+                <span className="text-sm text-get_pink font-bold  mt-[-10px] text-center animate-pulse">
                   Mohon Masukan Nomor HP dengan format contoh : <br />
                   [+62] 8123456789
                 </span>
@@ -108,8 +108,8 @@ export default function Register({ providers, csrfToken }) {
               {/* <button
                 className={` ${
                   isLoading
-                    ? "bg-gray-200 rounded-lg px-[20px] py-[3px] text-white text-[30px]"
-                    : "bg-primary rounded-lg px-[20px] py-[3px] text-white text-[30px]"
+                    ? "bg-gray-200 rounded-lg px-[20px] py-[3px] text-white text-lg"
+                    : "bg-get_blue rounded-lg px-[20px] py-[3px] text-white text-lg"
                 }`}
                 type="submit"
                 disabled={isLoading}
@@ -127,15 +127,18 @@ export default function Register({ providers, csrfToken }) {
                   )}
                 </span>
               </button> */}
-              <SubmitButton text="Register"></SubmitButton>
+              <SubmitButton
+                text="Register"
+                classNameInject="px-[20px] py-[10px] text-white text-sm bg-get_blue rounded-[5px] "
+              ></SubmitButton>
             </div>
           </form>
         </div>
         <div className={style["register-note"]}>
           <div className={style["register-note__wrapper"]}>
-            <p>Sudah memiliki akun? </p>
+            <p className="text-get_desc">Sudah memiliki akun? </p>
             <Link href="/auth/login">
-              <a className="text-primary font-bold"> Login disini.</a>
+              <a className="text-get_blue font-bold"> Login disini.</a>
             </Link>
           </div>
         </div>

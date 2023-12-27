@@ -97,17 +97,17 @@ export default function ConfirmPin() {
     }
   };
   return (
-    <div className="w-full bg-primary px-[20px]">
+    <div className="w-full bg-get_blue px-[20px]">
       <div className="flex flex-col gap-[20px] justify-center min-h-screen">
         <div className="w-full flex justify-center">
           <picture>
             <img className="h-[100px]" src="/images/reset.png" alt="PIN" />
           </picture>
         </div>
-        <div className="text-center text-[30px] text-white">
+        <div className="text-center text-xl text-white font-bold">
           <h3>Konfirmasi PIN kamu</h3>
         </div>
-        <div className="text-center text-[20px] px-[40px] leading-[20px] text-white">
+        <div className="text-center text-sm px-[40px]  text-white">
           <p>Masukan ulang PIN mu untuk mengkonfirmasi PIN mu.</p>
         </div>
         <form
@@ -116,7 +116,7 @@ export default function ConfirmPin() {
         >
           <div className="flex gap-[10px] ">
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp1"
               type="password"
@@ -127,7 +127,7 @@ export default function ConfirmPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%] "
+              className=" w-[40px] text-center text-xl p-[0px]  "
               maxLength={1}
               id="otp2"
               type="password"
@@ -138,7 +138,7 @@ export default function ConfirmPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp3"
               type="password"
@@ -149,7 +149,7 @@ export default function ConfirmPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               id="otp4"
               type="password"
@@ -160,7 +160,7 @@ export default function ConfirmPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               type="password"
               pattern="[0-9]*"
@@ -171,7 +171,7 @@ export default function ConfirmPin() {
               onKeyDown={handleKeyDown}
             />
             <input
-              className=" w-[40px] text-center text-[30px] p-[0px] pt-[1%]"
+              className=" w-[40px] text-center text-xl p-[0px] "
               maxLength={1}
               type="password"
               pattern="[0-9]*"
@@ -185,7 +185,7 @@ export default function ConfirmPin() {
           </div>
           <div className=" w-full flex justify-center mt-[20px]">
             <SubmitButton
-              classNameInject="  text-gray-700 shadow-md text-[24px] bg-white rounded-xl w-[200px] "
+              classNameInject="  text-get_desc shadow-md text-lg bg-white rounded-md w-[200px] "
               text="Konfirmasi"
             ></SubmitButton>
           </div>

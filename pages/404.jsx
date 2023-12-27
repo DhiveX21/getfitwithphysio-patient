@@ -17,17 +17,17 @@ export default function FourOhFour() {
               />
             </picture>
           </div>
-          <div className="error-page__title text-[30px] leading-[30px] text-danger">
+          <div className="error-page__title text-xl font-semibold  text-get_pink">
             <h3>Halaman Tidak di temukan.</h3>
           </div>
-          <div className="error-page__description text-[20px] leading-[20px] text-slate-400">
+          <div className="error-page__description text-sm  text-get_light_desc">
             <p>coba kembali ke Menu utama saja yuk :)</p>
           </div>
           <Link href="/dashboard">
             <div className="error-page__button">
               <Button
                 text="Menu"
-                classNameInject=" bg-white border-2 border-primary px-[20px] py-[5px] shadow-md shadow-slate-200 text-primary text-[20px] rounded-lg min-w-[100px] mt-[20px]"
+                classNameInject=" bg-white border-2 border-primary px-[20px] py-[5px] shadow-md shadow-slate-200 text-get_blue text-sm rounded-lg min-w-[100px] mt-[20px]"
               />
             </div>
           </Link>

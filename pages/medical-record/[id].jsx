@@ -45,7 +45,7 @@ export default function AppointmentInfo({ medicalRecords }) {
             {medicalRecords.records.map((item, index) => {
               return (
                 <div key={index} className="medical_complaint mb-[20px]">
-                  <h3 className="text-[24px] text-primary">{item.key} : </h3>
+                  <h3 className="text-[24px] text-get_blue">{item.key} : </h3>
                   <p className="text-[#2D2D2D] text-[20px] leading-[16px]">
                     {item.value}
                   </p>

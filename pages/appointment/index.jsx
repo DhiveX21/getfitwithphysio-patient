@@ -52,6 +52,10 @@ export default function Appointment({ appointmentData }) {
                     item.time_appointment
                   }`}
                   image="/images/icon/user.png"
+                  cardStyle=" bg-get_light_bg rounded-md"
+                  titleStyle="text-get_blue text-base font-bold"
+                  descStyle="text-get_text text-sm "
+                  noteStyle="text-get_light_desc text-xs font-bold"
                 />
               </div>
             );
@@ -59,9 +63,9 @@ export default function Appointment({ appointmentData }) {
         ) : (
           <div className="flex text-center w-full justify-center flex-col items-center">
             <picture className="w-1/6 opacity-50">
-              <img src="/images/icon/empty.png" alt="not found video" />
+              <z src="/images/icon/empty.png" alt="not found video" />
             </picture>
-            <h3 className="text-[34px] text-slate-400">
+            <h3 className="text-xl text-get_light_desc">
               {" "}
               Belum Ada Appointment
             </h3>

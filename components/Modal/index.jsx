@@ -54,17 +54,17 @@ export function FullScreenModal({ show = false, close, title, message }) {
           </picture>
         </div>
         <div className={style.full_screen_modal__title}>
-          <h3 className="invert">{title}</h3>
+          <h3 className="invert text-xl font-bold">{title}</h3>
         </div>
         <div className={style.full_screen_modal__content}>
           <div className={style.full_screen_modal__content__wrapper}>
-            <p className="text-white">{message}</p>
+            <p className="text-white text-sm">{message}</p>
           </div>
         </div>
         {close ? (
           <div className={style.full_screen_modal__button}>
             <button
-              className="bg-danger  px-[40px] rounded-full text-white py-[4px]  shadow-slate-500 shadow-md"
+              className="bg-danger  px-[40px] rounded-lg text-white py-[4px]  text-sm shadow-slate-500 shadow-md"
               onClick={() => close()}
             >
               Tutup

@@ -12,7 +12,7 @@ export function calcAge(dateString) {
   return age;
 }
 
-export function getProgressTelePhysio(status, linkMeeting) {
+export function getProgressTelePhysio(status, linkMeeting, appointmentType) {
   const progressSimulation = [
     {
       icon: "/images/icon/search_fisio.svg",
@@ -74,9 +74,13 @@ export function getProgressTelePhysio(status, linkMeeting) {
     progressSimulation[3].status = "1";
     progressSimulation[4].status = "0";
     progressSimulation[5].status = "0";
-    if (linkMeeting && status === "treatment") {
+    if (
+      linkMeeting &&
+      status === "treatment" &&
+      appointmentType === "tele_physio"
+    ) {
       progressSimulation[3].action = (
-        <div className="bg-white p-[10px] rounded-lg text-center text-[14px] leading-[1em] text-gray-600">
+        <div className="bg-white p-[10px] rounded-lg text-center text-sm  text-get_desc">
           <p>Room Treatment Telah Tersedia Silahkan Masuk...</p>
           <a
             href={`${linkMeeting}`}

@@ -10,9 +10,6 @@
 .sectionTitle__wrapper {
   background-color: #f6f6f6;
   padding: 8px 25px;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 14px;
 }
 
 /* /////////////////////// */
@@ -26,9 +23,6 @@
 
 .menuTitle__wrapper {
   padding: 20px;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 14px;
   display: flex;
   gap: 10px;
   align-items: center;

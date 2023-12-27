@@ -112,20 +112,18 @@ export default function Register() {
         </div>
         <div className="otp__timer flex justify-center items-center">
           <div className="otp__timer__wrapper flex flex-col gap-[5px] justify-center items-center">
-            <h4 className="text-[34px] text-[#5e5e5e] m-0 leading-[36px]">
-              Tersisa :{" "}
-            </h4>
-            <h3 className="text-[42px] text-danger m-0 leading-[45px]">
+            <h4 className="text-xl text-get_desc m-0">Tersisa : </h4>
+            <h3 className="text-2xl text-danger m-0 font-bold">
               {seconds} Detik
             </h3>
           </div>
         </div>
 
-        <div className="otp__note">
+        <div className="otp__note mt-[10px]">
           <div className="otp__note__wrapper">
-            <h4 className="text-[20px] text-[#5E5E5E] text-center mb-[26px] px-[20px]">
+            <h4 className="text-sm text-get_desc text-center mb-[26px] px-[20px]">
               Kami telah mengirimkan kode verifikasi ke nomor{" "}
-              <b className="text-primary">{phoneNumberView}</b>, Silahkan Cek
+              <b className="text-get_blue">{phoneNumberView}</b>, Silahkan Cek
               pesan masuk.
             </h4>
           </div>
@@ -142,12 +140,12 @@ export default function Register() {
 
               <SubmitButton
                 text="Lanjut"
-                classNameInject="w-[200px] self-center rounded-xl bg-primary"
+                classNameInject="w-[200px] self-center py-[10px] rounded-lg bg-get_blue"
               ></SubmitButton>
               <button
                 type="button"
                 onClick={() => router.push("/auth/register")}
-                className="px-[20px] py-[5px] hover:scale-105 duration-500 text-danger  rounded-full w-1/2 self-center  text-[24px] leading-[24px]"
+                className="px-[20px] py-[5px] hover:scale-105 duration-500 text-get_pink  rounded-full w-1/2 self-center  "
               >
                 Batal
               </button>
@@ -158,7 +156,7 @@ export default function Register() {
           <div className={style["register-note__wrapper"]}>
             <p>Sudah memiliki akun? </p>
             <Link href="/auth/register">
-              <a className="text-primary font-bold"> Login disini.</a>
+              <a className="text-get_blue font-bold"> Login disini.</a>
             </Link>
           </div>
         </div>

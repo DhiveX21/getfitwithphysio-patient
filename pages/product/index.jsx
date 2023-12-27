@@ -64,7 +64,7 @@ export default function Product({ productData }) {
                                 ></CardFullImage>
                               </div>
                               <div className="product__list__item__facility w-full py-[10px]">
-                                <div className="product__list__item__facility__title text-danger text-[16px] leading-[20px] py-[10px]">
+                                <div className="product__list__item__facility__title text-get_pink text-sm  py-[10px]">
                                   <h3>Fasilitas</h3>
                                 </div>
                                 <div className="product__list__item__facility__list flex gap-x-[10px] gap-y-[10px] flex-wrap">
@@ -75,17 +75,17 @@ export default function Product({ productData }) {
                                           key={subProductItem.id}
                                           className="product__list__item__facility__list__item flex items-center justify-center gap-[3px]"
                                         >
-                                          <p className="leading-[16px] text-[20px] text-[#5E5E5E]">
+                                          <p className=" text-sm text-get_text">
                                             {subProductItem.name}
                                           </p>
-                                          <p className="bg-primary px-[10px] py-[3px] leading-[16px] text-[20px] rounded-md text-[white]">
+                                          <p className="bg-primary px-[10px] py-[3px]  text-sm rounded-md text-white">
                                             {subProductItem.quota}
                                           </p>
                                         </div>
                                       );
                                     })
                                   ) : (
-                                    <p className="leading-[16px] text-[20px] text-[#5E5E5E]">
+                                    <p className=" text-sm text-get_text">
                                       Kosong
                                     </p>
                                   )}
@@ -93,16 +93,16 @@ export default function Product({ productData }) {
                               </div>
                               <hr className="solid"></hr>
                               <div className="product__list__item__desc w-full py-[10px]">
-                                <div className="product__list__item__desc__title text-danger text-[16px] leading-[20px]">
+                                <div className="product__list__item__desc__title text-get_pink text-sm ">
                                   <h3>Deskripsi</h3>
                                 </div>
-                                <div className="product__list__item__desc__text text-[16px] leading-[16px] font-light">
+                                <div className="product__list__item__desc__text text-sm  font-light">
                                   <p>{item.description}</p>
                                 </div>
                               </div>
                               <hr className="solid"></hr>
                               <div className="product__list__item__price w-full py-[10px]">
-                                <div className="product__list__item__price text-[#5E5E5E] text-[16px] leading-[20px]">
+                                <div className="product__list__item__price text-get_text text-sm ">
                                   <p className="flex gap-[5px]">
                                     {/* Harga : <strike>Rp. {item.amount}</strike>{" "}
                                      */}
@@ -111,15 +111,15 @@ export default function Product({ productData }) {
                                       src="/images/icon/triple_arrow.svg"
                                       alt="arrow"
                                     />
-                                    <span className="text-danger">
+                                    <span className="text-get_pink">
                                       {formatCurrency(item.cost_paid)}
                                     </span>
                                   </p>
                                 </div>
-                                <div className="product__list__item__duration text-[#5E5E5E] text-[16px] leading-[20px]">
+                                <div className="product__list__item__duration text-get_text text-sm ">
                                   <p className="flex gap-[5px]">
                                     Hanya Sampai
-                                    <span className="text-danger">
+                                    <span className="text-get_pink">
                                       Minggu Depan
                                     </span>
                                   </p>
@@ -133,7 +133,7 @@ export default function Product({ productData }) {
                                     router.push(`/product/${item.id}`)
                                   }
                                   text="Beli Sekarang"
-                                  classNameInject="px-[10px] py-[5px] text-[#fff] text-[20px] bg-primary rounded-[10px] w-[200px]"
+                                  classNameInject="px-[10px] py-[5px] text-white text-sm bg-primary rounded-[10px] w-[200px]"
                                 />
                               </div>
                             </div>
